@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>examples · jaali</title>
+<meta name="description" content="A reading list, a habit tracker and a release gate, built from jaali.">
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/jaali.css">
+<link rel="stylesheet" href="assets/docs.css">
+<script>
+  try {
+    var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
+    if (t) document.documentElement.dataset.theme = t;
+    if (m) document.documentElement.dataset.mode = m;
+  } catch (e) {}
+</script>
+</head>
+<body class="jaali">
+<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+
+<header class="j-top j-wrap">
+  <div class="j-inner">
+    <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="examples.html" class="on">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <div class="j-actions">
+      <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
+      <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
+    </div>
+  </div>
+  <div class="j-skins" id="skins"><div class="j-wrap"><div class="j-inner" id="skinRow"></div></div></div>
+  <div class="j-progress"><i id="prog"></i></div>
+</header>
+
+<main>
+<section class="j-hero" style="padding-bottom:0"><div class="j-wrap"><div class="j-inner">
+<h1 class="j-title j-title--hero" style="white-space:normal">examples</h1>
+<p class="j-lead j-halo" style="margin-top:22px">Three small pages built only from the kit. All content is invented.</p></div></div></section>
+<section id="reading"><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>reading list</h2></div>
+<div class="j-wrap"><div class="j-inner" data-j-in>
+<p class="j-sub j-halo" data-j-st>Hairline rows with large titles. Hover a row to see it shift.</p>
+<div class="j-pivot" style="margin-top:30px" id="rlPivot"><div class="j-pivot__strip"><button class="on" data-f="all">all</button><button data-f="reading">reading</button><button data-f="queued">queued</button><button data-f="done">done</button></div></div>
+<div class="j-rows j-turn" id="rl"></div>
+</div></div></section>
+
+<section id="habits"><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>habits</h2></div>
+<div class="j-wrap"><div class="j-inner" data-j-in>
+<p class="j-sub j-halo" data-j-st>Tap a day to mark it. The streak is the large number.</p>
+<div style="margin-top:34px" id="hb"></div>
+<p class="j-cap j-foot">Filled means done. No red or green.</p>
+</div></div></section>
+
+<section id="gate"><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>release gate</h2></div>
+<div class="j-wrap"><div class="j-inner" data-j-in>
+<p class="j-sub j-halo" data-j-st>Lattice, a fictional job scheduler, checks a build before release. Drag the score. Below the gate, the build is held.</p>
+<div class="demo2">
+<div class="ctrl">
+<div><h4>checks passing</h4><div class="val"><span id="gv">82</span><small style="font-size:.4em">%</small></div>
+<div class="j-range" id="gr" style="--gate:80"><input type="range" min="0" max="100" value="82" aria-label="Checks passing"><span class="tr"></span><span class="fl"></span><span class="gate"></span><span class="gl">gate 80%</span><span class="th"></span></div></div>
+<div class="gate-out"><span class="word" id="gw">ship</span><span class="why" id="gy">Above the gate. The build goes out.</span></div>
+</div>
+<div><h4 class="j-cap" style="margin-bottom:6px">pipeline</h4>
+<ol class="steps" id="st"><li data-i="0"><span class="m"></span>install</li><li data-i="1"><span class="m"></span>lint</li><li data-i="2"><span class="m"></span>unit tests</li><li data-i="3"><span class="m"></span>build</li><li data-i="4"><span class="m"></span>publish</li></ol>
+<div class="ctl-row" style="margin-top:22px"><button class="j-cbtn j-cbtn--accent" id="runB"><span class="ring"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span>run</button><span class="j-status j-status--sent" id="runS">idle</span></div></div>
+</div>
+<p class="j-foot j-cap" style="margin-top:30px">The full dashboard with live tiles is on the <a class="j-link" href="sample.html">sample page <span class="ar">→</span></a></p>
+</div></div></section>
+<div class="j-wrap"><div class="j-inner"><div class="j-sign"><span class="rosette-slot"></span><span>jaali is MIT licensed. Built in Bengaluru, drawn from Jaipur.</span></div></div></div>
+
+</main>
+
+<script src="assets/jaali.iife.js"></script>
+<script src="assets/site.js"></script>
+<script>document.querySelectorAll(".rosette-slot").forEach(function(e){e.innerHTML=Jaali.rosette()})</script><script>
+(function(){
+  var J=window.Jaali,$=J.$,$$=J.$$;
+  /* reading list */
+  var B=[
+   ['A Pattern of Small Rooms','Nuru Okafor-Reyes','reading','312','pages'],
+   ['The Slow Ledger','Imke Varga','queued','248','pages'],
+   ['Salt and Tin','Dev Raman','done','190','pages'],
+   ['Notes on Stairs','Marit Solheim','queued','126','pages'],
+   ['Paper Weather','Tobias Lindqvist','done','284','pages']];
+  var rl=$('#rl');
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function draw(f){
+    var L=B.filter(function(b){return f==='all'||b[2]===f});
+    rl.innerHTML=L.map(function(b,i){return '<div class="j-row" tabindex="0"><span class="yr">'+String(i+1).padStart(2,'0')+'</span><span><span class="wt">'+esc(b[0])+'</span><span class="wd">'+esc(b[1])+'</span></span><span class="wm"><span class="n">'+b[3]+'</span><span class="j-cap">'+b[4]+' · '+b[2]+'</span></span></div>'}).join('');
+    J.indexKids(rl);
+  }
+  draw('all');rl.classList.add('is-in');
+  J.pivot($('#rlPivot'),function(b){J.turnstile(rl,function(){draw(b.dataset.f)})});
+
+  /* habits */
+  var H=[['read 20 pages',[1,1,0,1,1,1,0]],['walk after lunch',[1,0,1,1,0,1,1]],['no screens at 11',[0,1,1,0,1,1,1]]];
+  var D=['m','t','w','t','f','s','s'];
+  var hb=$('#hb');
+  function streak(a){var n=0;for(var i=a.length-1;i>=0;i--){if(a[i])n++;else break}return n}
+  function paint(){
+    hb.innerHTML='<div class="habit-head"><span>habit</span>'+D.map(function(d){return '<span>'+d+'</span>'}).join('')+'<span>streak</span></div>'+
+    H.map(function(h,r){return '<div class="habit"><span>'+h[0]+'</span>'+h[1].map(function(v,c){return '<button class="d'+(v?' on':'')+'" data-r="'+r+'" data-c="'+c+'" aria-pressed="'+(!!v)+'" aria-label="'+h[0]+', day '+(c+1)+'"></button>'}).join('')+'<span class="streak">'+streak(h[1])+'</span></div>'}).join('');
+  }
+  paint();
+  hb.addEventListener('click',function(e){var b=e.target.closest('.d');if(!b)return;var r=+b.dataset.r,c=+b.dataset.c;H[r][1][c]=H[r][1][c]?0:1;paint();var nb=hb.querySelector('[data-r="'+r+'"][data-c="'+c+'"]');if(nb)nb.focus();});
+
+  /* release gate */
+  var rg=J.range($('#gr'),function(v){
+    $('#gv').textContent=v;
+    var ok=v>=80,w=$('#gw');
+    w.textContent=ok?'ship':'held';w.className='word'+(ok?'':' held');
+    $('#gy').textContent=ok?'Above the gate. The build goes out.':'Below the gate. The build waits for a person.';
+  });
+  var run=$('#runB'),busy=false;
+  run.addEventListener('click',function(){
+    if(busy)return;busy=true;
+    var li=$$('#st li'),S=$('#runS'),pass=rg.value()>=80,i=0;
+    li.forEach(function(x){x.className=''});
+    S.className='j-status j-status--run';S.textContent='running';
+    (function next(){
+      if(i>0)li[i-1].className='done';
+      if(i===li.length){S.className='j-status j-status--sent';S.textContent='shipped';busy=false;return}
+      if(i===4&&!pass){li[3].className='done';S.className='j-status j-status--held';S.textContent='held at publish';busy=false;return}
+      li[i].className='now';i++;setTimeout(next,J.reduced()?60:620);
+    })();
+  });
+})();
+</script>
+</body>
+</html>

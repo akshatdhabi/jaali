@@ -1,0 +1,34 @@
+/* One easing: fast out, soft settle. cubic-bezier(.1,.9,.2,1), 600ms in, 170ms out. */
+
+@keyframes j-slide-in { from { opacity: .15; transform: translateX(56px); } }
+@keyframes j-turn-in { from { opacity: 0; transform: perspective(1400px) rotateY(-62deg) translateX(-24px); } }
+@keyframes j-turn-out { to { opacity: 0; transform: perspective(1400px) rotateY(58deg) translateX(18px); } }
+@keyframes j-tile-in { from { opacity: .1; transform: perspective(1200px) rotateY(-75deg); } }
+@keyframes j-draw { from { stroke-dashoffset: 1; } }
+@keyframes j-pulse { 50% { opacity: .25; } }
+@keyframes j-grow { from { transform: scaleX(0); } }
+@keyframes j-wipe { from { clip-path: inset(0 100% 0 0); } }
+@keyframes j-drift { to { -webkit-mask-position: 44px 0; mask-position: 44px 0; } }
+@keyframes j-sweep { from { background-position: -40% 0; } to { background-position: 140% 0; } }
+@keyframes j-spin { to { transform: rotate(360deg); } }
+@keyframes j-breathe { 50% { opacity: .35; transform: scale(.94); } }
+@keyframes j-drawloop { 0% { stroke-dashoffset: 1; } 45%, 70% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
+@keyframes j-pop-in { from { opacity: 0; transform: translateY(10px) scale(.96); } }
+@keyframes j-tick-up { from { transform: scaleY(0); } }
+@keyframes j-flip-out { 60% { opacity: .25; } to { transform: rotateX(90deg); opacity: 0; } }
+@keyframes j-flip-in { from { transform: rotateX(-90deg); opacity: 0; } 40% { opacity: 1; } }
+
+/* Slide-ins. reveal() adds .is-in to [data-j-in] when it scrolls into view.
+   Children marked data-j-st stagger by --d (60ms steps). */
+.is-in [data-j-st], [data-j-st].is-in {
+  animation: j-slide-in .75s var(--j-ease) backwards;
+  animation-delay: calc(var(--d, 0) * 60ms);
+}
+
+/* Turnstile: swap a view by turning it out, then the new one in, item by item (--i, 40ms steps). */
+.j-turn { transform-origin: 0 50%; }
+.j-turn.is-in > * { animation: j-turn-in .62s var(--j-ease) backwards; animation-delay: calc(var(--i, 0) * 40ms); transform-origin: 0 50%; }
+.j-turn.is-out { animation: j-turn-out .17s ease-in forwards; }
+
+/* Press tilt target. tilt() sets the transform from the pointer position. */
+[data-j-tilt] { transition: transform .5s var(--j-ease); }

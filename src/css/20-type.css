@@ -1,0 +1,86 @@
+/* Type is the interface. Geist only, thin, lowercase, oversized. */
+
+.j-bleed { padding-top: clamp(56px, 7vw, 112px); }
+
+/* Section title. Weight 160, up to 180px, stays in frame. */
+.j-title {
+  display: block;
+  font-weight: 160;
+  font-size: clamp(76px, 11.6vw, 180px);
+  line-height: .88;
+  letter-spacing: -.068em;
+  text-wrap: balance;
+  max-width: var(--j-measure);
+  margin: 0 auto;
+  padding-left: calc(var(--j-gutter-l) + clamp(0px, 2vw, 24px));
+  padding-right: var(--j-gutter-r);
+}
+.j-title .j-accent { color: var(--j-accent); }
+
+/* Hero variant: two lines that do not wrap on wide screens. */
+.j-title--hero {
+  white-space: nowrap;
+  font-weight: 180;
+  font-size: clamp(58px, 9.8vw, 156px);
+  line-height: .9;
+  padding: 0; margin: 0; max-width: none;
+}
+.j-title--hero + .j-title--hero { margin-top: .02em; }
+
+.j-eyebrow { font-size: 15px; color: var(--j-ink); font-weight: 450; position: relative; }
+
+.j-lead, .j-sub {
+  color: color-mix(in srgb, var(--j-ink) 78%, var(--j-ground));
+  max-width: 52ch;
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.5;
+  letter-spacing: -.01em;
+}
+.j-sub { margin-top: clamp(18px, 2vw, 28px); }
+.j-lead b { color: var(--j-ink); font-weight: 400; }
+
+.j-cap { font-size: 13.5px; color: var(--j-muted); line-height: 1.5; letter-spacing: .005em; }
+.j-foot { margin-top: 18px; }
+
+/* Big numbers. Light weight, tabular. */
+.j-num {
+  font-weight: 230;
+  font-size: clamp(56px, 6vw, 92px);
+  line-height: 1;
+  letter-spacing: -.05em;
+  font-variant-numeric: tabular-nums;
+}
+.j-num small { font-size: .45em; letter-spacing: -.02em; margin-left: 2px; }
+
+.j-h { font-weight: 380; font-size: 26px; letter-spacing: -.03em; }
+
+/* Flip word: the accent word that turns over like a live tile. Behaviour in flipWords(). */
+.j-flip {
+  display: inline-block; position: relative; color: var(--j-accent);
+  perspective: 700px; white-space: nowrap; vertical-align: bottom;
+  transition: width .55s var(--j-ease);
+}
+.j-flip > span { display: inline-block; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.j-flip > .out { position: absolute; left: 0; top: 0; transform-origin: 50% 0; animation: j-flip-out .36s cubic-bezier(.55, 0, .85, .35) forwards; }
+.j-flip > .in { transform-origin: 50% 100%; animation: j-flip-in .7s var(--j-ease) .38s both; }
+.j-flip:not(.j-flip--line) { transition: width .5s var(--j-ease) .2s; }
+/* multi-word lines (taglines) wrap instead of resizing */
+.j-flip--line { display: block; width: auto !important; white-space: normal; }
+.j-flip--line > .out { right: 0; }
+
+@media (max-width: 760px) {
+  .j-title--hero { white-space: normal; font-size: clamp(52px, 15vw, 84px); line-height: .95; }
+  .j-title--hero .j-flip { display: block; width: auto !important; }
+}
+
+/* Hero: eyebrow, two huge lines, lead and links. */
+.j-hero { position: relative; overflow: clip; padding-top: clamp(36px, 5vw, 72px); }
+.j-hero__title { margin-top: clamp(18px, 2.4vw, 30px); position: relative; }
+.j-hero__low { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-top: clamp(28px, 3.4vw, 48px); position: relative; }
+.j-hero__cta { display: flex; gap: 28px; flex-wrap: wrap; }
+
+/* Closing line and an inline command, for the last section of a page. */
+.j-hello { font-weight: 250; font-size: clamp(40px, 5.4vw, 84px); line-height: 1; letter-spacing: -.055em; max-width: 16ch; text-wrap: balance; margin-top: clamp(20px, 2.4vw, 32px); }
+.j-mail { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 28px; font-size: clamp(18px, 1.8vw, 24px); font-weight: 300; }
+.j-code { font-family: inherit; user-select: all; border-bottom: 1px solid var(--j-line); padding-bottom: 4px; }
+.j-sign { display: flex; align-items: center; gap: 14px; margin-top: 64px; padding-bottom: 72px; color: var(--j-muted); font-size: 14px; }

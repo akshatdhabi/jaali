@@ -1,0 +1,87 @@
+/* Controls. Text links carry an arrow and a hairline. Actions sit in circles with a word under them.
+   Fields are one underline. Status uses form, not colour. */
+
+/* ---- link ---- */
+.j-link {
+  display: inline-flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 450;
+  padding-block: 8px; position: relative; text-decoration: none;
+}
+.j-link::after { content: ""; position: absolute; left: 0; right: 26px; bottom: 4px; height: 1px; background: currentColor; opacity: .35; transition: opacity .3s; }
+.j-link:hover::after { opacity: 1; }
+.j-link .ar { transition: transform .5s var(--j-ease); }
+.j-link:hover .ar { transform: translateX(5px); }
+.j-link--accent { color: var(--j-accent); }
+
+/* ---- circle action ---- */
+.j-cbtn { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: var(--j-muted); }
+.j-cbtn .ring {
+  width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--j-ink);
+  display: grid; place-items: center; color: var(--j-ink);
+  transition: background .25s, color .25s, transform .5s var(--j-ease);
+}
+.j-cbtn:hover .ring { background: var(--j-ink); color: var(--j-ground); }
+.j-cbtn:active .ring { transform: scale(.92); }
+.j-cbtn--accent .ring { border-color: var(--j-accent); color: var(--j-accent); }
+.j-cbtn--accent:hover .ring { background: var(--j-accent); color: var(--j-accent-ink); }
+.j-cbtn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.j-cbtn:disabled { opacity: .35; cursor: not-allowed; }
+.j-ring-sm { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--j-ink); display: grid; place-items: center; }
+.j-ring-sm svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+
+/* ---- status: form, not colour ----
+   sent    filled ink dot
+   held    accent dot, accent text
+   running pulsing accent ring
+   failed  hollow muted ring */
+.j-status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.j-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+.j-status--sent::before { background: var(--j-ink); }
+.j-status--held::before { background: var(--j-accent); }
+.j-status--held { color: var(--j-accent); }
+.j-status--run::before { border: 1.5px solid var(--j-accent); animation: j-pulse 1.2s ease-in-out infinite; }
+.j-status--fail::before { border: 1.5px solid var(--j-muted); }
+.j-status--fail { color: var(--j-muted); }
+
+/* ---- toggle ---- */
+.j-toggle { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; }
+.j-toggle .tk { width: 46px; height: 22px; border: 1.5px solid var(--j-ink); position: relative; }
+.j-toggle .tk::after { content: ""; position: absolute; top: 3px; left: 3px; width: 13px; height: 13px; background: var(--j-ink); transition: transform .45s var(--j-ease), background .3s; }
+.j-toggle[aria-pressed="true"] .tk { border-color: var(--j-accent); }
+.j-toggle[aria-pressed="true"] .tk::after { transform: translateX(24px); background: var(--j-accent); }
+
+/* ---- field: one underline ---- */
+.j-field { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--j-line); padding: 6px 0; min-width: min(320px, 100%); transition: border-color .3s; }
+.j-field:focus-within { border-color: var(--j-accent); }
+.j-field input { flex: 1; min-width: 0; background: none; border: 0; color: var(--j-ink); font: inherit; font-size: 15px; outline: none; }
+.j-field input::placeholder { color: var(--j-faded); }
+
+/* ---- range with a gate marker ----
+   <div class="j-range" style="--gate:80"> input + .tr .fl .gate .gl .th. rangeInit() wires the fill. */
+.j-range { position: relative; height: 34px; margin-top: 6px; }
+.j-range input { position: absolute; inset: 0; width: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.j-range .tr { position: absolute; left: 0; right: 0; top: 16px; height: 1px; background: var(--j-line); }
+.j-range .fl { position: absolute; left: 0; top: 16px; height: 1px; background: var(--j-ink); }
+.j-range .th { position: absolute; top: 9px; width: 15px; height: 15px; border-radius: 50%; background: var(--j-ink); transform: translateX(-50%); transition: transform .3s var(--j-ease); }
+.j-range input:active ~ .th { transform: translateX(-50%) scale(1.3); }
+.j-range input:focus-visible ~ .th { outline: 2px solid var(--j-accent); outline-offset: 3px; }
+.j-range .gate { position: absolute; left: calc(var(--gate, 80) * 1%); top: 6px; width: 1px; height: 21px; background: var(--j-accent); }
+.j-range .gl { position: absolute; left: calc(var(--gate, 80) * 1%); top: 28px; font-size: 12px; color: var(--j-accent); transform: translateX(-50%); white-space: nowrap; }
+.j-range.is-low .fl, .j-range.is-low .th { background: var(--j-accent); }
+
+/* ---- pivot: big lowercase words ----
+   Active in ink, the rest fade. The strip slides so the active word leads and wraps around.
+   pivot() clones the buttons once so the strip can loop. */
+.j-pivot { overflow: hidden; margin: 0 0 26px -14px; -webkit-mask: linear-gradient(90deg, #000 80%, transparent); mask: linear-gradient(90deg, #000 80%, transparent); }
+.j-pivot__strip { display: flex; gap: clamp(6px, 1vw, 12px); transition: transform .6s var(--j-ease); width: max-content; }
+.j-pivot__strip button {
+  font-weight: 330; font-size: clamp(26px, 2.8vw, 38px); letter-spacing: -.035em; line-height: 1.2;
+  color: var(--j-faded); white-space: nowrap; padding: 2px 14px 6px; border-radius: 12px;
+  transition: color .4s var(--j-ease), opacity .4s var(--j-ease), background .35s var(--j-ease);
+  text-shadow: 0 0 14px var(--j-ground), 0 0 4px var(--j-ground), 0 0 1px var(--j-ground);
+}
+.j-pivot__strip button:hover { color: var(--j-muted); background: var(--j-raised); box-shadow: var(--j-shadow-tile); text-shadow: none; }
+.j-pivot__strip button.on { color: var(--j-ink); font-weight: 400; }
+.j-pivot__strip button.on:hover { color: var(--j-ink); background: transparent; box-shadow: none; }
+.j-pivot__strip button.ghost { opacity: 0; pointer-events: none; }
+.j-pivot--sm .j-pivot__strip button { font-size: clamp(20px, 2vw, 26px); }
+.j-pivot--flush { margin-bottom: 0; }

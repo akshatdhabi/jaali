@@ -1,0 +1,70 @@
+/* Three layers.
+   ground : flat. The page and the lattice.
+   tile   : lifted colour, edge highlight, soft shadow. Content lives here.
+   raised : its own lighter colour, a 1px accent edge, a deep shadow. Anything that pops in. */
+
+.j-tile {
+  background: var(--j-tile);
+  box-shadow: var(--j-shadow-tile);
+  border-radius: 14px;
+}
+
+.j-raised {
+  background: var(--j-raised);
+  color: var(--j-ink);
+  box-shadow: var(--j-shadow-raised);
+  border-radius: 14px;
+}
+
+/* popover that animates in over a tile */
+.j-pop { transform-origin: 0 0; animation: j-pop-in .6s var(--j-ease) both; }
+
+/* toast: slides up from the bottom edge. toast() toggles .is-on */
+.j-toast {
+  position: fixed; left: 0; right: 0; margin: 0 auto; width: fit-content;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 22px);
+  z-index: 60; display: flex; align-items: center; gap: 14px;
+  max-width: min(440px, calc(100vw - 32px));
+  padding: 14px 18px 14px 16px; border-radius: 14px;
+  background: var(--j-raised); color: var(--j-ink); box-shadow: var(--j-shadow-raised);
+  transform: translateY(140%); opacity: 0;
+  transition: transform .6s var(--j-ease), opacity .3s;
+}
+.j-toast.is-on { transform: none; opacity: 1; }
+.j-toast::before { content: ""; width: 3px; align-self: stretch; border-radius: 2px; background: var(--j-accent); }
+.j-toast b { font-weight: 450; font-size: 15px; display: block; }
+.j-toast span { font-size: 13.5px; color: var(--j-muted); }
+
+/* sheet: full-screen detail view. openSheet() runs the continuum transition from the tapped title */
+.j-sheet {
+  position: fixed; inset: 0; z-index: 40; background: var(--j-ground);
+  padding-top: calc(env(safe-area-inset-top, 0px) + 28px); overflow-y: auto;
+}
+.j-sheet[hidden] { display: none !important; }
+.j-sheet__back { margin-bottom: 34px; }
+.j-sheet__org { font-size: 14px; color: var(--j-muted); }
+.j-sheet__title {
+  display: inline-block; font-weight: 200; font-size: clamp(56px, 9vw, 140px);
+  line-height: .95; letter-spacing: -.06em; transform-origin: 0 0; margin-top: 10px;
+}
+.j-sheet__row {
+  display: flex; gap: clamp(24px, 5vw, 72px); flex-wrap: wrap; margin-top: 40px;
+  border-top: 1px solid var(--j-line); padding-top: 22px; max-width: 1000px;
+}
+.j-sheet__text { max-width: 52ch; font-size: clamp(18px, 1.6vw, 22px); font-weight: 300; margin-top: 30px; }
+.j-sheet__body > * { animation: j-slide-in .6s var(--j-ease) backwards; animation-delay: calc(var(--d, 0) * 60ms + 120ms); }
+
+/* rules list: label and sentence on a hairline row */
+.j-rules { list-style: none; margin: 20px 0 0; padding: 0; border-top: 1px solid var(--j-line); }
+.j-rules li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--j-line-soft); font-size: 15px; }
+.j-rules li b { font-weight: 450; }
+.j-rules li span { color: color-mix(in srgb, var(--j-ink) 72%, var(--j-ground)); }
+@media (max-width: 760px) { .j-rules li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* a tile with a popover over it: the layers side by side */
+.j-pop-demo { position: relative; min-height: 190px; margin-top: 34px; }
+.j-pop-demo .base { padding: 18px 20px; max-width: 360px; }
+.j-pop-demo .base b, .j-pop-demo .pop b { font-weight: 450; display: block; }
+.j-pop-demo .pop { position: absolute; left: min(160px, 30%); top: 70px; width: min(300px, 70%); padding: 16px 18px; }
+.j-pop-demo .pop b { margin-bottom: 4px; }
+.j-pop-demo .pop span { font-size: 13.5px; color: var(--j-muted); }

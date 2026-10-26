@@ -1,0 +1,52 @@
+/* jaali base. Opt in with class="jaali" on <body>.
+   Resets use :where() so they never outrank a component class. */
+
+:root {
+  --j-lattice: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cg fill='none' stroke='%23000' stroke-width='.8'%3E%3Ccircle cx='11' cy='11' r='11'/%3E%3Ccircle cx='0' cy='0' r='11'/%3E%3Ccircle cx='22' cy='0' r='11'/%3E%3Ccircle cx='0' cy='22' r='11'/%3E%3Ccircle cx='22' cy='22' r='11'/%3E%3C/g%3E%3Ccircle cx='11' cy='11' r='1.3'/%3E%3Ccircle cx='0' cy='0' r='1.3'/%3E%3Ccircle cx='22' cy='0' r='1.3'/%3E%3Ccircle cx='0' cy='22' r='1.3'/%3E%3Ccircle cx='22' cy='22' r='1.3'/%3E%3C/svg%3E");
+  --j-gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --j-gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --j-measure: 1180px;
+}
+
+html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
+
+.jaali {
+  margin: 0;
+  background: var(--j-ground-image, linear-gradient(transparent, transparent)) fixed, var(--j-ground);
+  color: var(--j-ink);
+  font-family: var(--j-font);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  transition: background .5s var(--j-ease), color .5s var(--j-ease);
+}
+.jaali *, .jaali *::before, .jaali *::after { box-sizing: border-box; }
+/* paints the notch area in the ground colour on phones */
+.jaali::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 31; background: var(--j-ground);
+}
+.jaali :where(h1, h2, h3, h4, p) { margin: 0; }
+.jaali :where(button) { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; touch-action: manipulation; }
+.jaali :where(a) { color: inherit; }
+.jaali :focus-visible { outline: 2px solid var(--j-accent); outline-offset: 4px; }
+.jaali ::selection { background: var(--j-accent); color: var(--j-accent-ink); }
+.jaali main { position: relative; z-index: 1; }
+
+.j-tn { font-variant-numeric: tabular-nums; }
+.j-accent { color: var(--j-accent); }
+.j-wrap { padding-left: var(--j-gutter-l); padding-right: var(--j-gutter-r); }
+.j-inner { max-width: var(--j-measure); margin: 0 auto; padding-left: clamp(0px, 2vw, 24px); }
+.j-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* a soft halo in the ground colour keeps text readable where it crosses the lattice */
+.j-halo { text-shadow: 0 0 14px var(--j-ground), 0 0 4px var(--j-ground), 0 0 1px var(--j-ground); }
+
+/* theme change: every colour eases for 0.7s. Added and removed by setTheme() */
+html.j-reskin *, html.j-reskin *::before, html.j-reskin *::after {
+  transition: background-color .6s var(--j-ease), color .6s var(--j-ease), border-color .6s var(--j-ease), fill .6s, stroke .6s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

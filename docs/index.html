@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>jaali</title>
+<meta name="description" content="jaali: a small open-source design system. Design tokens, CSS and vanilla JS, with eight themes.">
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/jaali.css">
+<link rel="stylesheet" href="assets/docs.css">
+<script>
+  try {
+    var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
+    if (t) document.documentElement.dataset.theme = t;
+    if (m) document.documentElement.dataset.mode = m;
+  } catch (e) {}
+</script>
+</head>
+<body class="jaali">
+<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+
+<header class="j-top j-wrap">
+  <div class="j-inner">
+    <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html" class="on">home</a><a href="kit.html">kit</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <div class="j-actions">
+      <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
+      <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
+    </div>
+  </div>
+  <div class="j-skins" id="skins"><div class="j-wrap"><div class="j-inner" id="skinRow"></div></div></div>
+  <div class="j-progress"><i id="prog"></i></div>
+</header>
+
+<main>
+
+<section class="j-hero">
+<div class="j-wrap"><div class="j-inner">
+<svg class="j-arch" viewBox="0 0 160 300" aria-hidden="true"><path pathLength="1" d="M8 300 V132 C8 76 46 40 80 6 C114 40 152 76 152 132 V300"/><path class="a2" pathLength="1" d="M20 300 V136 C20 86 52 54 80 24 C108 54 140 86 140 136 V300"/></svg>
+<p class="j-eyebrow j-halo">open source · MIT</p>
+<h1 class="j-hero__title" aria-label="a design system for pages, tools, dashboards and trackers">
+<span class="j-title j-title--hero" aria-hidden="true">a design system</span>
+<span class="j-title j-title--hero" aria-hidden="true">for <span class="j-flip" data-words="pages|tools|dashboards|trackers">pages</span></span></h1>
+<div class="j-hero__low">
+<p class="j-lead j-halo">Design tokens, CSS and about 7 KB (gzipped) of vanilla JS. Eight themes, each with a dark and a light mode. No framework.</p>
+<div class="j-hero__cta"><a class="j-link j-link--accent j-halo" href="kit.html">kit <span class="ar">→</span></a><a class="j-link j-halo" href="story.html">story <span class="ar">→</span></a></div>
+</div>
+<div class="j-stats" data-j-in>
+<div class="j-stat" data-j-st style="--d:0"><div class="j-num"><span data-count="8">8</span></div><p class="j-cap">themes, each with dark and light</p></div>
+<div class="j-stat" data-j-st style="--d:1"><div class="j-num"><span data-count="3">3</span></div><p class="j-cap">surface layers: ground, tile, raised</p></div>
+<div class="j-stat" data-j-st style="--d:2"><div class="j-num"><span data-count="1">1</span></div><p class="j-cap">easing curve</p></div>
+<div class="j-stat" data-j-st style="--d:3"><div class="j-num"><span data-count="0">0</span></div><p class="j-cap">dependencies</p></div>
+</div></div></div></section>
+
+<section><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>principles</h2></div>
+<div class="j-wrap"><div class="j-inner" data-j-in>
+<p class="j-sub j-halo" data-j-st>In priority order. If two conflict, the earlier one wins.</p>
+<div class="j-cols">
+<div data-j-st style="--d:1"><div class="k">01</div><b>type</b><p>Thin, lowercase and large. One easing curve for all motion.</p></div>
+<div data-j-st style="--d:2"><div class="k">02</div><b>lines</b><p>Hairlines and grids give the structure. Tiles and raised surfaces are the only filled shapes.</p></div>
+<div data-j-st style="--d:3"><div class="k">03</div><b>Jaipur</b><p>A jaali lattice, an Amer arch, a blue-pottery rosette and one rose accent. Used sparingly, except the lattice.</p></div>
+</div></div></div></section>
+
+<section><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>install</h2></div>
+<div class="j-wrap"><div class="j-inner" data-j-in>
+<p class="j-sub j-halo" data-j-st>Link two stylesheets and add one class.</p>
+<pre class="code" data-j-st style="--d:1;margin-top:26px"><span class="c"># install</span>
+npm install jaali
+
+<span class="c">&lt;!-- html --&gt;</span>
+&lt;link rel="stylesheet" href="jaali/fonts.css"&gt;
+&lt;link rel="stylesheet" href="jaali/jaali.css"&gt;
+&lt;body class="jaali"&gt;
+  &lt;h1 class="j-title"&gt;hello&lt;/h1&gt;
+&lt;/body&gt;
+
+<span class="c">// optional behaviour</span>
+<span class="k">import</span> { mount, jaaliField } <span class="k">from</span> 'jaali';
+mount();
+jaaliField(document.querySelector('canvas'));</pre>
+<div class="j-cols" style="margin-top:44px">
+<div data-j-st><b><a href="kit.html">kit</a></b><p>Tokens, themes, type, layers, tiles, motion and controls.</p></div>
+<div data-j-st style="--d:1"><b><a href="examples.html">examples</a></b><p>A reading list, a habit tracker and a release gate.</p></div>
+<div data-j-st style="--d:2"><b><a href="story.html">story</a></b><p>Why I built it, how it was made, and what I dropped.</p></div>
+</div>
+</div></div></section>
+<div class="j-wrap"><div class="j-inner"><div class="j-sign"><span class="rosette-slot"></span><span>jaali is MIT licensed. Built in Bengaluru, drawn from Jaipur.</span></div></div></div>
+
+</main>
+
+<script src="assets/jaali.iife.js"></script>
+<script src="assets/site.js"></script>
+<script>document.querySelectorAll(".rosette-slot").forEach(function(e){e.innerHTML=Jaali.rosette()})</script>
+</body>
+</html>

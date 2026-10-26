@@ -1,0 +1,9 @@
+node_modules/
+dist/
+docs/assets/jaali.css
+docs/assets/jaali.iife.js
+*.tgz
+.DS_Store
+src/js/_themes.gen.js
+docs/assets/fonts.css
+docs/assets/fonts/

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>story · jaali</title>
+<meta name="description" content="Why I built jaali and how it was made.">
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/jaali.css">
+<link rel="stylesheet" href="assets/docs.css">
+<script>
+  try {
+    var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
+    if (t) document.documentElement.dataset.theme = t;
+    if (m) document.documentElement.dataset.mode = m;
+  } catch (e) {}
+</script>
+</head>
+<body class="jaali">
+<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+
+<header class="j-top j-wrap">
+  <div class="j-inner">
+    <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="examples.html">examples</a><a href="story.html" class="on">story</a><a href="sample.html">sample</a></nav>
+    <div class="j-actions">
+      <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
+      <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
+    </div>
+  </div>
+  <div class="j-skins" id="skins"><div class="j-wrap"><div class="j-inner" id="skinRow"></div></div></div>
+  <div class="j-progress"><i id="prog"></i></div>
+</header>
+
+<main>
+<section class="j-hero" style="padding-bottom:0"><div class="j-wrap"><div class="j-inner">
+<h1 class="j-title j-title--hero" style="white-space:normal">story</h1>
+<p class="j-lead j-halo" style="margin-top:22px">Why I built jaali and how it was made.</p></div></div></section>
+<div class="j-wrap"><div class="j-inner" style="margin-top:56px"><div class="prose">
+<p style="font-size:14px;color:var(--j-muted)">Akshat Dhabi · Bengaluru</p>
+
+<h3>why I built it</h3>
+<p>I'm from Jaipur, and I like this UI. I wanted my own pages and tools to look like it.</p>
+<p>The UI is the Zune interface: large thin lowercase type, pivots that slide sideways, content with little chrome around it, and motion that shows where things come from. Zune is gone. The ideas still work, so I kept them.</p>
+<p>Jaipur is the other half. Gulabi is the pink of the city. Jaali are the stone lattices in its windows. Amer has the pointed arch and blue pottery has the rosettes. I didn't want to decorate with any of it, so each shows up in one small place: a faint lattice behind the page, one pink accent, one arch, one rosette.</p>
+
+<h3>how it was built</h3>
+<p>I built it with Claude over two days, in three rounds. Each round I looked at screenshots, said what was wrong, and Claude rebuilt it. The first two rounds failed.</p>
+<p><b>Round 1, Breathe + jaali.</b> I rejected it. The type was too loud and the pink looked dirty on dark.</p>
+<p><b>Round 2, Gulabi.</b> Serif type, arch-shaped tiles, a rose ticker and turquoise accents. I tried to add the Zune ideas on top and the two systems clashed.</p>
+<p><b>Round 3, Gulabi Zune.</b> I restarted with Zune as the base, hairlines second and Jaipur third. The first version was a horizontal panorama. It glitched, so it became a vertical page where titles stay in frame. This is the version I kept.</p>
+<p>After the design settled, Claude packaged it: tokens in one JSON file, eight themes derived by rules, CSS generated from the tokens, tests, a contrast audit and this docs site.</p>
+
+<h3>what worked</h3>
+<ul>
+<li>A faint jaali lattice behind the page that glows under the cursor.</li>
+<li>One pink word that flips over like a live tile.</li>
+<li>Work tiles modelled on a music app: a large name, a tagline that changes, a line figure.</li>
+</ul>
+
+<h3>testing on a phone</h3>
+<p>I tried it as a gym tracker on a phone at low brightness. The tiles blended into the page and pop-ups disappeared into the tile underneath. The screenshots had looked fine.</p>
+<p>That test led to the three layers. Ground is flat. Tile has an edge highlight and a soft shadow. Raised has its own lighter colour, a thin accent edge and a deep shadow, and everything that pops in uses it.</p>
+
+<h3>what I dropped</h3>
+<ul class="rej"><li><b>45-degree chamfers</b>They looked like a different brand.</li><li><b>Cloud arches</b>Amer has a pointed arch with straight sides. Clouds are soft and round.</li><li><b>Condensed caps</b>Too loud. That was the Round 1 problem.</li><li><b>Quirky display faces</b>Fun at first. Geist holds up longer.</li><li><b>Mono all-caps labels</b>Sentence case reads like a person wrote it.</li><li><b>Pastel status colours</b>They wash out on a dim screen. Status uses shape now.</li><li><b>Dark mode as inverted light</b>Dark has its own tiles, shadows and edge highlights.</li><li><b>Titles that slide off screen</b>The panorama glitched and titles left the frame. Titles now stay in view.</li><li><b>Pop-ups in the same colour as the surface below</b>They disappear. Raised has its own lighter colour.</li></ul>
+
+<h3>known gaps</h3>
+<p>Some colour pairs in light mode fall below WCAG contrast. They are listed in the README with suggested fixes. I left the colours as I picked them and added a test that fails if a new gap appears.</p>
+
+<h3>the name</h3>
+<p>While building it I called it Gulabi Zune. Zune is Microsoft's trademark, and I want anyone to be able to use this. The public name is <b>jaali</b>, after the lattice.</p>
+
+<p class="notice">Zune is a trademark of Microsoft. jaali is an independent project and is not affiliated with, endorsed by, or sponsored by Microsoft. It reuses no Microsoft code, fonts or assets. Type-led layout and pivots are general design approaches.</p>
+</div></div></div>
+<div class="j-wrap"><div class="j-inner"><div class="j-sign"><span class="rosette-slot"></span><span>jaali is MIT licensed. Built in Bengaluru, drawn from Jaipur.</span></div></div></div>
+
+</main>
+
+<script src="assets/jaali.iife.js"></script>
+<script src="assets/site.js"></script>
+<script>document.querySelectorAll(".rosette-slot").forEach(function(e){e.innerHTML=Jaali.rosette()})</script>
+</body>
+</html>

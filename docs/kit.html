@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>kit · jaali</title>
+<meta name="description" content="Every jaali token and component: colour, themes, type, layers, tiles, motion and controls.">
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/jaali.css">
+<link rel="stylesheet" href="assets/docs.css">
+<script>
+  try {
+    var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
+    if (t) document.documentElement.dataset.theme = t;
+    if (m) document.documentElement.dataset.mode = m;
+  } catch (e) {}
+</script>
+</head>
+<body class="jaali">
+<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+
+<header class="j-top j-wrap">
+  <div class="j-inner">
+    <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html" class="on">kit</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <div class="j-actions">
+      <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
+      <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
+    </div>
+  </div>
+  <div class="j-skins" id="skins"><div class="j-wrap"><div class="j-inner" id="skinRow"></div></div></div>
+  <div class="j-progress"><i id="prog"></i></div>
+</header>
+
+<main>
+<section class="j-hero" style="padding-bottom:0"><div class="j-wrap"><div class="j-inner">
+<h1 class="j-title j-title--hero" style="white-space:normal">kit</h1>
+<p class="j-lead j-halo" style="margin-top:22px">Every token and component, live. Change the theme or mode from the top bar.</p></div></div></section>
+<div class="j-wrap"><div class="j-inner" style="margin-top:56px">
+
+<div class="kit-sec"><h3>colour<small>CSS custom properties, <code>--j-*</code>. Values are for gulabi, the default theme.</small></h3>
+<div><div class="ctl-row" style="margin-bottom:18px"><div class="j-pivot j-pivot--sm" id="modePivot"><div class="j-pivot__strip"><button class="on" data-m="dark">dark</button><button data-m="light">light</button></div></div></div>
+<table class="tokens" id="tokTable"><thead><tr><th>token</th><th>value</th><th>use</th></tr></thead>
+<tbody class="t-dark"><tr><td><span class="chip" style="background:#17121A"></span>ground</td><td><code>#17121A</code></td><td>the page</td></tr><tr><td><span class="chip" style="background:#251C2A"></span>tile</td><td><code>#251C2A</code></td><td>content tiles</td></tr><tr><td><span class="chip" style="background:#2E2335"></span>tileBack</td><td><code>#2E2335</code></td><td>tile back face</td></tr><tr><td><span class="chip" style="background:#3A2D42"></span>raised</td><td><code>#3A2D42</code></td><td>pop-ins, sheets, menus</td></tr><tr><td><span class="chip" style="background:#342A36"></span>line</td><td><code>#342A36</code></td><td>hairlines</td></tr><tr><td><span class="chip" style="background:#271F2B"></span>lineSoft</td><td><code>#271F2B</code></td><td>soft hairlines</td></tr><tr><td><span class="chip" style="background:#F5EEF0"></span>ink</td><td><code>#F5EEF0</code></td><td>text</td></tr><tr><td><span class="chip" style="background:#A89AA2"></span>muted</td><td><code>#A89AA2</code></td><td>secondary text</td></tr><tr><td><span class="chip" style="background:#6E6072"></span>faded</td><td><code>#6E6072</code></td><td>tertiary, disabled</td></tr><tr><td><span class="chip" style="background:#F28DAE"></span>accent</td><td><code>#F28DAE</code></td><td>the one accent</td></tr><tr><td><span class="chip" style="background:#17121A"></span>accentInk</td><td><code>#17121A</code></td><td>text on accent</td></tr></tbody><tbody class="t-light" hidden><tr><td><span class="chip" style="background:#F7F2F1"></span>ground</td><td><code>#F7F2F1</code></td><td>the page</td></tr><tr><td><span class="chip" style="background:#FFFFFF"></span>tile</td><td><code>#FFFFFF</code></td><td>content tiles</td></tr><tr><td><span class="chip" style="background:#F4ECEA"></span>tileBack</td><td><code>#F4ECEA</code></td><td>tile back face</td></tr><tr><td><span class="chip" style="background:#FFFFFF"></span>raised</td><td><code>#FFFFFF</code></td><td>pop-ins, sheets, menus</td></tr><tr><td><span class="chip" style="background:#E6DAD9"></span>line</td><td><code>#E6DAD9</code></td><td>hairlines</td></tr><tr><td><span class="chip" style="background:#F0E7E5"></span>lineSoft</td><td><code>#F0E7E5</code></td><td>soft hairlines</td></tr><tr><td><span class="chip" style="background:#2E1F27"></span>ink</td><td><code>#2E1F27</code></td><td>text</td></tr><tr><td><span class="chip" style="background:#7A6A70"></span>muted</td><td><code>#7A6A70</code></td><td>secondary text</td></tr><tr><td><span class="chip" style="background:#A5949B"></span>faded</td><td><code>#A5949B</code></td><td>tertiary, disabled</td></tr><tr><td><span class="chip" style="background:#B53A61"></span>accent</td><td><code>#B53A61</code></td><td>the one accent</td></tr><tr><td><span class="chip" style="background:#FBF8F7"></span>accentInk</td><td><code>#FBF8F7</code></td><td>text on accent</td></tr></tbody></table>
+<p class="j-cap" style="margin-top:14px">Values shown are the gulabi theme. Other themes derive their tile, back face and raised colours from the same rules. See <code>src/tokens/themes.json</code>.</p></div></div>
+
+<div class="kit-sec"><h3>themes<small>Eight themes. Pick one to apply it to this page.</small></h3>
+<div><div class="j-skin-list" id="themeList"></div></div></div>
+
+<div class="kit-sec"><h3>type<small>Geist, variable. Light weights, tight tracking.</small></h3>
+<div>
+<div class="spec"><div style="font-weight:160;font-size:clamp(48px,8vw,110px);letter-spacing:-.068em;line-height:.9">title</div><div class="j-cap">weight 160, up to 180px, tracking -.068em</div></div>
+<div class="spec"><div style="font-weight:230;font-size:64px;letter-spacing:-.05em;line-height:1">1,284</div><div class="j-cap">figure: weight 230, tabular numerals</div></div>
+<div class="spec"><div style="font-weight:380;font-size:28px;letter-spacing:-.035em">section heading</div><div class="j-cap">weight 380, 24 to 30px</div></div>
+<div class="spec"><div style="font-size:18px;line-height:1.5">Body copy. Weight 400, 15 to 20px.</div><div class="j-cap">body: 400, line-height 1.5</div></div>
+<div class="spec"><div class="j-cap" style="font-size:13.5px">caption, sentence case, never all caps</div><div class="j-cap">13.5px, muted</div></div>
+</div></div>
+
+<div class="kit-sec"><h3>layers<small>Ground, tile, raised.</small></h3>
+<div><div class="j-pop-demo"><div class="j-tile base"><b>Tile</b><p class="j-cap" style="margin-top:6px">Layer 1. Edge highlight on top, soft shadow below.</p></div>
+<div class="j-raised j-pop pop" id="popDemo"><b>Raised</b><span>Layer 2. Lighter, with a thin accent edge.</span></div></div>
+<div class="layers"><div class="l0"><b>ground</b><span>flat</span></div><div class="l1"><b>tile</b><span>--j-shadow-tile</span></div><div class="l2"><b>raised</b><span>--j-shadow-raised</span></div></div></div></div>
+
+<div class="kit-sec"><h3>tiles<small>Tap a tile to flip it. Hover to light the lattice.</small></h3>
+<div><div class="minihub j-hub" id="miniHub" data-j-in style="grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:110px;max-width:640px">
+<div class="j-live j-glow is-wide" data-j-live><div class="j-live__in"><div class="j-face"><span class="j-tn1">128</span><span class="j-tl">items, front</span></div><div class="j-face j-face--back"><span class="j-tw">back face is lighter</span><span class="j-tl">flip</span></div></div></div>
+<div class="j-live j-glow is-accent"><div class="j-live__in"><div class="j-face"><span class="j-tn1">6</span><span class="j-tl">accent tile</span></div></div></div>
+<div class="j-live j-glow"><div class="j-live__in"><div class="j-face"><span class="j-tn1">3</span><span class="j-tl">plain</span></div></div></div>
+</div></div></div>
+
+<div class="kit-sec"><h3>flip word &amp; pivot<small>A flipping accent word and a sliding pivot.</small></h3>
+<div><p style="font-weight:250;font-size:clamp(36px,5vw,64px);letter-spacing:-.05em;line-height:1">built with <span class="j-flip" data-words="type|lines|a lattice|one accent">type</span></p>
+<div class="j-pivot" style="margin-top:34px"><div class="j-pivot__strip"><button class="on">today</button><button>week</button><button>month</button><button>year</button></div></div></div></div>
+
+<div class="kit-sec"><h3>motion<small>One curve. 600ms in, 170ms out. Press the tile.</small></h3>
+<div class="ctl-row" style="align-items:stretch">
+<svg class="curve" viewBox="0 0 220 140" aria-label="Easing curve cubic-bezier(.1,.9,.2,1)"><line class="ax" x1="10" y1="130" x2="210" y2="130"/><line class="ax" x1="10" y1="130" x2="10" y2="10"/><path d="M10 130 C30 30 50 12 210 10"/></svg>
+<div class="press j-tile" data-j-tilt style="padding:26px;border-radius:14px;border:0"><b>press me</b><span class="j-cap">cubic-bezier(.1, .9, .2, 1)</span></div>
+<div class="demo-list" id="turnList"><div>one</div><div>two</div><div>three</div></div>
+</div></div>
+
+<div class="kit-sec"><h3>controls<small>Link, buttons, toggle, field, range and status.</small></h3>
+<div><div class="ctl-row">
+<a class="j-link j-link--accent" href="#">text link <span class="ar">→</span></a>
+<button class="j-cbtn j-cbtn--accent"><span class="ring"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>add</button>
+<button class="j-cbtn"><span class="ring"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>done</button>
+<button class="j-toggle" id="tgl" aria-pressed="false"><span class="tk"></span>notify me</button>
+<label class="j-field"><input placeholder="search" aria-label="Search"></label>
+</div>
+<div class="ctl-row" style="margin-top:30px">
+<span class="j-status j-status--sent">sent</span><span class="j-status j-status--held">held</span><span class="j-status j-status--run">running</span><span class="j-status j-status--fail">failed</span></div>
+<p class="j-cap" style="margin-top:14px">Status uses shape, not colour: filled dot, accent dot, pulsing ring, hollow ring.</p>
+<div class="j-range" id="rg" style="--gate:70;margin-top:30px;max-width:420px"><input type="range" min="0" max="100" value="82" aria-label="Score"><span class="tr"></span><span class="fl"></span><span class="gate"></span><span class="gl">gate 70</span><span class="th"></span></div>
+</div></div>
+
+<div class="kit-sec"><h3>Jaipur cues<small>Line drawings in the accent colour.</small></h3>
+<div><div class="cues">
+<div><div class="art" id="cueArch"></div><b>Amer arch</b><p>Pointed, with straight sides. Drawn once in the hero corner.</p></div>
+<div><div class="art" id="cueRos"></div><b>rosette</b><p>Blue-pottery rosette with eight petals. Closes a page.</p></div>
+<div><div class="art"><div class="mini-band"><div class="j-band is-in"><i></i><b></b></div></div></div><b>jaali lattice</b><p>The one place the accent covers the page, at low opacity.</p></div>
+</div></div></div>
+
+<div class="kit-sec"><h3>left out<small>Tried and removed.</small></h3>
+<div class="prose"><ul class="rej">
+<li><b>45-degree chamfers</b>Looked like a different brand.</li>
+<li><b>Cloud-shaped arches</b>Pointed Amer arches only.</li>
+<li><b>Condensed caps and quirky display faces</b>Geist, thin, lowercase.</li>
+<li><b>Mono all-caps labels</b>Sentence case captions.</li>
+<li><b>Pastel status colours</b>Status is told by form.</li>
+<li><b>Dark mode as inverted light</b>Dark is designed on its own.</li>
+<li><b>Titles that slide off screen</b>Titles stay in frame.</li>
+<li><b>Pop-ins in the same colour as the surface below</b>Raised has its own colour.</li>
+</ul></div></div>
+
+</div></div>
+<div class="j-wrap"><div class="j-inner"><div class="j-sign"><span class="rosette-slot"></span><span>jaali is MIT licensed. Built in Bengaluru, drawn from Jaipur.</span></div></div></div>
+
+</main>
+
+<script src="assets/jaali.iife.js"></script>
+<script src="assets/site.js"></script>
+<script>document.querySelectorAll(".rosette-slot").forEach(function(e){e.innerHTML=Jaali.rosette()})</script><script>
+(function(){
+  var J=window.Jaali,$=J.$,$$=J.$$;
+  J.themePicker($('#themeList'));
+  $('#themeList').addEventListener('click',function(){});
+  J.liveTiles($('#miniHub'));
+  J.pivot($('#modePivot'),function(b){
+    var m=b.dataset.m;J.setMode(m);
+    $('.t-dark').hidden=m!=='dark';$('.t-light').hidden=m!=='light';
+  });
+  document.addEventListener('jaali:theme',function(e){
+    var m=e.detail.mode;$('.t-dark').hidden=m!=='dark';$('.t-light').hidden=m!=='light';
+  });
+  $('#tgl').addEventListener('click',function(){var b=this;b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');});
+  J.range($('#rg'));
+  $('#cueArch').innerHTML=J.motif('arch');$('#cueRos').innerHTML=J.motif('rosette');
+  var pop=$('#popDemo');setInterval(function(){pop.style.animation='none';void pop.offsetWidth;pop.style.animation='';},6000);
+  var tl=$('#turnList'),n=0,W=[['one','two','three'],['four','five','six'],['seven','eight','nine']];
+  function fill(){tl.innerHTML=W[n%3].map(function(x){return '<div>'+x+'</div>'}).join('');J.indexKids(tl);}
+  fill();tl.classList.add('j-turn','is-in');
+  setInterval(function(){n++;J.turnstile(tl,fill);},3200);
+})();
+</script>
+</body>
+</html>

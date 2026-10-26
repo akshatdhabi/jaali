@@ -1,0 +1,151 @@
+{
+  "_note": "Source of truth for colour. 'gulabi' is pinned: its values are used exactly as written. Every other theme lists authored values that scripts/build.mjs resolves with the rules in src/tokens/derive.mjs.",
+  "default": "gulabi",
+  "themes": {
+    "gulabi": {
+      "label": "home",
+      "pinned": true,
+      "dark": {
+        "ground": "#17121A", "tile": "#251C2A", "tileBack": "#2E2335", "raised": "#3A2D42",
+        "line": "#342A36", "lineSoft": "#271F2B", "ink": "#F5EEF0", "muted": "#A89AA2",
+        "faded": "#6E6072", "accent": "#F28DAE", "accentInk": "#17121A"
+      },
+      "light": {
+        "ground": "#F7F2F1", "tile": "#FFFFFF", "tileBack": "#F4ECEA", "raised": "#FFFFFF",
+        "line": "#E6DAD9", "lineSoft": "#F0E7E5", "ink": "#2E1F27", "muted": "#7A6A70",
+        "faded": "#A5949B", "accent": "#B53A61", "accentInk": "#FBF8F7"
+      }
+    },
+    "neel": {
+      "label": "blue pottery",
+      "dark": {
+        "ground": "#0C1424", "tile": "#141F35", "tileBack": "#1A2842",
+        "line": "#24324D", "lineSoft": "#18233A", "ink": "#EEF3FA", "muted": "#98A8C2",
+        "faded": "#5C6C88", "accent": "#7FB2FF", "accentInk": "#0C1424"
+      },
+      "light": {
+        "ground": "#F6F8FC", "tile": "#E9EEF7", "tileBack": "#DDE5F2",
+        "line": "#D8E0EE", "lineSoft": "#E8EDF6", "ink": "#13213D", "muted": "#5E6B85",
+        "faded": "#97A3BA", "accent": "#1F4FB5", "accentInk": "#F6F8FC"
+      }
+    },
+    "amer": {
+      "label": "sandstone",
+      "dark": {
+        "ground": "#19130D", "tile": "#241B13", "tileBack": "#2D2218",
+        "line": "#3A2D20", "lineSoft": "#2A2017", "ink": "#F7EEE2", "muted": "#B8A58E",
+        "faded": "#7A6A56", "accent": "#EBA74E", "accentInk": "#19130D"
+      },
+      "light": {
+        "ground": "#FBF6EE", "tile": "#F2E9DA", "tileBack": "#EADDC8",
+        "line": "#E6D9C4", "lineSoft": "#F0E6D6", "ink": "#2B1D10", "muted": "#7A6650",
+        "faded": "#AE9C84", "accent": "#A35F12", "accentInk": "#FBF6EE"
+      }
+    },
+    "makrana": {
+      "label": "marble and emerald",
+      "dark": {
+        "ground": "#0E1613", "tile": "#16211D", "tileBack": "#1C2A25",
+        "line": "#26362F", "lineSoft": "#1A2621", "ink": "#EEF5F1", "muted": "#97ABA2",
+        "faded": "#5E7068", "accent": "#4FD69C", "accentInk": "#0E1613"
+      },
+      "light": {
+        "ground": "#F7F8F6", "tile": "#ECEFEB", "tileBack": "#E1E6E0",
+        "line": "#DCE2DB", "lineSoft": "#EAEEE8", "ink": "#16211C", "muted": "#5F6E67",
+        "faded": "#99A69F", "accent": "#0E7F57", "accentInk": "#F7F8F6"
+      }
+    },
+    "magenta": {
+      "label": "black and magenta",
+      "dark": {
+        "ground": "#000000", "tile": "#141414", "tileBack": "#1D1D1D",
+        "line": "#2A2A2A", "lineSoft": "#1A1A1A", "ink": "#FFFFFF", "muted": "#A3A3A3",
+        "faded": "#606060", "accent": "#FF2E9A", "accentInk": "#000000"
+      },
+      "light": {
+        "ground": "#FFFFFF", "tile": "#F2F2F2", "tileBack": "#E8E8E8",
+        "line": "#E3E3E3", "lineSoft": "#F0F0F0", "ink": "#111111", "muted": "#666666",
+        "faded": "#A3A3A3", "accent": "#D3007A", "accentInk": "#FFFFFF"
+      }
+    },
+    "ember": {
+      "label": "graphite and orange",
+      "dark": {
+        "ground": "#1B1B1B", "tile": "#262626", "tileBack": "#2F2F2F",
+        "line": "#3A3A3A", "lineSoft": "#2A2A2A", "ink": "#FAFAFA", "muted": "#A8A8A8",
+        "faded": "#6A6A6A", "accent": "#FF7A1F", "accentInk": "#1B1B1B"
+      },
+      "light": {
+        "ground": "#FAFAF9", "tile": "#EFEFED", "tileBack": "#E5E5E2",
+        "line": "#E2E2DF", "lineSoft": "#EDEDEA", "ink": "#1B1B1B", "muted": "#666664",
+        "faded": "#A3A3A0", "accent": "#D95B00", "accentInk": "#FAFAF9"
+      }
+    },
+    "cobalt": {
+      "label": "midnight and cyan",
+      "dark": {
+        "ground": "#05152D", "tile": "#0B2245", "tileBack": "#102B54",
+        "line": "#173463", "lineSoft": "#0E2549", "ink": "#EAF6FF", "muted": "#8FB1CF",
+        "faded": "#527293", "accent": "#38D2FF", "accentInk": "#05152D"
+      },
+      "light": {
+        "ground": "#F3F9FD", "tile": "#E4F0F8", "tileBack": "#D6E7F3",
+        "line": "#D2E3EF", "lineSoft": "#E2EEF7", "ink": "#0A2240", "muted": "#4F6B86",
+        "faded": "#8DA6BD", "accent": "#0A7DB0", "accentInk": "#F3F9FD"
+      }
+    },
+    "sanjh": {
+      "label": "dusk sky",
+      "dark": {
+        "ground": "#150E24", "tile": "#22163A", "tileBack": "#2B1C47",
+        "line": "#3A2752", "lineSoft": "#26193F", "ink": "#FFF2EC", "muted": "#C6A9B9",
+        "faded": "#7E6585", "accent": "#FFAE78", "accentInk": "#150E24",
+        "groundImage": "linear-gradient(180deg,#150E24 0%,#2A1440 38%,#4A1C3C 72%,#5C2533 100%)"
+      },
+      "light": {
+        "ground": "#FFF6EF", "tile": "#FBE9E3", "tileBack": "#F4DDD9",
+        "line": "#EED7D3", "lineSoft": "#F8E5DF", "ink": "#2A1730", "muted": "#7A6070",
+        "faded": "#B39AA6", "accent": "#C2492E", "accentInk": "#FFF6EF",
+        "groundImage": "linear-gradient(180deg,#FFF6EF 0%,#FCE6E4 45%,#EFE3F7 100%)"
+      }
+    }
+  },
+  "rules": {
+    "dark": {
+      "tile": "authored tile mixed 3.5% toward ink",
+      "tileBack": "authored tileBack mixed 5% toward ink",
+      "raised": "authored tileBack mixed 12% toward ink"
+    },
+    "light": {
+      "ground": "authored ground nudged 25% toward line",
+      "tile": "white",
+      "tileBack": "authored tile",
+      "raised": "white"
+    }
+  },
+  "elevation": {
+    "dark": {
+      "tile": "inset 0 1px 0 rgba(255,255,255,.09),inset 0 0 0 1px rgba(255,255,255,.065),0 2px 4px rgba(0,0,0,.45),0 14px 32px -12px rgba(0,0,0,.75)",
+      "raised": "inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px color-mix(in srgb,var(--j-accent) 40%,transparent),0 28px 64px -14px rgba(0,0,0,.85),0 6px 16px rgba(0,0,0,.5)"
+    },
+    "light": {
+      "tile": "inset 0 0 0 1px rgba(46,31,39,.07),0 1px 2px rgba(46,31,39,.08),0 14px 30px -14px rgba(58,29,46,.30)",
+      "raised": "0 0 0 1px color-mix(in srgb,var(--j-accent) 30%,transparent),0 28px 64px -16px rgba(58,29,46,.40),0 6px 16px -4px rgba(58,29,46,.18)"
+    }
+  },
+  "motion": {
+    "ease": "cubic-bezier(.1,.9,.2,1)",
+    "duration": { "base": "600ms", "exit": "170ms", "flip": "900ms" }
+  },
+  "type": {
+    "family": "'Geist',system-ui,-apple-system,'Segoe UI',sans-serif",
+    "scale": {
+      "title": { "weight": 160, "size": "clamp(76px,11.6vw,180px)", "tracking": "-.068em", "leading": ".88" },
+      "number": { "weight": 230, "size": "clamp(56px,6vw,92px)", "tracking": "-.05em", "leading": "1" },
+      "tileNumber": { "weight": 240, "size": "clamp(44px,4.6vw,72px)", "tracking": "-.055em", "leading": ".9" },
+      "pivot": { "weight": 330, "size": "clamp(26px,2.8vw,38px)", "tracking": "-.035em", "leading": "1.2" },
+      "body": { "weight": 400, "size": "16px", "tracking": "0", "leading": "1.55" },
+      "caption": { "weight": 400, "size": "13.5px", "tracking": ".005em", "leading": "1.5" }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+/* Page chrome: sticky top bar, section nav, scroll progress, theme switcher. */
+
+.j-top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--j-ground); transition: background .5s var(--j-ease); }
+.j-top .j-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+.j-brand { font-size: 14px; font-weight: 500; white-space: nowrap; }
+.j-nav { display: flex; gap: clamp(14px, 2.4vw, 28px); align-items: baseline; }
+.j-nav a {
+  text-decoration: none; font-weight: 350; font-size: clamp(17px, 1.6vw, 21px); letter-spacing: -.02em;
+  color: var(--j-faded); transition: color .4s var(--j-ease);
+  text-shadow: 0 0 14px var(--j-ground), 0 0 4px var(--j-ground), 0 0 1px var(--j-ground);
+}
+.j-nav a.on { color: var(--j-ink); font-weight: 420; }
+.j-nav a:hover { color: var(--j-muted); }
+.j-actions { display: flex; gap: 10px; align-items: center; }
+.j-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--j-line); }
+.j-progress i { position: absolute; inset: 0; background: var(--j-accent); transform-origin: left; transform: scaleX(0); }
+
+/* theme switcher: a panel that drops from the bar, one card per theme */
+.j-skin-btn .j-ring-sm { border-color: var(--j-accent); }
+.j-skin-btn .j-ring-sm i { width: 12px; height: 12px; border-radius: 50%; background: var(--j-accent); }
+.j-skins { position: absolute; left: 0; right: 0; top: 100%; background: var(--j-raised); box-shadow: var(--j-shadow-raised); border-bottom: 1px solid var(--j-line); overflow: hidden; max-height: 0; transition: max-height .55s var(--j-ease); }
+.j-skins.is-open { max-height: 260px; }
+.j-top .j-skins .j-inner { display: flex; gap: 10px; overflow-x: auto; padding-block: 14px 16px; scrollbar-width: none; height: auto; align-items: stretch; justify-content: flex-start; }
+.j-skins .j-inner::-webkit-scrollbar { display: none; }
+.j-skin {
+  box-shadow: var(--j-shadow-tile); flex: 0 0 auto; display: grid; gap: 8px; justify-items: start;
+  padding: 12px 14px; border-radius: 12px; min-width: 118px; background: var(--j-tile);
+  transition: transform .5s var(--j-ease), outline-color .3s; outline: 1.5px solid transparent; outline-offset: 0; text-align: left;
+}
+.j-skin:hover { transform: translateY(-2px); }
+.j-skin.on { outline-color: var(--j-accent); }
+.j-skin .dots { display: flex; gap: 5px; }
+.j-skin .dots i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, .35); }
+.j-skin b { font-weight: 300; font-size: 19px; letter-spacing: -.025em; line-height: 1; }
+.j-skin b i { font-style: normal; }
+.j-skin small { font-size: 11.5px; color: var(--j-muted); }
+.j-skins.is-open .j-skin { animation: j-slide-in .6s var(--j-ease) backwards; animation-delay: calc(var(--i, 0) * 40ms); }
+
+/* larger theme cards, two columns, for a theme page */
+.j-skin-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.j-skin-list .j-skin { min-width: 0; width: 100%; padding: 18px 20px; }
+.j-skin-list .j-skin b { font-size: 30px; }
+
+@media (max-width: 760px) {
+  .j-nav a { font-size: 16px; }
+  .j-brand { display: none; }
+}

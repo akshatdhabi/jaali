@@ -1,0 +1,51 @@
+/* Jaipur, in line and rose only.
+   The lattice is the one place the accent is allowed to be everywhere, and only faintly. */
+
+/* page-wide canvas, drawn by jaaliField(). Sits behind everything. */
+.j-field-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+/* lattice lit by the accent under the cursor. add .j-glow to a tile or card; glow() sets --mx and --my */
+.j-glow { position: relative; isolation: isolate; }
+.j-glow::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0;
+  transition: opacity .5s var(--j-ease);
+  background: radial-gradient(150px circle at var(--mx, 50%) var(--my, 50%), var(--j-accent), transparent 75%);
+  -webkit-mask: var(--j-lattice) 0 0 / 28px 28px; mask: var(--j-lattice) 0 0 / 28px 28px;
+}
+.j-glow:hover::after { opacity: .26; }
+.j-live.j-glow::after { z-index: 3; border-radius: 12px; }
+.j-live.j-glow:hover::after { opacity: .2; }
+.j-glow > * { position: relative; z-index: 1; }
+
+/* a drifting lattice that fills its parent, for live tiles and bands */
+.j-lattice-fill {
+  position: absolute; inset: 0; background: var(--j-accent); opacity: .22;
+  -webkit-mask: var(--j-lattice) 0 0 / 22px 22px; mask: var(--j-lattice) 0 0 / 22px 22px;
+  animation: j-drift 7s linear infinite;
+}
+
+/* lattice band between sections: draws itself in, drifts, and a light sweeps across */
+.j-band { position: relative; height: 44px; margin-top: clamp(56px, 7vw, 104px); border-top: 1px solid var(--j-line); border-bottom: 1px solid var(--j-line); }
+.j-band i { position: absolute; inset: 0; background: var(--j-accent); opacity: .32; -webkit-mask: var(--j-lattice) 0 0 / 22px 22px; mask: var(--j-lattice) 0 0 / 22px 22px; animation: j-drift 9s linear infinite; }
+.j-band b {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0, var(--j-accent) 50%, transparent 100%) -40% 0 / 28% 100% no-repeat;
+  opacity: .9; -webkit-mask: var(--j-lattice) 0 0 / 22px 22px; mask: var(--j-lattice) 0 0 / 22px 22px;
+  animation: j-drift 9s linear infinite, j-sweep 5.5s var(--j-ease) infinite;
+}
+.j-band.is-in i, .j-band.is-in b { animation: j-drift 9s linear infinite, j-wipe 1.6s var(--j-ease) backwards; }
+.j-band.is-in b { animation: j-drift 9s linear infinite, j-sweep 5.5s var(--j-ease) infinite 1.2s, j-wipe 1.6s var(--j-ease) backwards; }
+
+/* Amer arch: pointed, straight jambs, drawn once. Two paths, the second fainter. */
+.j-arch { position: absolute; right: clamp(16px, 3vw, 56px); top: clamp(30px, 5vw, 80px); width: clamp(110px, 12vw, 180px); height: auto; pointer-events: none; }
+.j-arch path { fill: none; stroke: var(--j-accent); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; animation: j-draw 2.6s var(--j-ease) .3s backwards; }
+.j-arch .a2 { opacity: .35; }
+
+/* blue-pottery rosette, as a line, for sign-offs */
+.j-rosette { width: 44px; height: 44px; flex: 0 0 auto; }
+.j-rosette * { fill: none; stroke: var(--j-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.j-rosette .j-dot { fill: var(--j-accent); stroke: none; }
+
+@media (max-width: 760px) {
+  .j-arch { width: 84px; right: 16px; top: 18px; opacity: .6; }
+}

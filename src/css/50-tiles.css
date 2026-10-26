@@ -1,0 +1,104 @@
+/* Tiles.
+   .j-hub   a grid of live tiles for dashboards: 8px gaps, 12px corners, one accent tile per hub.
+   .j-card  a larger content tile with a name, a tagline and an animated line motif. */
+
+/* ---------- hub of live tiles ---------- */
+.j-hub {
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: clamp(120px, 13.2vw, 170px); gap: 8px; grid-auto-flow: dense;
+}
+.j-live { position: relative; border-radius: 12px; perspective: 900px; min-width: 0; cursor: pointer; transition: transform .5s var(--j-ease); grid-column: span 1; }
+.j-live.is-wide { grid-column: span 2; }
+.j-live.is-big { grid-column: span 2; grid-row: span 2; }
+.j-hub.is-in .j-live {
+  animation: j-tile-in .8s var(--j-ease) backwards;
+  animation-delay: calc(var(--c, 0) * 70ms + var(--r, 0) * 30ms);
+  transform-origin: 0 50%;
+}
+.j-live > .j-live__in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s var(--j-ease); }
+.j-live.is-flip .j-live__in { transform: rotateX(180deg); }
+.j-face {
+  position: absolute; inset: 0; border-radius: 12px; background: var(--j-tile); box-shadow: var(--j-shadow-tile);
+  padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.j-face--back { transform: rotateX(180deg); background: var(--j-tile-back); }
+.j-face--feed { justify-content: flex-start; }
+.j-live.is-accent .j-face { background: var(--j-accent); color: var(--j-accent-ink); }
+.j-live.is-accent .j-face .j-tl { color: var(--j-accent-ink); opacity: .8; }
+
+.j-tl { font-size: 13.5px; font-weight: 450; color: var(--j-muted); position: relative; z-index: 1; }
+.j-tn1 { font-weight: 240; font-size: clamp(44px, 4.6vw, 72px); line-height: .9; letter-spacing: -.055em; font-variant-numeric: tabular-nums; position: relative; z-index: 1; }
+.j-tn1 small { font-size: .42em; letter-spacing: -.02em; }
+.j-live.is-big .j-tn1 { font-size: clamp(72px, 8vw, 128px); }
+.j-tw { font-weight: 350; font-size: clamp(20px, 2vw, 28px); letter-spacing: -.03em; line-height: 1.1; position: relative; z-index: 1; }
+
+/* one tick per item: filled ink, accent for the ones that need attention, dashed for the ones still open */
+.j-ticks { display: flex; align-items: flex-end; height: 44%; position: relative; z-index: 1; }
+.j-ticks i { flex: 1; height: 100%; border-left: 1.5px solid var(--j-ink); }
+.j-ticks i.h { border-left-color: var(--j-accent); }
+.j-ticks i.f { border-left: 1.5px dashed var(--j-muted); height: 62%; }
+.is-in .j-ticks i { animation: j-tick-up .8s var(--j-ease) backwards; animation-delay: calc(var(--k) * 14ms + 400ms); }
+
+/* a tiny scale: ticks along an axis with one accent target line */
+.j-trt { position: relative; height: 56px; z-index: 1; }
+.j-trt .ax { position: absolute; left: 0; right: 0; bottom: 6px; height: 1px; background: var(--j-line); }
+.j-trt .g { position: absolute; left: 20%; bottom: 0; width: 1px; height: 56px; background: var(--j-accent); }
+.j-trt i { position: absolute; bottom: 6px; width: 1.5px; background: var(--j-ink); }
+.j-trt i.o { background: var(--j-muted); }
+
+/* feed: newest line slides in at the top */
+.j-feed { position: relative; z-index: 1; display: grid; margin-top: 12px; }
+.j-feed div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 9px 0; border-top: 1px solid var(--j-line); font-size: 14px; align-items: center; }
+.j-feed div span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.j-feed div.new { animation: j-slide-in .7s var(--j-ease); }
+
+.j-typing { display: inline-flex; gap: 4px; margin-left: 6px; }
+.j-typing i { width: 4px; height: 4px; border-radius: 50%; background: var(--j-accent); animation: j-pulse 1s infinite; }
+.j-typing i:nth-child(2) { animation-delay: .15s; }
+.j-typing i:nth-child(3) { animation-delay: .3s; }
+
+.j-hub-top { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 28px; font-size: 14px; color: var(--j-muted); }
+.j-live-dot { display: inline-flex; align-items: center; gap: 8px; color: var(--j-ink); }
+.j-live-dot::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--j-accent); animation: j-pulse 1.6s infinite; }
+
+/* ---------- content cards ---------- */
+.j-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.j-card {
+  background: var(--j-tile); box-shadow: var(--j-shadow-tile); border-radius: 16px;
+  padding: clamp(22px, 2.4vw, 32px); min-height: 330px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 22px;
+  text-align: left; cursor: pointer; width: 100%; overflow: hidden; position: relative;
+  transition: transform .5s var(--j-ease), background .4s var(--j-ease);
+}
+.j-card--wide { grid-column: span 2; min-height: 0; }
+.j-card--wide .j-motif { width: clamp(110px, 12vw, 170px); position: absolute; right: clamp(22px, 2.4vw, 32px); top: clamp(22px, 2.4vw, 32px); }
+.j-card--wide .j-card__foot { margin-top: 12px; }
+.j-card__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.j-card__meta { font-size: 13.5px; color: var(--j-muted); font-weight: 450; }
+.j-card__name { font-weight: 350; font-size: clamp(36px, 3.6vw, 54px); line-height: .95; letter-spacing: -.05em; display: inline-block; }
+.j-card__name i { font-style: normal; color: var(--j-accent); }
+.j-card__tag { display: block; min-height: 1.5em; color: var(--j-accent); font-size: 18px; font-weight: 450; letter-spacing: -.01em; margin-top: 12px; }
+.j-card__desc { display: block; color: color-mix(in srgb, var(--j-ink) 70%, var(--j-tile)); font-size: 15px; line-height: 1.5; margin-top: 8px; max-width: 52ch; }
+.j-card__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; border-top: 1px solid var(--j-line); padding-top: 14px; }
+.j-card__foot .n { display: block; font-weight: 250; font-size: 36px; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.j-card:hover { box-shadow: var(--j-shadow-tile), 0 0 0 1px color-mix(in srgb, var(--j-accent) 35%, transparent); }
+.j-card:hover .j-motif { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--j-accent) 55%, transparent)); }
+
+/* ---------- line motifs ---------- */
+.j-motif { width: clamp(96px, 10vw, 140px); height: auto; flex: 0 0 auto; overflow: visible; transition: filter .5s var(--j-ease); }
+.j-motif * { fill: none; stroke: var(--j-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.j-motif .j-dot { fill: var(--j-accent); stroke: none; }
+.j-motif .j-spin { transform-origin: 50% 50%; transform-box: view-box; animation: j-spin 40s linear infinite; }
+.j-motif .j-spin.r { animation-direction: reverse; animation-duration: 60s; }
+.j-motif .j-breathe { animation: j-breathe 4.5s ease-in-out infinite; transform-origin: 50% 50%; transform-box: view-box; }
+.j-motif .j-drawloop { stroke-dasharray: 1; animation: j-drawloop 7s var(--j-ease) infinite; }
+
+@media (max-width: 760px) {
+  .j-card--wide { grid-column: auto; }
+  .j-card--wide .j-motif { position: static; }
+  .j-cards { grid-template-columns: minmax(0, 1fr); }
+  .j-card { min-height: 280px; }
+  .j-hub { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
+  .j-live.is-wide, .j-live.is-big { grid-column: span 2; }
+}
