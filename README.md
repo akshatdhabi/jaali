@@ -26,27 +26,42 @@ In priority order. If two conflict, the earlier one wins.
 
 ## Install
 
+jaali is not on npm. Clone it, build it, and copy the files you need.
+
 ```sh
-npm install jaali
+git clone https://github.com/akshatdhabi/jaali
+cd jaali
+npm install
+npm run build
 ```
 
+The build writes everything to `dist/`. Copy these into your project, for example into a `jaali/` folder:
+
+| file | for |
+|---|---|
+| `dist/jaali.css` | all styles |
+| `dist/fonts.css` and `dist/fonts/` | self-hosted Geist |
+| `dist/jaali.js` | JS as an ES module |
+| `dist/jaali.iife.js` | JS as a script tag. Exposes a global called `Jaali` |
+| `dist/tokens.json` and `dist/tokens.css` | the tokens on their own |
+
+Then link the CSS and add one class:
+
 ```html
-<link rel="stylesheet" href="node_modules/jaali/dist/fonts.css">
-<link rel="stylesheet" href="node_modules/jaali/dist/jaali.css">
+<link rel="stylesheet" href="jaali/fonts.css">
+<link rel="stylesheet" href="jaali/jaali.css">
 
 <body class="jaali">
   <h1 class="j-title">hello</h1>
 </body>
 ```
 
-Prefer no bundler? Copy `dist/jaali.css`, `dist/fonts.css`, `dist/fonts/` and `dist/jaali.iife.js` and load the last one with a script tag. It exposes a global called `Jaali`.
-
 Everything is opt-in. The base styles only apply under `<body class="jaali">`, and every class is prefixed `j-`, so it will not fight an existing stylesheet.
 
 ## Use it
 
 ```js
-import { mount, jaaliField, themePicker, toggleMode } from 'jaali';
+import { mount, jaaliField, themePicker, toggleMode } from './jaali/jaali.js';
 
 mount();                                            // restore theme and mode, slide-ins, cursor glow, flip words, press tilt
 jaaliField(document.querySelector('canvas'));       // the lattice behind the page
@@ -88,7 +103,7 @@ Types ship in `dist/jaali.d.ts`. The JS never touches the network and never thro
 
 ## Tokens
 
-All tokens are `--j-*` custom properties, generated from [`src/tokens/themes.json`](src/tokens/themes.json). Also published as `jaali/tokens.json` and `jaali/tokens.css`.
+All tokens are `--j-*` custom properties, generated from [`src/tokens/themes.json`](src/tokens/themes.json). Also built to `dist/tokens.json` and `dist/tokens.css`.
 
 Gulabi, the default theme:
 
@@ -184,7 +199,7 @@ Bump `version` in `package.json`, update [CHANGELOG.md](CHANGELOG.md), then push
 git tag v0.1.0 && git push --tags
 ```
 
-The `publish` workflow runs the tests and publishes to npm. It needs an `NPM_TOKEN` secret in the repository settings. The `pages` workflow deploys `docs/` to GitHub Pages on every push to `main`.
+jaali is not on npm yet. If you decide to publish, the `publish` workflow runs the tests and publishes when you push a `v*` tag. It needs an `NPM_TOKEN` secret in the repository settings. The `pages` workflow deploys `docs/` to GitHub Pages on every push to `main`.
 
 ## Trademark notice
 
