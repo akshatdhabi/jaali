@@ -4,7 +4,7 @@ All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/)
 
 ## 0.1.0
 
-First public release. Not published to npm: clone the repo and run `npm run build`.
+First public release.
 
 - Tokens: eight themes (gulabi, neel, amer, makrana, magenta, ember, cobalt, sanjh), each in dark and light, generated from one JSON file.
 - Three surface layers: ground, tile, raised.

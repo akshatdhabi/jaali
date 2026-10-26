@@ -63,13 +63,11 @@
 <div data-j-st style="--d:3"><div class="k">03</div><b>Jaipur</b><p>A jaali lattice, an Amer arch, a blue-pottery rosette and one rose accent. Used sparingly, except the lattice.</p></div>
 </div></div></div></section>
 
-<section><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>get started</h2></div>
+<section><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>install</h2></div>
 <div class="j-wrap"><div class="j-inner" data-j-in>
-<p class="j-sub j-halo" data-j-st>Clone the repo, build it, copy the files into your project.</p>
-<pre class="code" data-j-st style="--d:1;margin-top:26px"><span class="c"># get the files</span>
-git clone https://github.com/akshatdhabi/jaali
-cd jaali &amp;&amp; npm install &amp;&amp; npm run build
-<span class="c"># copy dist/ into your project as jaali/</span>
+<p class="j-sub j-halo" data-j-st>Link two stylesheets and add one class.</p>
+<pre class="code" data-j-st style="--d:1;margin-top:26px"><span class="c"># install</span>
+npm install jaali
 
 <span class="c">&lt;!-- html --&gt;</span>
 &lt;link rel="stylesheet" href="jaali/fonts.css"&gt;
@@ -79,7 +77,7 @@ cd jaali &amp;&amp; npm install &amp;&amp; npm run build
 &lt;/body&gt;
 
 <span class="c">// optional behaviour</span>
-<span class="k">import</span> { mount, jaaliField } <span class="k">from</span> './jaali/jaali.js';
+<span class="k">import</span> { mount, jaaliField } <span class="k">from</span> 'jaali';
 mount();
 jaaliField(document.querySelector('canvas'));</pre>
 <div class="j-cols" style="margin-top:44px">
