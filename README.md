@@ -1,16 +1,35 @@
-# jaali
+<p align="center">
+  <img src="docs/readme/hero.gif" width="720" alt="The jaali hero: a design system for tools, with a flipping accent word, a drifting lattice and an Amer arch drawing itself">
+</p>
 
-A small design system for pages, tools and dashboards. Thin lowercase titles, hairline structure, live tiles and a lattice background.
+<h1 align="center">jaali</h1>
+
+<p align="center">
+  A small design system for pages, tools and dashboards.<br>
+  Thin lowercase titles, hairline structure, live tiles and a lattice background.
+</p>
+
+<p align="center">
+  <img alt="MIT licence" src="docs/readme/badge-licence.svg">
+  <img alt="8 themes" src="docs/readme/badge-themes.svg">
+  <img alt="Zero dependencies" src="docs/readme/badge-dependencies.svg">
+  <img alt="About 7 KB of JavaScript, gzipped" src="docs/readme/badge-js.svg">
+</p>
+
+<p align="center">
+  <a href="https://akshatdhabi.github.io/jaali/">Docs</a> ·
+  <a href="https://akshatdhabi.github.io/jaali/kit.html">Kit</a> ·
+  <a href="https://akshatdhabi.github.io/jaali/examples.html">Examples</a> ·
+  <a href="https://akshatdhabi.github.io/jaali/story.html">Story</a>
+</p>
 
 Design tokens as JSON and CSS custom properties, CSS components, and about 7 KB (gzipped) of vanilla JS. No framework and no runtime dependencies. MIT.
 
-**Docs and live demo:** https://akshatdhabi.github.io/jaali/ (run `npm run docs` to see it locally)
-
 ## Why I built it
 
-I'm from Jaipur, and I like this UI. I wanted my own pages and tools to look like it.
+I'm from Jaipur, and I like the Zune interface. I wanted my own pages and tools to have its large thin type, sliding pivots and motion, with Jaipur worked in.
 
-The UI is the Zune interface: large thin lowercase type, pivots that slide sideways, content with little chrome, motion that shows where things come from. Zune is gone, and the ideas still work.
+Zune is gone. The ideas still work: type as the interface, content over chrome, motion that shows where things come from.
 
 Jaipur is the other half: gulabi (the pink), jaali (the stone lattice), the pointed arch at Amer, blue pottery. Each appears in one small place.
 
@@ -23,6 +42,36 @@ In priority order. If two conflict, the earlier one wins.
 1. **Type.** Thin, lowercase, large. One easing curve for all motion.
 2. **Lines.** Hairlines and grids give the structure. Tiles and raised surfaces are the only filled shapes.
 3. **Jaipur.** A jaali lattice, an Amer arch, a blue-pottery rosette and one rose accent. Used sparingly, except the lattice.
+
+## What is in it
+
+### Live tiles
+
+Tiles flip on their own, flip again when you tap them, and light the lattice under your cursor.
+
+<p align="center">
+  <img src="docs/readme/tiles.gif" width="720" alt="A dashboard of live tiles flipping, with the lattice glowing under the cursor as it moves across them">
+</p>
+
+### Eight themes, dark and light
+
+Each theme has its own dark and light mode. Switch with `setTheme()` and `setMode()`, or with `data-theme` and `data-mode` on `<html>`.
+
+<p align="center">
+  <img src="docs/readme/themes.png" width="830" alt="The hero in all eight themes: gulabi, neel, amer, makrana, magenta, ember, cobalt and sanjh, each in dark and light">
+</p>
+
+### Three layers
+
+<p align="center">
+  <img src="docs/readme/layers.png" width="720" alt="Ground, tile and raised surfaces, with a raised pop-up overlapping a tile">
+</p>
+
+### Status and controls
+
+<p align="center">
+  <img src="docs/readme/status.png" width="720" alt="Status shapes for done, held, running and failed, plus a text link, round buttons, a toggle and a range with a gate marker">
+</p>
 
 ## Install
 
