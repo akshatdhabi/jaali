@@ -1,0 +1,57 @@
+/* Glass. One material for the function layer only: bars, pills, menus, sheets, toasts.
+   Content stays on flat tiles; glass never sits on glass.
+   .j-glass          the material
+   .j-glass.j-mat    starts hidden; add .is-on and it rises out of blur (materialize)
+   .j-live.is-glass  a glass face for a live tile, over a .j-stage of shapes
+   .j-live.is-pop    a tile filled with the pop colour: the one thing that needs you */
+
+.j-glass {
+  position: relative;
+  background: color-mix(in srgb, var(--j-raised) var(--j-glass-fill), transparent);
+  -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+  backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--j-ink) 14%, transparent), 0 0 0 1px color-mix(in srgb, var(--j-pop) 30%, transparent), var(--j-shadow-raised);
+  color: var(--j-ink);
+}
+
+.j-mat {
+  opacity: 0; visibility: hidden; transform: translateY(8px) scale(.96);
+  -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px);
+  transition: opacity .22s var(--j-ease), transform .5s var(--j-spring), -webkit-backdrop-filter .5s var(--j-ease), backdrop-filter .5s var(--j-ease), visibility .5s;
+}
+.j-mat.is-on {
+  opacity: 1; visibility: visible; transform: none;
+  -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+  backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+}
+
+/* glass and pop faces for live tiles */
+.j-live.is-glass .j-face {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--j-tile) 58%, transparent), color-mix(in srgb, var(--j-tile) 42%, transparent));
+  -webkit-backdrop-filter: blur(26px) saturate(150%); backdrop-filter: blur(26px) saturate(150%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--j-ink) 16%, transparent), inset 0 0 0 1px color-mix(in srgb, var(--j-ink) 7%, transparent), var(--j-shadow-tile);
+}
+.j-live.is-glass .j-face::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(220px circle at var(--mx, 20%) var(--my, 0%), color-mix(in srgb, var(--j-ink) 14%, transparent), transparent 60%);
+}
+.j-live.is-pop .j-face { background: var(--j-pop); color: var(--j-pop-ink); }
+.j-live.is-pop .j-face .j-tl { color: var(--j-pop-ink); opacity: .8; }
+
+/* stage: slow jaali shapes behind a hub, in accent and pop, so glass has colour to bend */
+.j-staged { position: relative; isolation: isolate; }
+.j-staged > .j-hub { position: relative; z-index: 1; }
+.j-stage { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; border-radius: 14px; }
+.j-stage svg { position: absolute; will-change: transform; }
+.j-stage .s1 { width: 30%; aspect-ratio: 160 / 300; left: 28%; top: 6%; fill: var(--j-accent); animation: j-stage-a 26s ease-in-out infinite alternate; }
+.j-stage .s2 { width: 26%; aspect-ratio: 1; left: 62%; top: -8%; fill: var(--j-pop); animation: j-stage-b 31s ease-in-out infinite alternate; }
+.j-stage .s3 { width: 22%; aspect-ratio: 1; left: 4%; top: 50%; fill: var(--j-accent); animation: j-stage-c 22s ease-in-out infinite alternate; }
+.j-stage .s4 { width: 17%; aspect-ratio: 160 / 300; left: 76%; top: 50%; fill: var(--j-pop); animation: j-stage-a 28s ease-in-out infinite alternate-reverse; }
+@keyframes j-stage-a { to { transform: translate(18%, -10%) rotate(14deg) scale(1.08); } }
+@keyframes j-stage-b { to { transform: translate(-30%, 30%) rotate(-40deg); } }
+@keyframes j-stage-c { to { transform: translate(40%, -25%) rotate(45deg) scale(1.15); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .j-stage svg { animation: none; }
+  .j-mat { transition: none; }
+}

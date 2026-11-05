@@ -42,6 +42,9 @@
 .j-skin-list .j-skin b { font-size: 30px; }
 
 @media (max-width: 760px) {
-  .j-nav a { font-size: 16px; }
+  .j-nav { gap: 12px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .j-nav::-webkit-scrollbar { display: none; }
+  .j-nav a { font-size: 16px; white-space: nowrap; }
+  .j-actions { flex: none; }
   .j-brand { display: none; }
 }
