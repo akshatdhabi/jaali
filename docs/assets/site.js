@@ -9,4 +9,6 @@
   J.scrollSpy({ progress: prog });
   J.$$('[data-count]').forEach((el) => J.countUp(el));
   J.$$('.j-pivot[data-auto]').forEach((b) => J.pivot(b));
+  J.$$('[data-stage]').forEach((el) => J.stage(el));
+  J.sheen();
 })();

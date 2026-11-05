@@ -1,6 +1,15 @@
 /* Page chrome: sticky top bar, section nav, scroll progress, theme switcher. */
 
-.j-top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--j-ground); transition: background .5s var(--j-ease); }
+.j-top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; }
+/* the bar is glass. The blur sits on ::before so the theme panel below can be glass too
+   (backdrop-filter on the bar itself would cut the panel off from the page). */
+.j-top::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--j-ground) 72%, transparent);
+  -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+  backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+  transition: background .5s var(--j-ease);
+}
 .j-top .j-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
 .j-brand { font-size: 14px; font-weight: 500; white-space: nowrap; }
 .j-nav { display: flex; gap: clamp(14px, 2.4vw, 28px); align-items: baseline; }
@@ -18,7 +27,7 @@
 /* theme switcher: a panel that drops from the bar, one card per theme */
 .j-skin-btn .j-ring-sm { border-color: var(--j-accent); }
 .j-skin-btn .j-ring-sm i { width: 12px; height: 12px; border-radius: 50%; background: var(--j-accent); }
-.j-skins { position: absolute; left: 0; right: 0; top: 100%; background: var(--j-raised); box-shadow: var(--j-shadow-raised); border-bottom: 1px solid var(--j-line); overflow: hidden; max-height: 0; transition: max-height .55s var(--j-ease); }
+.j-skins { position: absolute; left: 0; right: 0; top: 100%; background: color-mix(in srgb, var(--j-raised) var(--j-glass-fill), transparent); -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate)); backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate)); box-shadow: var(--j-shadow-raised); border-bottom: 1px solid var(--j-line); overflow: hidden; max-height: 0; transition: max-height .55s var(--j-ease); }
 .j-skins.is-open { max-height: 260px; }
 .j-top .j-skins .j-inner { display: flex; gap: 10px; overflow-x: auto; padding-block: 14px 16px; scrollbar-width: none; height: auto; align-items: stretch; justify-content: flex-start; }
 .j-skins .j-inner::-webkit-scrollbar { display: none; }
@@ -48,3 +57,12 @@
   .j-actions { flex: none; }
   .j-brand { display: none; }
 }
+
+/* no backdrop-filter (kept last so it wins): glass falls back to the solid raised colour so text stays readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .j-glass, .j-raised, .j-toast, .j-skins, .j-pour { background: var(--j-raised); }
+  .j-top::before { background: var(--j-ground); }
+  .j-sheet { background: var(--j-ground); }
+  .j-live.is-glass .j-face { background: var(--j-tile); }
+}
+

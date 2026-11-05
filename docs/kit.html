@@ -40,11 +40,10 @@
 <p class="j-lead j-halo" style="margin-top:22px">Every token and component, live. Change the theme or mode from the top bar.</p></div></div></section>
 <div class="j-wrap"><div class="j-inner" style="margin-top:56px">
 
-<div class="kit-sec"><h3>colour<small>CSS custom properties, <code>--j-*</code>. Values are for gulabi, the default theme.</small></h3>
-<div><div class="ctl-row" style="margin-bottom:18px"><div class="j-pivot j-pivot--sm" id="modePivot"><div class="j-pivot__strip"><button class="on" data-m="dark">dark</button><button data-m="light">light</button></div></div></div>
-<table class="tokens" id="tokTable"><thead><tr><th>token</th><th>value</th><th>use</th></tr></thead>
-<tbody class="t-dark"><tr><td><span class="chip" style="background:#17121A"></span>ground</td><td><code>#17121A</code></td><td>the page</td></tr><tr><td><span class="chip" style="background:#251C2A"></span>tile</td><td><code>#251C2A</code></td><td>content tiles</td></tr><tr><td><span class="chip" style="background:#2E2335"></span>tileBack</td><td><code>#2E2335</code></td><td>tile back face</td></tr><tr><td><span class="chip" style="background:#3A2D42"></span>raised</td><td><code>#3A2D42</code></td><td>pop-ins, sheets, menus</td></tr><tr><td><span class="chip" style="background:#342A36"></span>line</td><td><code>#342A36</code></td><td>hairlines</td></tr><tr><td><span class="chip" style="background:#271F2B"></span>lineSoft</td><td><code>#271F2B</code></td><td>soft hairlines</td></tr><tr><td><span class="chip" style="background:#F5EEF0"></span>ink</td><td><code>#F5EEF0</code></td><td>text</td></tr><tr><td><span class="chip" style="background:#A89AA2"></span>muted</td><td><code>#A89AA2</code></td><td>secondary text</td></tr><tr><td><span class="chip" style="background:#6E6072"></span>faded</td><td><code>#6E6072</code></td><td>tertiary, disabled</td></tr><tr><td><span class="chip" style="background:#F28DAE"></span>accent</td><td><code>#F28DAE</code></td><td>the one accent</td></tr><tr><td><span class="chip" style="background:#17121A"></span>accentInk</td><td><code>#17121A</code></td><td>text on accent</td></tr></tbody><tbody class="t-light" hidden><tr><td><span class="chip" style="background:#F7F2F1"></span>ground</td><td><code>#F7F2F1</code></td><td>the page</td></tr><tr><td><span class="chip" style="background:#FFFFFF"></span>tile</td><td><code>#FFFFFF</code></td><td>content tiles</td></tr><tr><td><span class="chip" style="background:#F4ECEA"></span>tileBack</td><td><code>#F4ECEA</code></td><td>tile back face</td></tr><tr><td><span class="chip" style="background:#FFFFFF"></span>raised</td><td><code>#FFFFFF</code></td><td>pop-ins, sheets, menus</td></tr><tr><td><span class="chip" style="background:#E6DAD9"></span>line</td><td><code>#E6DAD9</code></td><td>hairlines</td></tr><tr><td><span class="chip" style="background:#F0E7E5"></span>lineSoft</td><td><code>#F0E7E5</code></td><td>soft hairlines</td></tr><tr><td><span class="chip" style="background:#2E1F27"></span>ink</td><td><code>#2E1F27</code></td><td>text</td></tr><tr><td><span class="chip" style="background:#7A6A70"></span>muted</td><td><code>#7A6A70</code></td><td>secondary text</td></tr><tr><td><span class="chip" style="background:#A5949B"></span>faded</td><td><code>#A5949B</code></td><td>tertiary, disabled</td></tr><tr><td><span class="chip" style="background:#B53A61"></span>accent</td><td><code>#B53A61</code></td><td>the one accent</td></tr><tr><td><span class="chip" style="background:#FBF8F7"></span>accentInk</td><td><code>#FBF8F7</code></td><td>text on accent</td></tr></tbody></table>
-<p class="j-cap" style="margin-top:14px">Values shown are the gulabi theme. Other themes derive their tile, back face and raised colours from the same rules. See <code>src/tokens/themes.json</code>.</p></div></div>
+<div class="kit-sec"><h3>colour<small>CSS custom properties, <code>--j-*</code>. Values for the theme and mode you have on.</small></h3>
+<div><div class="ctl-row" style="margin-bottom:18px"><div class="j-stretch" id="modePivot" role="tablist" aria-label="Mode"><i class="j-stretch__pill"></i><button role="tab" aria-selected="true" data-m="dark">dark</button><button role="tab" data-m="light">light</button></div><span class="j-cap" id="tokTheme"></span></div>
+<table class="tokens" id="tokTable"><thead><tr><th>token</th><th>value</th><th>use</th></tr></thead><tbody id="tokBody"></tbody></table>
+<p class="j-cap" style="margin-top:14px">Base, primary and pop run about 60, 30 and 10. The pop marks one thing that needs you; in the eight original themes it reuses the accent. See <code>src/tokens/themes.json</code>.</p></div></div>
 
 <div class="kit-sec"><h3>themes<small>Twelve themes. The first four use three colours. Pick one to apply it to this page.</small></h3>
 <div><div class="j-skin-list" id="themeList"></div></div></div>
@@ -58,25 +57,37 @@
 <div class="spec"><div class="j-cap" style="font-size:13.5px">caption, sentence case, never all caps</div><div class="j-cap">13.5px, muted</div></div>
 </div></div>
 
-<div class="kit-sec"><h3>layers<small>Ground, tile, raised.</small></h3>
+<div class="kit-sec"><h3>layers<small>Ground, tile, raised. Raised is glass.</small></h3>
 <div><div class="j-pop-demo"><div class="j-tile base"><b>Tile</b><p class="j-cap" style="margin-top:6px">Layer 1. Edge highlight on top, soft shadow below.</p></div>
-<div class="j-raised j-pop pop" id="popDemo"><b>Raised</b><span>Layer 2. Lighter, with a thin accent edge.</span></div></div>
-<div class="layers"><div class="l0"><b>ground</b><span>flat</span></div><div class="l1"><b>tile</b><span>--j-shadow-tile</span></div><div class="l2"><b>raised</b><span>--j-shadow-raised</span></div></div></div></div>
+<div class="j-raised j-pop pop" id="popDemo"><b>Raised glass</b><span>Layer 2. 62% fill, 24px blur, a thin pop edge.</span></div></div>
+<div class="layers"><div class="l0"><b>ground</b><span>flat</span></div><div class="l1"><b>tile</b><span>--j-shadow-tile</span></div><div class="l2 j-raised"><b>raised glass</b><span>.j-raised, --j-glass-blur</span></div></div></div></div>
 
-<div class="kit-sec"><h3>tiles<small>Tap a tile to flip it. Hover to light the lattice.</small></h3>
-<div><div class="minihub j-hub" id="miniHub" data-j-in style="grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:110px;max-width:640px">
+<div class="kit-sec"><h3>tiles<small>Tap a tile to flip it. Glass tiles blur the stage behind; tap the glass one to pour it into a sheet.</small></h3>
+<div><div class="j-staged" style="max-width:640px"><div class="j-stage" data-stage></div><div class="minihub j-hub" id="miniHub" data-j-in style="grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:110px;max-width:640px">
 <div class="j-live j-glow is-wide" data-j-live><div class="j-live__in"><div class="j-face"><span class="j-tn1">128</span><span class="j-tl">items, front</span></div><div class="j-face j-face--back"><span class="j-tw">back face is lighter</span><span class="j-tl">flip</span></div></div></div>
 <div class="j-live j-glow is-accent"><div class="j-live__in"><div class="j-face"><span class="j-tn1">6</span><span class="j-tl">accent tile</span></div></div></div>
 <div class="j-live j-glow"><div class="j-live__in"><div class="j-face"><span class="j-tn1">3</span><span class="j-tl">plain</span></div></div></div>
-</div></div></div>
+<div class="j-live is-wide is-glass" id="pourTile"><div class="j-live__in"><div class="j-face"><span class="j-tn1">24<small>px</small></span><span class="j-tl">.is-glass · tap to pour</span></div></div></div>
+<div class="j-live is-pop"><div class="j-live__in"><div class="j-face"><span class="j-tn1">1</span><span class="j-tl">.is-pop</span></div></div></div>
+<div class="j-live"><div class="j-live__in"><div class="j-face"><span class="j-tn1">0</span><span class="j-tl">plain</span></div></div></div>
+</div></div></div></div>
 
 <div class="kit-sec"><h3>flip word &amp; pivot<small>A flipping accent word and a sliding pivot.</small></h3>
 <div><p style="font-weight:250;font-size:clamp(36px,5vw,64px);letter-spacing:-.05em;line-height:1">built with <span class="j-flip" data-words="type|lines|a lattice|one accent">type</span></p>
 <div class="j-pivot" style="margin-top:34px"><div class="j-pivot__strip"><button class="on">today</button><button>week</button><button>month</button><button>year</button></div></div></div></div>
 
-<div class="kit-sec"><h3>motion<small>One curve. 600ms in, 170ms out. Press the tile.</small></h3>
+<div class="kit-sec"><h3>liquid<small>Motion that answers an action. Each one uses the spring.</small></h3>
+<div>
+<div class="spec"><div><div class="j-stretch" id="stretchDemo" role="tablist" aria-label="Range"><i class="j-stretch__pill"></i><button role="tab" aria-selected="true">day</button><button role="tab">week</button><button role="tab">quarter</button></div></div><div class="j-cap">stretch(el). Leading edge first, trailing edge follows</div></div>
+<div class="spec"><div><button class="j-grow j-glass" id="growDemo" aria-label="New"><span class="j-grow__plus">+</span><span class="j-grow__opts"><span>new note</span><span>list</span><span>tile</span></span></button></div><div class="j-cap">grow(button). The + grows into its actions</div></div>
+<div class="spec"><div style="font-weight:250;font-size:clamp(34px,4.4vw,56px);letter-spacing:-.05em;line-height:1.15">jaali in <span class="j-melt" id="meltDemo" data-words="glass|liquid|light"></span></div><div class="j-cap">melt(el). One word melts into the next</div></div>
+<div class="spec"><div style="min-width:0"><div class="kit-car" id="carDemo"></div><div class="j-worm" id="wormDemo" style="margin-top:12px"><i></i><i></i><i></i><i></i><i></i><b></b></div></div><div class="j-cap">worm(scroller, pager). Scroll sideways</div></div>
+<div class="spec"><div><button class="j-link j-link--accent" id="toastDemo">show a toast <span class="ar">→</span></button></div><div class="j-cap">toast(title, text). Rises out of blur on the raised layer</div></div>
+</div></div>
+
+<div class="kit-sec"><h3>motion<small>One curve for every move: 600ms in, 170ms out. One spring, only for liquid parts. Press the tile.</small></h3>
 <div class="ctl-row" style="align-items:stretch">
-<svg class="curve" viewBox="0 0 220 140" aria-label="Easing curve cubic-bezier(.1,.9,.2,1)"><line class="ax" x1="10" y1="130" x2="210" y2="130"/><line class="ax" x1="10" y1="130" x2="10" y2="10"/><path d="M10 130 C30 30 50 12 210 10"/></svg>
+<svg class="curve" viewBox="0 0 220 140" aria-label="Easing curve cubic-bezier(.1,.9,.2,1)"><line class="ax" x1="10" y1="130" x2="210" y2="130"/><line class="ax" x1="10" y1="130" x2="10" y2="10"/><path d="M10 130 C30 30 50 12 210 10"/><path class="spring" d="M10 130 C70 -18 110 2 210 10"/></svg>
 <div class="press j-tile" data-j-tilt style="padding:26px;border-radius:14px;border:0"><b>press me</b><span class="j-cap">cubic-bezier(.1, .9, .2, 1)</span></div>
 <div class="demo-list" id="turnList"><div>one</div><div>two</div><div>three</div></div>
 </div></div>
@@ -112,6 +123,9 @@
 <li><b>Dark mode as inverted light</b>Dark is designed on its own.</li>
 <li><b>Titles that slide off screen</b>Titles stay in frame.</li>
 <li><b>Pop-ins in the same colour as the surface below</b>Raised has its own colour.</li>
+<li><b>A liquid drop that follows the cursor</b>It pulled the eye off the content. Liquid motion only answers an action.</li>
+<li><b>Glass panes over reading content</b>Text under blur is hard to read. Glass stays on what floats.</li>
+<li><b>Water droplets</b>They clashed with the lattice. Liquid moves through edges and shapes, never drops.</li>
 </ul></div></div>
 
 </div></div>
@@ -127,13 +141,25 @@
   J.themePicker($('#themeList'));
   $('#themeList').addEventListener('click',function(){});
   J.liveTiles($('#miniHub'));
-  J.pivot($('#modePivot'),function(b){
-    var m=b.dataset.m;J.setMode(m);
-    $('.t-dark').hidden=m!=='dark';$('.t-light').hidden=m!=='light';
-  });
-  document.addEventListener('jaali:theme',function(e){
-    var m=e.detail.mode;$('.t-dark').hidden=m!=='dark';$('.t-light').hidden=m!=='light';
-  });
+  var USE={ground:'the page, about 60%',tile:'content tiles',tileBack:'tile back face',raised:'glass layer, at 62%',line:'hairlines',lineSoft:'soft hairlines',ink:'text',muted:'secondary text',faded:'tertiary, disabled',accent:'primary, about 30%',accentInk:'text on primary',pop:'pop, about 10%',popInk:'text on pop'};
+  var modes=J.stretch($('#modePivot'),function(b){J.setMode(b.dataset.m);});
+  function tokens(){
+    var cs=getComputedStyle(document.documentElement),m=J.getMode();
+    $('#tokTheme').textContent='theme · '+J.getTheme();
+    var kebab=function(k){return k.replace(/[A-Z]/g,function(c){return '-'+c.toLowerCase()})};
+    $('#tokBody').innerHTML=Object.keys(USE).map(function(k){var v=cs.getPropertyValue('--j-'+kebab(k)).trim();return '<tr><td><span class="chip" style="background:'+v+'"></span>'+k+'</td><td><code>'+v.toUpperCase()+'</code></td><td>'+USE[k]+'</td></tr>'}).join('');
+  }
+  function syncMode(){var i=J.getMode()==='light'?1:0;var cur=$$('#modePivot button').findIndex(function(b){return b.getAttribute('aria-selected')==='true'});if(cur!==i)modes.select(i);}
+  tokens();syncMode();
+  new MutationObserver(function(){tokens();syncMode();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','data-mode']});
+  /* liquid */
+  J.stretch($('#stretchDemo'));J.grow($('#growDemo'));J.melt($('#meltDemo'));
+  $('#carDemo').innerHTML=['arch','star','rosette','ring','well'].map(function(k){return '<div>'+J.motif(k)+'<b>'+k+'</b></div>'}).join('');
+  J.worm($('#carDemo'),$('#wormDemo'));
+  $('#toastDemo').addEventListener('click',function(){J.toast('Saved','This toast rose out of blur.')});
+  var pt=$('#pourTile');pt.tabIndex=0;pt.setAttribute('role','button');
+  var pour=function(){J.pour(pt,function(b){b.innerHTML='<p class="j-cap">pour(tile, render)</p><h4>a sheet<span style="color:var(--j-pop)">.</span></h4><p>This sheet grew out of the tile you tapped. Close it with Esc, the × or a tap outside, and it pours back.</p>'})};
+  pt.addEventListener('click',pour);pt.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pour()}});
   $('#tgl').addEventListener('click',function(){var b=this;b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');});
   J.range($('#rg'));
   $('#cueArch').innerHTML=J.motif('arch');$('#cueRos').innerHTML=J.motif('rosette');
