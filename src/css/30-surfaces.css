@@ -1,7 +1,8 @@
 /* Three layers.
    ground : flat. The page and the lattice.
    tile   : lifted colour, edge highlight, soft shadow. Content lives here.
-   raised : its own lighter colour, a 1px accent edge, a deep shadow. Anything that pops in. */
+   raised : glass. Its own lighter colour at 62%, a 24px backdrop blur, a thin pop edge, a deep shadow.
+            Anything that pops in or floats: menus, popovers, sheets, toasts, bars. Never on reading content. */
 
 .j-tile {
   background: var(--j-tile);
@@ -10,34 +11,39 @@
 }
 
 .j-raised {
-  background: var(--j-raised);
+  background: color-mix(in srgb, var(--j-raised) var(--j-glass-fill), transparent);
+  -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate)); backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
   color: var(--j-ink);
-  box-shadow: var(--j-shadow-raised);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--j-ink) 14%, transparent), 0 0 0 1px color-mix(in srgb, var(--j-pop) 30%, transparent), var(--j-shadow-raised);
   border-radius: 14px;
 }
 
 /* popover that animates in over a tile */
 .j-pop { transform-origin: 0 0; animation: j-pop-in .6s var(--j-ease) both; }
 
-/* toast: slides up from the bottom edge. toast() toggles .is-on */
+/* toast: rises out of blur from the bottom edge. toast() toggles .is-on */
 .j-toast {
   position: fixed; left: 0; right: 0; margin: 0 auto; width: fit-content;
   bottom: calc(env(safe-area-inset-bottom, 0px) + 22px);
   z-index: 60; display: flex; align-items: center; gap: 14px;
   max-width: min(440px, calc(100vw - 32px));
   padding: 14px 18px 14px 16px; border-radius: 14px;
-  background: var(--j-raised); color: var(--j-ink); box-shadow: var(--j-shadow-raised);
-  transform: translateY(140%); opacity: 0;
-  transition: transform .6s var(--j-ease), opacity .3s;
+  background: color-mix(in srgb, var(--j-raised) var(--j-glass-fill), transparent); color: var(--j-ink); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--j-ink) 14%, transparent), 0 0 0 1px color-mix(in srgb, var(--j-pop) 30%, transparent), var(--j-shadow-raised);
+  -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px);
+  transform: translateY(24px) scale(.96); opacity: 0; visibility: hidden;
+  transition: transform .55s var(--j-spring), opacity .25s var(--j-ease), -webkit-backdrop-filter .5s var(--j-ease), backdrop-filter .5s var(--j-ease), visibility .55s;
 }
-.j-toast.is-on { transform: none; opacity: 1; }
-.j-toast::before { content: ""; width: 3px; align-self: stretch; border-radius: 2px; background: var(--j-accent); }
+.j-toast.is-on { transform: none; opacity: 1; visibility: visible; -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate)); backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate)); }
+.j-toast::before { content: ""; width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--j-pop); box-shadow: 0 0 0 3px color-mix(in srgb, var(--j-pop) 28%, transparent); }
 .j-toast b { font-weight: 450; font-size: 15px; display: block; }
 .j-toast span { font-size: 13.5px; color: var(--j-muted); }
 
-/* sheet: full-screen detail view. openSheet() runs the continuum transition from the tapped title */
+/* sheet: full-screen glass detail view. sheet() runs the continuum transition from the tapped title.
+   The page stays faintly visible behind it, so you keep your place. */
 .j-sheet {
-  position: fixed; inset: 0; z-index: 40; background: var(--j-ground);
+  position: fixed; inset: 0; z-index: 40;
+  background: color-mix(in srgb, var(--j-ground) 80%, transparent);
+  -webkit-backdrop-filter: blur(28px) saturate(var(--j-glass-saturate)); backdrop-filter: blur(28px) saturate(var(--j-glass-saturate));
   padding-top: calc(env(safe-area-inset-top, 0px) + 28px); overflow-y: auto;
 }
 .j-sheet[hidden] { display: none !important; }

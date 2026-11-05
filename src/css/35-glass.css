@@ -53,5 +53,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .j-stage svg { animation: none; }
-  .j-mat { transition: none; }
+  .j-mat, .j-toast { transition: none; }
 }

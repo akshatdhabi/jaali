@@ -72,9 +72,9 @@
     <div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>library</h2></div>
     <div class="j-wrap"><div class="j-inner" data-j-in>
       <p class="j-sub j-halo" data-j-st>A music library made of content tiles. Each has a name, a tagline that <span class="j-flip" data-words="rotates|changes|flips">rotates</span> and a line figure. Tap one to open it.</p>
-      <div class="j-pivot" style="margin-top:30px" id="libPivot"><div class="j-pivot__strip">
-        <button class="on" data-f="all">all</button><button data-f="album">albums</button><button data-f="playlist">playlists</button>
-      </div></div>
+      <div class="j-stretch" style="margin-top:30px" id="libPivot" role="tablist" aria-label="Filter the library"><i class="j-stretch__pill"></i>
+        <button role="tab" aria-selected="true" data-f="all">all</button><button role="tab" data-f="album">albums</button><button role="tab" data-f="playlist">playlists</button>
+      </div>
       <div class="j-cards j-turn" id="cards"></div>
     </div></div>
   </section>
@@ -87,8 +87,8 @@
         <span class="j-live-dot">scheduler live</span><span>sample data, fictional app</span>
         <label class="j-field"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><input placeholder="search jobs" aria-label="Ask about a job"></label>
       </div>
-      <div style="margin-top:28px" id="hubMount"></div>
-      <p class="j-cap j-foot">Tiles flip on their own. Tap one to flip it, hover to light its lattice. All numbers are invented.</p>
+      <div class="j-staged" style="margin-top:28px" id="hubMount"></div>
+      <p class="j-cap j-foot">Tiles flip on their own. Tap one to flip it. Glass tiles blur the shapes drifting behind the hub; tap the done tile and it pours into a sheet. All numbers are invented.</p>
     </div></div>
   </section>
 
@@ -96,15 +96,15 @@
   <section id="layers">
     <div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>layers</h2></div>
     <div class="j-wrap"><div class="j-inner" data-j-in>
-      <p class="j-sub j-halo" data-j-st>Ground is flat. Tiles sit above it with a soft shadow. Pop-ups use the raised layer: a lighter colour, a thin accent edge and a deeper shadow.</p>
+      <p class="j-sub j-halo" data-j-st>Ground is flat. Tiles sit above it with a soft shadow. Pop-ups use the raised layer, which is glass: a lighter colour at 62%, a 24px blur of whatever sits behind, a thin pop edge and a deeper shadow.</p>
       <div class="j-pop-demo" data-j-st style="--d:1">
         <div class="j-tile base"><b>Late Trains</b><p class="j-cap" style="margin-top:6px">Tile, layer 1</p></div>
-        <div class="j-raised j-pop pop" id="popDemo"><b>Added to queue</b><span>Layer 2, raised. It does not blend into the tile below.</span></div>
+        <div class="j-raised j-pop pop" id="popDemo"><b>Added to queue</b><span>Layer 2, raised glass. It blurs the tile below instead of blending into it.</span></div>
       </div>
       <div class="j-cols">
         <div data-j-st style="--d:1"><b>ground</b><p>The page and the lattice. No shadow.</p></div>
         <div data-j-st style="--d:2"><b>tile</b><p>Content. Edge highlight on top, soft shadow below.</p></div>
-        <div data-j-st style="--d:3"><b>raised</b><p>Toasts, menus, popovers and sheets.</p></div>
+        <div data-j-st style="--d:3"><b>raised</b><p>Glass. The top bar, toasts, menus, popovers and sheets.</p></div>
       </div>
     </div></div>
   </section>

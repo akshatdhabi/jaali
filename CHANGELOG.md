@@ -2,6 +2,17 @@
 
 All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/).
 
+## 0.3.0
+
+Glass becomes the default for the raised layer, and every docs page uses glass and liquid. Not published to npm.
+
+- The top bar, theme panel, `.j-raised` popovers, `.j-sheet` and `.j-toast` are glass by default. The bar's blur sits on `::before` so the theme panel below it can blur the page too.
+- Toasts rise out of blur with the spring and carry a pop dot instead of an accent bar.
+- Sheets keep the page faintly visible behind an 80% ground and a 28px blur.
+- Glass falls back to the solid raised colour when `backdrop-filter` is missing.
+- New test (`test/glass.test.mjs`): function-layer parts blur, content tiles stay flat.
+- Docs: home links become a staged hub with a fourth principle for glass; kit token table follows the current theme and mode, adds pop, a liquid section and glass tiles; sample filters stretch, the ops hub sits on a stage with glass and pop tiles and a tile that pours; examples filter with a stretch pill, rows pour into sheets, habits and the release gate confirm with glass toasts; story gets a glass and liquid chapter.
+
 ## 0.2.0
 
 Glass and liquid, and three-colour themes. Not published to npm.

@@ -1,6 +1,6 @@
 {
   "name": "jaali",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A small design system: thin lowercase type, hairlines, live tiles and a lattice background. CSS tokens plus vanilla JS.",
   "type": "module",
   "license": "MIT",

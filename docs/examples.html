@@ -40,14 +40,14 @@
 <p class="j-lead j-halo" style="margin-top:22px">Three small pages built only from the kit. All content is invented.</p></div></div></section>
 <section id="reading"><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>reading list</h2></div>
 <div class="j-wrap"><div class="j-inner" data-j-in>
-<p class="j-sub j-halo" data-j-st>Hairline rows with large titles. Hover a row to see it shift.</p>
-<div class="j-pivot" style="margin-top:30px" id="rlPivot"><div class="j-pivot__strip"><button class="on" data-f="all">all</button><button data-f="reading">reading</button><button data-f="queued">queued</button><button data-f="done">done</button></div></div>
+<p class="j-sub j-halo" data-j-st>Hairline rows with large titles. Filter with the pill, then tap a row and it pours into a glass sheet.</p>
+<div class="j-stretch" style="margin-top:30px" id="rlPivot" role="tablist" aria-label="Filter the list"><i class="j-stretch__pill"></i><button role="tab" aria-selected="true" data-f="all">all</button><button role="tab" data-f="reading">reading</button><button role="tab" data-f="queued">queued</button><button role="tab" data-f="done">done</button></div>
 <div class="j-rows j-turn" id="rl"></div>
 </div></div></section>
 
 <section id="habits"><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>habits</h2></div>
 <div class="j-wrap"><div class="j-inner" data-j-in>
-<p class="j-sub j-halo" data-j-st>Tap a day to mark it. The streak is the large number.</p>
+<p class="j-sub j-halo" data-j-st>Tap a day to mark it. The streak is the large number, and a glass toast confirms each change.</p>
 <div style="margin-top:34px" id="hb"></div>
 <p class="j-cap j-foot">Filled means done. No red or green.</p>
 </div></div></section>
@@ -86,12 +86,15 @@
   var rl=$('#rl');
   function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function draw(f){
-    var L=B.filter(function(b){return f==='all'||b[2]===f});
-    rl.innerHTML=L.map(function(b,i){return '<div class="j-row" tabindex="0"><span class="yr">'+String(i+1).padStart(2,'0')+'</span><span><span class="wt">'+esc(b[0])+'</span><span class="wd">'+esc(b[1])+'</span></span><span class="wm"><span class="n">'+b[3]+'</span><span class="j-cap">'+b[4]+' · '+b[2]+'</span></span></div>'}).join('');
+    var L=B.map(function(b,k){return [b,k]}).filter(function(x){return f==='all'||x[0][2]===f});
+    rl.innerHTML=L.map(function(x,i){var b=x[0];return '<div class="j-row" tabindex="0" role="button" data-i="'+x[1]+'"><span class="yr">'+String(i+1).padStart(2,'0')+'</span><span><span class="wt">'+esc(b[0])+'</span><span class="wd">'+esc(b[1])+'</span></span><span class="wm"><span class="n">'+b[3]+'</span><span class="j-cap">'+b[4]+' · '+b[2]+'</span></span></div>'}).join('');
     J.indexKids(rl);
   }
   draw('all');rl.classList.add('is-in');
-  J.pivot($('#rlPivot'),function(b){J.turnstile(rl,function(){draw(b.dataset.f)})});
+  J.stretch($('#rlPivot'),function(b){J.turnstile(rl,function(){draw(b.dataset.f)})});
+  function open(row){var b=B[+row.dataset.i];J.pour(row,function(el){el.innerHTML='<p class="j-cap">'+esc(b[1])+' · example</p><h4>'+esc(b[0])+'<span style="color:var(--j-pop)">.</span></h4><p>'+b[3]+' '+b[4]+', '+b[2]+'.</p>'})}
+  rl.addEventListener('click',function(e){var r=e.target.closest('.j-row');if(r)open(r)});
+  rl.addEventListener('keydown',function(e){var r=e.target.closest('.j-row');if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault();open(r)}});
 
   /* habits */
   var H=[['read 20 pages',[1,1,0,1,1,1,0]],['walk after lunch',[1,0,1,1,0,1,1]],['no screens at 11',[0,1,1,0,1,1,1]]];
@@ -103,7 +106,7 @@
     H.map(function(h,r){return '<div class="habit"><span>'+h[0]+'</span>'+h[1].map(function(v,c){return '<button class="d'+(v?' on':'')+'" data-r="'+r+'" data-c="'+c+'" aria-pressed="'+(!!v)+'" aria-label="'+h[0]+', day '+(c+1)+'"></button>'}).join('')+'<span class="streak">'+streak(h[1])+'</span></div>'}).join('');
   }
   paint();
-  hb.addEventListener('click',function(e){var b=e.target.closest('.d');if(!b)return;var r=+b.dataset.r,c=+b.dataset.c;H[r][1][c]=H[r][1][c]?0:1;paint();var nb=hb.querySelector('[data-r="'+r+'"][data-c="'+c+'"]');if(nb)nb.focus();});
+  hb.addEventListener('click',function(e){var b=e.target.closest('.d');if(!b)return;var r=+b.dataset.r,c=+b.dataset.c;H[r][1][c]=H[r][1][c]?0:1;paint();J.toast(H[r][0],'streak '+streak(H[r][1])+(H[r][1][c]?', day '+(c+1)+' marked':', day '+(c+1)+' cleared'));var nb=hb.querySelector('[data-r="'+r+'"][data-c="'+c+'"]');if(nb)nb.focus();});
 
   /* release gate */
   var rg=J.range($('#gr'),function(v){
@@ -121,7 +124,7 @@
     (function next(){
       if(i>0)li[i-1].className='done';
       if(i===li.length){S.className='j-status j-status--sent';S.textContent='shipped';busy=false;return}
-      if(i===4&&!pass){li[3].className='done';S.className='j-status j-status--held';S.textContent='held at publish';busy=false;return}
+      if(i===4&&!pass){li[3].className='done';S.className='j-status j-status--held';S.textContent='held at publish';busy=false;J.toast('Held at publish','Checks are below the gate. A person decides.');return}
       li[i].className='now';i++;setTimeout(next,J.reduced()?60:620);
     })();
   });

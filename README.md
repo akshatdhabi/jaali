@@ -56,7 +56,7 @@ Tiles flip on their own, flip again when you tap them, and light the lattice und
 
 ### Glass and liquid
 
-A material layer on top of the three layers. Flat tiles carry content. Glass goes only on what you act on: bars, pills, menus, sheets, toasts, and glass tiles over a stage of drifting jaali shapes. Liquid motion only answers an action: a tab pill that stretches, a + that grows into its actions, a tile that pours out into a sheet and back, a pager dot that stretches as you scroll, a word that melts into the next. See [docs/glass.html](docs/glass.html).
+The raised layer is glass by default: the top bar, the theme panel, popovers, sheets and toasts blur what sits behind them. Flat tiles carry content. Glass goes only on what you act on: bars, pills, menus, sheets, toasts, and glass tiles over a stage of drifting jaali shapes. Liquid motion only answers an action: a tab pill that stretches, a + that grows into its actions, a tile that pours out into a sheet and back, a pager dot that stretches as you scroll, a word that melts into the next. See [docs/glass.html](docs/glass.html).
 
 ### Twelve themes, dark and light
 
@@ -151,7 +151,7 @@ Set the theme and mode before first paint to avoid a flash:
 | `liveTiles(hub)` | Auto-flips `.j-live[data-j-live]` tiles. Tap to flip. |
 | `sheet(el)` | Full-screen detail view with the title carried across. |
 | `range(el, onInput)` | Range with a gate marker. |
-| `toast(title, text)` | Slides up on the raised layer. |
+| `toast(title, text)` | Rises out of blur on the raised glass layer. |
 | `reveal`, `countUp`, `glow`, `tilt`, `scrollSpy` | Smaller pieces used by `mount()`. |
 | `motif(kind)`, `rosette()`, `arch()` | Jaipur line figures as SVG strings. |
 | `stage(el)`, `sheen(root?)` | Fill a `.j-stage` with drifting jaali shapes. A highlight follows the mouse on glass. |
@@ -209,14 +209,13 @@ Select one with `<html data-theme="neel" data-mode="light">`. With no `data-mode
 
 ### Layers
 
-Ground, tile and raised.
+Ground, tile and raised. Raised is glass.
 
 | layer | token | for |
 |---|---|---|
 | ground | none, flat | the page and the lattice |
 | tile | `--j-shadow-tile` | content |
-| raised | `--j-shadow-raised` | toasts, menus, popovers, sheets. Own lighter colour, thin accent edge |
-| glass | `.j-glass`, `--j-glass-blur` (24px), `--j-glass-fill` (62%), `--j-glass-saturate` (140%) | the raised layer as glass. Never on glass, never on reading content |
+| raised (glass) | `.j-raised` or `.j-glass`, `--j-glass-blur` (24px), `--j-glass-fill` (62%), `--j-glass-saturate` (140%), `--j-shadow-raised` | top bar, theme panel, toasts, menus, popovers, sheets. Own lighter colour, thin pop edge. Never on glass, never on reading content |
 
 ### Status
 
@@ -250,7 +249,7 @@ Contrast is audited for every theme and mode (`npm run audit`). Body text, `ink`
 
 **`faded` text (need 3:1).** 23 pairs, mostly in light mode, including gulabi light (2.59 on ground, 2.87 on tile). `faded` is for disabled and tertiary text, which WCAG exempts when it is disabled, but do not use it for content people must read. `npm run audit` prints every pair with a suggested value.
 
-The four three-colour themes pass every check with no gaps, including pop on ground (3:1) and popInk on pop (4.5:1). Glass needs `backdrop-filter` (Chrome 76, Safari 9, Firefox 103) and `color-mix` (Chrome 111, Safari 16.2, Firefox 113). Without blur, glass shows as a tinted raised surface.
+The four three-colour themes pass every check with no gaps, including pop on ground (3:1) and popInk on pop (4.5:1). Glass needs `backdrop-filter` (Chrome 76, Safari 9, Firefox 103) and `color-mix` (Chrome 111, Safari 16.2, Firefox 113). Without `backdrop-filter`, glass falls back to the solid raised colour.
 
 ## Develop
 

@@ -94,7 +94,7 @@
 <!-- cover: the add-on, made of its own tiles -->
 <section style="padding-top:clamp(36px,6vw,80px)">
 <div class="j-wrap"><div class="j-inner">
-  <div class="gl-top"><p class="j-cap">jaali · v0.2 · glass + liquid</p><p class="j-cap">three layers · three colours · eight liquid parts</p></div>
+  <div class="gl-top"><p class="j-cap">jaali · v0.3 · glass + liquid</p><p class="j-cap">three layers · three colours · eight liquid parts</p></div>
   <h1 class="gl-h">glass <i>+</i> liquid<i>.</i></h1>
   <p class="j-lead j-halo gl-lead">A material layer for jaali. Flat tiles carry content, glass sits on what you act on, and liquid motion answers a tap, a drag or a scroll.</p>
   <div class="j-staged gl-hub">
@@ -222,8 +222,6 @@ pour(tile, (body) =&gt; { body.innerHTML = '&lt;h4&gt;details&lt;/h4&gt;'; });</
 (function () {
   var J = window.Jaali, $ = J.$, $$ = J.$$;
   document.querySelectorAll('.rosette-slot').forEach(function (e) { e.innerHTML = J.rosette(); });
-  $$('[data-stage]').forEach(J.stage);
-  J.sheen();
 
   /* live hex codes and theme name on the cover */
   function paint() {
