@@ -19,6 +19,7 @@ export { range } from './range.js';
 export { sheet } from './sheet.js';
 export { scrollSpy } from './spy.js';
 export { motif, motifs, rosette, arch } from './motif.js';
+export { materialize, stretch, grow, pour, stage, sheen, worm, melt } from './liquid.js';
 
 /**
  * One call for the common setup: restore theme and mode, slide-ins, cursor glow, flip words, press tilt.

@@ -37,4 +37,12 @@ export function motif(kind: 'ring' | 'arch' | 'rosette' | 'star' | 'well'): stri
 export function motifs(): string[];
 export function rosette(): string;
 export function arch(): string;
+export function materialize(el: Element, on?: boolean): void;
+export function stretch(box: HTMLElement, onPick?: (tab: HTMLButtonElement, index: number, previous: number) => void): { select(index: number): void };
+export function grow(button: HTMLElement): { open(): void; close(): void };
+export function pour(tile: HTMLElement, render: (body: HTMLElement) => void): { close(): void };
+export function stage(el: HTMLElement): void;
+export function sheen(root?: ParentNode): () => void;
+export function worm(scroller: HTMLElement, pager: HTMLElement): { paint(): void };
+export function melt(el: HTMLElement, options?: { hold?: number; ms?: number }): () => void;
 export function mount(root?: ParentNode): () => void;

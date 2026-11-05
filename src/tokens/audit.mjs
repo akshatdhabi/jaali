@@ -7,6 +7,8 @@ export const CHECKS = [
   { id: 'accent-on-tile', fg: 'accent', bg: 'tile', min: 4.5, use: 'accent text on tiles (held status, taglines)' },
   { id: 'accentInk-on-accent', fg: 'accentInk', bg: 'accent', min: 4.5, use: 'text on the accent tile' },
   { id: 'faded-on-ground', fg: 'faded', bg: 'ground', min: 3, use: 'inactive pivots and nav (large type)' },
+  { id: 'pop-on-ground', fg: 'pop', bg: 'ground', min: 3, use: 'pop dots, edges and underlines (graphics, never body text)' },
+  { id: 'popInk-on-pop', fg: 'popInk', bg: 'pop', min: 4.5, use: 'text on the pop tile and pop buttons' },
   { id: 'faded-on-tile', fg: 'faded', bg: 'tile', min: 3, use: 'placeholder and quiet text on tiles' }
 ];
 

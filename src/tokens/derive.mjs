@@ -3,7 +3,7 @@
 
 export const ROLES = [
   'ground', 'tile', 'tileBack', 'raised', 'line', 'lineSoft',
-  'ink', 'muted', 'faded', 'accent', 'accentInk'
+  'ink', 'muted', 'faded', 'accent', 'accentInk', 'pop', 'popInk'
 ];
 
 const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
@@ -45,6 +45,9 @@ export function resolveTheme(theme, mode) {
   const pick = (o) => {
     const out = {};
     for (const r of ROLES) out[r] = o[r];
+    // pop is optional: a theme without its own third colour reuses the accent
+    if (!out.pop) out.pop = o.accent;
+    if (!out.popInk) out.popInk = o.accentInk;
     if (o.groundImage) out.groundImage = o.groundImage;
     return out;
   };

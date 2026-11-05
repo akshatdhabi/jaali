@@ -29,9 +29,14 @@ const decl = (tokens, mode) => {
 };
 
 const t = src.type;
+const mat = src.material || { blur: '24px', fill: '62%', saturate: '140%' };
 const head = `:root{
   --j-font:${t.family};
   --j-ease:${src.motion.ease};
+  --j-spring:cubic-bezier(.3,1.35,.5,1);
+  --j-glass-blur:${mat.blur};
+  --j-glass-fill:${mat.fill};
+  --j-glass-saturate:${mat.saturate};
 }`;
 
 const themeBlocks = Object.entries(resolved).map(([name, m]) => {
@@ -59,6 +64,7 @@ writeFileSync(p('dist/tokens.json'), JSON.stringify({
   default: src.default,
   themes: Object.fromEntries(Object.entries(resolved).map(([n, m]) => [n, { label: src.themes[n].label, ...m }])),
   elevation: src.elevation,
+  material: src.material,
   motion: src.motion,
   type: src.type
 }, null, 2) + '\n');

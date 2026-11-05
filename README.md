@@ -19,11 +19,12 @@
 <p align="center">
   <a href="https://akshatdhabi.github.io/jaali/">Docs</a> ·
   <a href="https://akshatdhabi.github.io/jaali/kit.html">Kit</a> ·
+  <a href="https://akshatdhabi.github.io/jaali/glass.html">Glass</a> ·
   <a href="https://akshatdhabi.github.io/jaali/examples.html">Examples</a> ·
   <a href="https://akshatdhabi.github.io/jaali/story.html">Story</a>
 </p>
 
-Design tokens as JSON and CSS custom properties, CSS components, and about 7 KB (gzipped) of vanilla JS. No framework and no runtime dependencies. MIT.
+Design tokens as JSON and CSS custom properties, CSS components, and about 10 KB (gzipped) of vanilla JS. No framework and no runtime dependencies. MIT.
 
 ## Why I built it
 
@@ -53,12 +54,18 @@ Tiles flip on their own, flip again when you tap them, and light the lattice und
   <img src="docs/readme/tiles.gif" width="720" alt="A dashboard of live tiles flipping, with the lattice glowing under the cursor as it moves across them">
 </p>
 
-### Eight themes, dark and light
+### Glass and liquid
+
+A material layer on top of the three layers. Flat tiles carry content. Glass goes only on what you act on: bars, pills, menus, sheets, toasts, and glass tiles over a stage of drifting jaali shapes. Liquid motion only answers an action: a tab pill that stretches, a + that grows into its actions, a tile that pours out into a sheet and back, a pager dot that stretches as you scroll, a word that melts into the next. See [docs/glass.html](docs/glass.html).
+
+### Twelve themes, dark and light
+
+Four themes use three colours: a base for the ground and plain tiles (about 60%), a primary for live tiles and the lattice (30%), and a pop (10%) for the one thing that needs you. `rani` (black, rani pink and orange) is the default, after the Zune black-magenta-orange look. The other eight are the original themes and reuse their accent as the pop.
 
 Each theme has its own dark and light mode. Switch with `setTheme()` and `setMode()`, or with `data-theme` and `data-mode` on `<html>`.
 
 <p align="center">
-  <img src="docs/readme/themes.png" width="830" alt="The hero in all eight themes: gulabi, neel, amer, makrana, magenta, ember, cobalt and sanjh, each in dark and light">
+  <img src="docs/readme/themes.png" width="830" alt="The hero in the original eight themes: gulabi, neel, amer, makrana, magenta, ember, cobalt and sanjh, each in dark and light">
 </p>
 
 ### Three layers
@@ -147,6 +154,13 @@ Set the theme and mode before first paint to avoid a flash:
 | `toast(title, text)` | Slides up on the raised layer. |
 | `reveal`, `countUp`, `glow`, `tilt`, `scrollSpy` | Smaller pieces used by `mount()`. |
 | `motif(kind)`, `rosette()`, `arch()` | Jaipur line figures as SVG strings. |
+| `stage(el)`, `sheen(root?)` | Fill a `.j-stage` with drifting jaali shapes. A highlight follows the mouse on glass. |
+| `materialize(el, on)` | Glass rises out of blur (`.j-glass.j-mat`). |
+| `stretch(el, onPick)` | Pill tabs whose pill stretches between tabs. |
+| `grow(btn)` | A glass + that grows into its row of actions. |
+| `pour(tile, render)` | A tile pours out into a glass sheet and back. Esc, × or the veil closes it. |
+| `worm(scroller, pager)` | Pager dots tied to horizontal scroll. |
+| `melt(el)` | A word that melts into the next (`data-words="a\|b"`). |
 
 Types ship in `dist/jaali.d.ts`. The JS never touches the network and never throws if `localStorage` is blocked.
 
@@ -154,7 +168,7 @@ Types ship in `dist/jaali.d.ts`. The JS never touches the network and never thro
 
 All tokens are `--j-*` custom properties, generated from [`src/tokens/themes.json`](src/tokens/themes.json). Also built to `dist/tokens.json` and `dist/tokens.css`.
 
-Gulabi, the default theme:
+Gulabi, the original theme. Its table is pinned:
 
 | token | dark | light | use |
 |---|---|---|---|
@@ -172,11 +186,15 @@ Gulabi, the default theme:
 
 ### Themes
 
-Eight, each with dark and light. Gulabi is pinned to the table above. The other seven are derived from a base palette by the rules in `themes.json` (dark tile is the tile mixed 3.5% toward ink, raised is the back face mixed 12% toward ink, and so on).
+Twelve, each with dark and light. `rani` is the default. Gulabi is pinned to the table above. The others are derived from a base palette by the rules in `themes.json` (dark tile is the tile mixed 3.5% toward ink, raised is the back face mixed 12% toward ink, and so on).
 
 | theme | feel |
 |---|---|
-| `gulabi` | home. Warm dark, rose accent |
+| `rani` | default. Black, rani pink, orange pop |
+| `gulal` | gulal pink, marigold pop |
+| `nilam` | cobalt, pink pop |
+| `mehendi` | magenta, henna lime pop |
+| `gulabi` | warm dark, rose accent |
 | `neel` | blue pottery |
 | `amer` | sandstone |
 | `makrana` | marble and emerald |
@@ -184,6 +202,8 @@ Eight, each with dark and light. Gulabi is pinned to the table above. The other 
 | `ember` | graphite and orange |
 | `cobalt` | midnight and cyan |
 | `sanjh` | dusk sky, with a gradient ground |
+
+Every theme has `pop` and `popInk` (`--j-pop`, `--j-pop-ink`). Use the pop for a held dot, a flag or one tile per hub, never for body text.
 
 Select one with `<html data-theme="neel" data-mode="light">`. With no `data-mode`, the system setting decides.
 
@@ -196,6 +216,7 @@ Ground, tile and raised.
 | ground | none, flat | the page and the lattice |
 | tile | `--j-shadow-tile` | content |
 | raised | `--j-shadow-raised` | toasts, menus, popovers, sheets. Own lighter colour, thin accent edge |
+| glass | `.j-glass`, `--j-glass-blur` (24px), `--j-glass-fill` (62%), `--j-glass-saturate` (140%) | the raised layer as glass. Never on glass, never on reading content |
 
 ### Status
 
@@ -203,7 +224,7 @@ Status uses shape, not colour: sent is a filled ink dot, held is an accent dot w
 
 ### Motion
 
-One easing, `cubic-bezier(.1, .9, .2, 1)`. 600ms in, 170ms out. Everything honours `prefers-reduced-motion`.
+One easing, `cubic-bezier(.1, .9, .2, 1)`. 600ms in, 170ms out. Liquid parts add one spring, `--j-spring` (`cubic-bezier(.3, 1.35, .5, 1)`), for overshoot. Everything honours `prefers-reduced-motion`.
 
 ## Fonts
 
@@ -224,9 +245,12 @@ Contrast is audited for every theme and mode (`npm run audit`). Body text, `ink`
 | `ember.light.accentInk-on-accent` | 3.69 | 4.5 | `#FAFAF9` on `#D95B00` | `#191919` |
 | `cobalt.light.accent-on-ground` | 4.12 | 4.5 | `#0A7DB0` on `#ebf4fa` | `#0A76A7` |
 | `cobalt.light.accentInk-on-accent` | 4.33 | 4.5 | `#F3F9FD` on `#0A7DB0` | none found by the audit |
+| `ember.light.popInk-on-pop`, `cobalt.light.popInk-on-pop` | as above | 4.5 | the pop is the accent in these themes | as above |
 | `sanjh.light.accent-on-ground` | 4.32 | 4.5 | `#C2492E` on `#fbeee8` | `#BC472E` |
 
 **`faded` text (need 3:1).** 23 pairs, mostly in light mode, including gulabi light (2.59 on ground, 2.87 on tile). `faded` is for disabled and tertiary text, which WCAG exempts when it is disabled, but do not use it for content people must read. `npm run audit` prints every pair with a suggested value.
+
+The four three-colour themes pass every check with no gaps, including pop on ground (3:1) and popInk on pop (4.5:1). Glass needs `backdrop-filter` (Chrome 76, Safari 9, Firefox 103) and `color-mix` (Chrome 111, Safari 16.2, Firefox 113). Without blur, glass shows as a tinted raised surface.
 
 ## Develop
 

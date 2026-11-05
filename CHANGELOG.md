@@ -2,6 +2,19 @@
 
 All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/).
 
+## 0.2.0
+
+Glass and liquid, and three-colour themes. Not published to npm.
+
+- New `pop` and `popInk` tokens (`--j-pop`, `--j-pop-ink`) on every theme. Themes without one reuse the accent.
+- Four three-colour themes: rani (black, rani pink, orange), gulal, nilam and mehendi. Rani is the new default; set `data-theme="gulabi"` to keep the old look. The eight original themes are unchanged. Twelve in all.
+- Glass material tokens: `--j-glass-blur`, `--j-glass-fill`, `--j-glass-saturate`, plus `--j-spring`.
+- `35-glass.css`: `.j-glass`, materialize (`.j-mat`), glass and pop live tiles (`.is-glass`, `.is-pop`), and a stage of drifting jaali shapes (`.j-stage`).
+- `55-liquid.css` and new JS helpers: `stretch`, `grow`, `pour`, `worm`, `melt`, `materialize`, `stage`, `sheen`, with types.
+- Contrast audit checks pop on ground and popInk on pop. The new themes pass with no gaps.
+- Docs: new glass page, glass link in the nav, counts updated.
+- JS is now about 10 KB gzipped.
+
 ## 0.1.0
 
 First public release. Not published to npm: clone the repo and run `npm run build`.
