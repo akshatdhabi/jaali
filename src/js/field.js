@@ -1,5 +1,6 @@
 // The page-wide jaali field: one faint lattice behind everything that lights under the cursor.
 import { reduced } from './util.js';
+import { getVelocity } from './velocity.js';
 
 /**
  * Draw the lattice on a fixed canvas (<canvas class="j-field-canvas" aria-hidden="true">).
@@ -8,7 +9,7 @@ import { reduced } from './util.js';
  */
 export function jaaliField(cv, { cell = 28 } = {}) {
   const ctx = cv.getContext('2d');
-  let W = 0, H = 0, px = -999, py = -999, glowK = 0, hidden = false, stopped = false;
+  let W = 0, H = 0, px = -999, py = -999, glowK = 0, hidden = false, stopped = false, drift = 0, lastT = 0;
   const t0 = performance.now();
   let acc = '#F28DAE';
   const readAcc = () => { acc = getComputedStyle(document.documentElement).getPropertyValue('--j-accent').trim() || acc; };
@@ -26,9 +27,12 @@ export function jaaliField(cv, { cell = 28 } = {}) {
     ctx.clearRect(0, 0, W, H);
     const sy = scrollY;
     const heroK = Math.max(0, 1 - sy / (H * 0.9));
-    const base = 0.0414 + 0.069 * heroK;
+    const vel = getVelocity();
+    const base = (0.0414 + 0.069 * heroK) * (1 + 1.2 * vel);
     const r = reduced();
-    const off = r ? 0 : (t * 3) % R;
+    // scroll speed pushes the drift: up to 7x at a fast flick
+    drift = (drift + Math.min(0.05, Math.max(0, t - lastT)) * 3 * (1 + 6 * vel)) % R; lastT = t;
+    const off = r ? 0 : drift;
     const oy = (sy * 0.15) % R;
     const cols = Math.ceil(W / R) + 2;
     const rows = Math.ceil(H / R) + 2;

@@ -46,3 +46,11 @@ export function sheen(root?: ParentNode): () => void;
 export function worm(scroller: HTMLElement, pager: HTMLElement): { paint(): void };
 export function melt(el: HTMLElement, options?: { hold?: number; ms?: number }): () => void;
 export function mount(root?: ParentNode): () => void;
+
+export function velocity(options?: { max?: number }): () => void;
+export function getVelocity(): number;
+export function onVelocity(fn: (v: number) => void): () => void;
+export function speedToTarget(px: number, ms: number, max?: number): number;
+export interface TipInfo { k?: string; t?: string; s?: string; quiet?: boolean }
+export function focusTip(): { show(info: TipInfo, x: number, y: number, owner?: object): void; hide(owner?: object): void };
+export function focusGroup(box: HTMLElement, options?: { tip?: boolean }): () => void;
