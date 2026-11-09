@@ -2,6 +2,18 @@
 
 All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/).
 
+## 0.4.0
+
+Flow: motion that answers the reader. Not published to npm.
+
+- `velocity()`: scroll speed as a shared 0 to 1 input, with `getVelocity()`, `onVelocity(fn)` and `--j-velocity` on `<html>`. `mount()` starts it. Stays at 0 under reduced motion.
+- The lattice field reads velocity: it drifts up to 7x faster and glows brighter on a fast scroll, then settles.
+- `focusGroup(el, { tip })`: point at one `[data-focus]` item and the others dim. Works with hover, keyboard and tap. The raised glass tip (`.j-tip`, `focusTip()`) is opt-in.
+- New `65-flow.css`, with types for the new helpers.
+- New test (`test/flow.test.mjs`): velocity clamps to 0..1 and never goes negative when a frame timestamp runs backwards; focus dims the rest; the tip is glass and opt-in.
+- Docs: new flow page with a live velocity meter, a focus demo and an example release page. Flow link in the nav.
+- JS is now about 11 KB gzipped.
+
 ## 0.3.0
 
 Glass becomes the default for the raised layer, and every docs page uses glass and liquid. Not published to npm.

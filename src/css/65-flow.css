@@ -1,0 +1,28 @@
+/* flow: focus groups and the shared tip.
+   Motion that answers the reader: scroll speed (--j-velocity, set by velocity()) and pointing (focus). */
+
+/* focus: the picked item stays, the rest step back */
+.j-focus [data-focus] { transition: opacity .45s var(--j-ease), color .45s var(--j-ease); }
+.j-focus.is-focusing [data-focus]:not(.is-focus) { opacity: .34; }
+.j-focus [data-focus].is-focus .j-focus__mark { color: var(--j-accent); }
+.j-focus__mark { transition: color .45s var(--j-ease); }
+
+/* the tip: raised glass, opt-in for focus groups */
+.j-tip {
+  position: fixed; z-index: 70; pointer-events: none;
+  display: flex; flex-direction: column; gap: 3px;
+  min-width: 200px; max-width: 300px; padding: 11px 14px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--j-raised) var(--j-glass-fill), transparent);
+  -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate)); backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--j-ink) 14%, transparent), 0 0 0 1px color-mix(in srgb, var(--j-pop) 30%, transparent), var(--j-shadow-raised);
+  color: var(--j-ink);
+  opacity: 0; transform: translateY(6px) scale(.96); transform-origin: 0 0;
+  transition: opacity .25s var(--j-ease), transform .5s var(--j-ease), left .3s var(--j-ease), top .3s var(--j-ease);
+}
+.j-tip.is-on { opacity: 1; transform: none; }
+.j-tip__k { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 450; color: var(--j-accent); }
+.j-tip__k::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.j-tip__k.is-quiet { color: var(--j-muted); }
+.j-tip__t { font-size: 15px; font-weight: 450; line-height: 1.35; }
+.j-tip__s { font-size: 13.5px; color: var(--j-muted); line-height: 1.45; }

@@ -13,18 +13,19 @@
   <img alt="MIT licence" src="docs/readme/badge-licence.svg">
   <img alt="8 themes" src="docs/readme/badge-themes.svg">
   <img alt="Zero dependencies" src="docs/readme/badge-dependencies.svg">
-  <img alt="About 7 KB of JavaScript, gzipped" src="docs/readme/badge-js.svg">
+  <img alt="About 11 KB of JavaScript, gzipped" src="docs/readme/badge-js.svg">
 </p>
 
 <p align="center">
   <a href="https://akshatdhabi.github.io/jaali/">Docs</a> ·
   <a href="https://akshatdhabi.github.io/jaali/kit.html">Kit</a> ·
   <a href="https://akshatdhabi.github.io/jaali/glass.html">Glass</a> ·
+  <a href="https://akshatdhabi.github.io/jaali/flow.html">Flow</a> ·
   <a href="https://akshatdhabi.github.io/jaali/examples.html">Examples</a> ·
   <a href="https://akshatdhabi.github.io/jaali/story.html">Story</a>
 </p>
 
-Design tokens as JSON and CSS custom properties, CSS components, and about 10 KB (gzipped) of vanilla JS. No framework and no runtime dependencies. MIT.
+Design tokens as JSON and CSS custom properties, CSS components, and about 11 KB (gzipped) of vanilla JS. No framework and no runtime dependencies. MIT.
 
 ## Why I built it
 
@@ -57,6 +58,10 @@ Tiles flip on their own, flip again when you tap them, and light the lattice und
 ### Glass and liquid
 
 The raised layer is glass by default: the top bar, the theme panel, popovers, sheets and toasts blur what sits behind them. Flat tiles carry content. Glass goes only on what you act on: bars, pills, menus, sheets, toasts, and glass tiles over a stage of drifting jaali shapes. Liquid motion only answers an action: a tab pill that stretches, a + that grows into its actions, a tile that pours out into a sheet and back, a pager dot that stretches as you scroll, a word that melts into the next. See [docs/glass.html](docs/glass.html).
+
+### Flow
+
+Motion that answers the reader. `velocity()` turns scroll speed into a 0 to 1 value, in JS and as `--j-velocity` in CSS, and the lattice drifts faster and glows brighter on a fast scroll. `focusGroup()` dims the other items in a group when you point at one, by hover, keyboard or tap, with an opt-in raised tip. `mount()` starts velocity for you. See [docs/flow.html](docs/flow.html).
 
 ### Twelve themes, dark and light
 
