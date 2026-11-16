@@ -19,18 +19,6 @@ The ops screens had grown busy: five fill treatments on one screen, two equally 
 - `glow()`: the card light trails the pointer.
 - `mount()` starts the pattern for `canvas.j-pattern-canvas` and no longer starts scroll velocity. Call `velocity()` yourself if you use it.
 
-**Performance**
-
-A profile showed the pattern canvas was the main cost: with it visible the main thread was about 99% busy at a 4x CPU slowdown, even when nothing was happening, against 12% with it hidden. Most of that was the browser compositing a full-screen canvas on every frame, not script. So the pattern now:
-
-- has no full-screen canvas. Two corner canvases cover about half the screen, and the pointer light is a small canvas that follows the pointer by transform
-- draws each corner as one cached tile fill with one baked fade, and redraws it only when the drift has moved a whole pixel (about 8 times a second) instead of every frame
-- runs the pointer light at about 30 frames a second, only while you move, then hides it
-- stops when the tab is hidden and after 45 seconds without input, and any input wakes it
-- caps the pixel ratio at 1.5
-
-On the home page at 4x CPU slowdown (main-thread milliseconds per second, 1000 is fully busy): trellis idle 989 to 321, pointer over trellis 987 to 769, windows 967 to 700, bandhani 991 to 721, lehariya 885 to 565, scrolling the kit 946 to 595. The pattern module no longer creates paths at import, so it can be imported on a server.
-
 **Added**
 
 - `jaaliPattern(canvas, { pattern })` and `PATTERNS`: `ogee` (stone trellis), `win` (Hawa Mahal windows), `bandhani` (tie-dye dots), `lehariya` (turban waves). Switch by setting `data-pattern` on the canvas.

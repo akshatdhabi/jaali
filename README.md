@@ -91,7 +91,7 @@ There is no tier switch. These rules hold everywhere:
 | glass | bar, pills, menus, sheets, toasts |
 | ambient motion | the pattern, and one flip word |
 
-`test/style.test.mjs` holds the rules as tests. The pattern comes from `jaaliPattern()` on a `canvas.j-pattern-canvas`. Set `data-pattern` to `ogee`, `win`, `bandhani` or `lehariya` on the canvas to switch it. It drifts, leans away from the pointer and lights up near it, and draws once under reduced motion. It is built to be cheap: two corner canvases instead of a full-screen one, redraws only when the drift moves a pixel, sleeps after 45 seconds without input, and stops when the tab is hidden.
+`test/style.test.mjs` holds the rules as tests. The pattern comes from `jaaliPattern()` on a `canvas.j-pattern-canvas`. Set `data-pattern` to `ogee`, `win`, `bandhani` or `lehariya` on the canvas to switch it. It drifts, leans away from the pointer and lights up near it, and draws once under reduced motion.
 
 ### Three layers
 
