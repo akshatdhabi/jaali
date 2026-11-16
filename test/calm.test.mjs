@@ -9,7 +9,7 @@ import { PATTERNS } from '../src/js/pattern.js';
 const src = JSON.parse(readFileSync(new URL('../src/tokens/themes.json', import.meta.url), 'utf8'));
 const calmSrc = readFileSync(new URL('../src/css/57-calm.css', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../dist/jaali.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
-const SOFT = ['soft-rani', 'soft-neel', 'soft-amer', 'soft-makrana', 'soft-sanjh', 'soft-calm'];
+const SOFT = ['rani', 'neel', 'amer', 'makrana', 'sanjh', 'calm'];
 
 test('six soft themes ship, pinned, with a pop of their own', () => {
   for (const name of SOFT) {
@@ -24,18 +24,8 @@ test('six soft themes ship, pinned, with a pop of their own', () => {
 });
 
 test('soft themes pass every audit check with no known gaps', () => {
-  const fails = audit(resolveAll(src)).filter((f) => f.theme.startsWith('soft-'));
+  const fails = audit(resolveAll(src)).filter((f) => SOFT.includes(f.theme));
   assert.deepEqual(fails.map((f) => f.key), []);
-});
-
-test('soft themes are calmer than the originals: the accent is never brighter than the loud rani pink', () => {
-  const sat = (hex) => {
-    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
-    const mx = Math.max(r, g, b), mn = Math.min(r, g, b);
-    return mx === 0 ? 0 : (mx - mn) / mx;
-  };
-  const loud = sat(src.themes.rani.dark.accent);
-  for (const name of SOFT) assert.ok(sat(src.themes[name].dark.accent) < loud, `${name} dark accent is softer than rani`);
 });
 
 test('four patterns ship: ogee, win, bandhani and lehariya', () => {
