@@ -29,8 +29,8 @@ test('contrast: black on white is 21, same colour is 1', () => {
   assert.ok(Math.abs(contrast('#336699', '#336699') - 1) < 1e-9);
 });
 
-test('twelve themes ship, rani is the default', () => {
-  assert.deepEqual(names.slice().sort(), ['amer', 'cobalt', 'ember', 'gulabi', 'gulal', 'magenta', 'makrana', 'mehendi', 'neel', 'nilam', 'rani', 'sanjh']);
+test('eighteen themes ship, rani is the default', () => {
+  assert.deepEqual(names.slice().sort(), ['amer', 'cobalt', 'ember', 'gulabi', 'gulal', 'magenta', 'makrana', 'mehendi', 'neel', 'nilam', 'rani', 'sanjh', 'soft-amer', 'soft-calm', 'soft-makrana', 'soft-neel', 'soft-rani', 'soft-sanjh']);
   assert.equal(src.default, 'rani');
 });
 

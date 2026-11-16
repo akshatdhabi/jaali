@@ -13,6 +13,7 @@ export { pivot, turnstile } from './pivot.js';
 export { tilt, tiltAll } from './tilt.js';
 export { glow } from './glow.js';
 export { jaaliField } from './field.js';
+export { jaaliPattern, PATTERNS } from './pattern.js';
 export { reveal, countUp } from './reveal.js';
 export { liveTiles, placeTiles } from './tiles.js';
 export { toast } from './toast.js';

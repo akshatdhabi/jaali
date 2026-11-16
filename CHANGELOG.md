@@ -2,6 +2,19 @@
 
 All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/).
 
+## 0.5.0
+
+Calm: a quieter tier for tools. Not published to npm.
+
+- `data-tier="tool"`: flat tiles, a tint for the one thing that needs a person, accent as a mark, no stage, no ambient motion. New `57-calm.css`. Without the attribute nothing changes.
+- `.is-tint` (and `.is-pop` in the tool tier): the pop colour as a 15% tint with a coloured number and a thin edge. `.is-slab` keeps the solid fill.
+- Six soft themes: `soft-rani`, `soft-neel`, `soft-amer`, `soft-makrana`, `soft-sanjh`, `soft-calm`. Eighteen themes in all. All pinned, all pass the contrast audit, no new known gaps.
+- `jaaliPattern(canvas, { pattern })` and `PATTERNS`: a thin Rajasthani pattern behind the page, as a screen and not a row of icons. `ogee` (stone trellis), `win` (Hawa Mahal windows), `bandhani` (tie-dye dots), `lehariya` (turban waves). It drifts, leans away from the pointer and lights up near it. Still under reduced motion.
+- `glow()`: the card light now trails the pointer. It goes straight to the pointer under reduced motion.
+- `.j-chips`: a wrapping row of pill choices.
+- New test (`test/calm.test.mjs`): the soft themes pass every audit check, the four shipped patterns, and that the tier rules only apply under `data-tier="tool"`.
+- Docs: new calm page with the ops dashboard in the tool tier, a pattern picker and the per-view budgets. Calm link in the nav.
+
 ## 0.4.0
 
 Flow: motion that answers the reader. Not published to npm.

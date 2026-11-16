@@ -63,7 +63,7 @@ The raised layer is glass by default: the top bar, the theme panel, popovers, sh
 
 Motion that answers the reader. `velocity()` turns scroll speed into a 0 to 1 value, in JS and as `--j-velocity` in CSS, and the lattice drifts faster and glows brighter on a fast scroll. `focusGroup()` dims the other items in a group when you point at one, by hover, keyboard or tap, with an opt-in raised tip. `mount()` starts velocity for you. See [docs/flow.html](docs/flow.html).
 
-### Twelve themes, dark and light
+### Eighteen themes, dark and light
 
 Four themes use three colours: a base for the ground and plain tiles (about 60%), a primary for live tiles and the lattice (30%), and a pop (10%) for the one thing that needs you. `rani` (black, rani pink and orange) is the default, after the Zune black-magenta-orange look. The other eight are the original themes and reuse their accent as the pop.
 
@@ -72,6 +72,27 @@ Each theme has its own dark and light mode. Switch with `setTheme()` and `setMod
 <p align="center">
   <img src="docs/readme/themes.png" width="830" alt="The hero in the original eight themes: gulabi, neel, amer, makrana, magenta, ember, cobalt and sanjh, each in dark and light">
 </p>
+
+### Calm tier
+
+Two tiers, one system. Pages (portfolios, docs, landing pages) keep the full system. Tools you open every day (dashboards, trackers, consoles) get a quieter one. Set `data-tier="tool"` on `<html>` and:
+
+- tiles stay flat, with no glass tiles and no stage
+- `.is-pop` becomes a tint: a coloured number, a thin edge, a 15% fill. Add `.is-slab` for the solid fill, or use `.is-tint` anywhere
+- the accent marks (ticks, numerals, held dots) instead of filling a tile
+- the failed status takes the pop dot, so the row matches the tile
+- nothing animates at rest. The pattern behind the page is the one allowed exception
+
+Glass stays on the bar, the pills, the sheet and the toast. Without the attribute nothing changes.
+
+| | tool tier | page tier |
+|---|---|---|
+| fills | 2: flat tile and raised | 3 |
+| colours besides ink | 1, and the pop only as a tint, once a view | 1, and the pop once |
+| glass | bar, pills, sheet, toast | the same, plus glass tiles over a stage |
+| ambient motion | none at rest, except a pattern | two things a view |
+
+The six `soft-*` themes are tuned for this tier: lower chroma than their originals, ink at least 7:1 on ground, accent at least 4.5:1, and no new contrast gaps. The pointer light on cards (`glow()`) now trails the cursor a little instead of snapping. See [docs/calm.html](docs/calm.html).
 
 ### Three layers
 
@@ -151,6 +172,7 @@ Set the theme and mode before first paint to avoid a flash:
 | `setMode('dark' \| 'light')`, `toggleMode()`, `getMode()` | Dark or light. Follows the system until the visitor picks (`jaali:mode`). |
 | `themePicker(list, { toggle, panel })` | Renders a card per theme. Optional dropdown wiring. |
 | `jaaliField(canvas)` | The drifting lattice field. Reacts to the cursor. Respects reduced motion. |
+| `jaaliPattern(canvas, { pattern })` | The calm backdrop: `ogee`, `win`, `bandhani` or `lehariya`. Drifts, leans away from the pointer, lights up near it. Returns `{ set(pattern), stop() }`. |
 | `flipWords(root)` | Turns `<span class="j-flip" data-words="a\|b\|c">` into a flip word. |
 | `pivot(el, onPick)`, `turnstile(el, render)` | Pivot strip, and the out-then-in swap of a list. |
 | `liveTiles(hub)` | Auto-flips `.j-live[data-j-live]` tiles. Tap to flip. |
@@ -191,7 +213,7 @@ Gulabi, the original theme. Its table is pinned:
 
 ### Themes
 
-Twelve, each with dark and light. `rani` is the default. Gulabi is pinned to the table above. The others are derived from a base palette by the rules in `themes.json` (dark tile is the tile mixed 3.5% toward ink, raised is the back face mixed 12% toward ink, and so on).
+Eighteen, each with dark and light. `rani` is the default. The last six (`soft-*`) are the calm set for tools. Gulabi is pinned to the table above. The others are derived from a base palette by the rules in `themes.json` (dark tile is the tile mixed 3.5% toward ink, raised is the back face mixed 12% toward ink, and so on).
 
 | theme | feel |
 |---|---|
@@ -207,6 +229,12 @@ Twelve, each with dark and light. `rani` is the default. Gulabi is pinned to the
 | `ember` | graphite and orange |
 | `cobalt` | midnight and cyan |
 | `sanjh` | dusk sky, with a gradient ground |
+| `soft-rani` | dusty rose, warm amber pop. The rani pairing at about half the saturation |
+| `soft-neel` | blue pottery, cornflower, amber pop |
+| `soft-amer` | sandstone, gold, terracotta pop |
+| `soft-makrana` | marble, sea green, brass pop |
+| `soft-sanjh` | dusk, peach, lavender pop |
+| `soft-calm` | neutral ground, muted rose, tan pop |
 
 Every theme has `pop` and `popInk` (`--j-pop`, `--j-pop-ink`). Use the pop for a held dot, a flag or one tile per hub, never for body text.
 
