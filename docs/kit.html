@@ -67,7 +67,7 @@
 
 <div class="kit-sec"><h3>layers<small>Ground, tile, raised. Raised is glass.</small></h3>
 <div><div class="j-pop-demo"><div class="j-tile base"><b>Tile</b><p class="j-cap" style="margin-top:6px">Layer 1. Edge highlight on top, soft shadow below.</p></div>
-<div class="j-raised j-pop pop" id="popDemo"><b>Raised glass</b><span>Layer 2. 62% fill, 24px blur, a thin pop edge.</span></div></div>
+<div class="j-raised j-pop pop" id="popDemo"><b>Raised glass</b><span>Layer 2. 40% fill, 28px blur, a thin pop edge.</span></div></div>
 <div class="layers"><div class="l0"><b>ground</b><span>flat</span></div><div class="l1"><b>tile</b><span>--j-shadow-tile</span></div><div class="l2 j-raised"><b>raised glass</b><span>.j-raised, --j-glass-blur</span></div></div></div></div>
 
 <div class="kit-sec"><h3>tiles<small>Tap a tile to flip it. Tap the wide one to pour it into a glass sheet.</small></h3>
@@ -149,7 +149,7 @@
   J.themePicker($('#themeList'));
   $('#themeList').addEventListener('click',function(){});
   J.liveTiles($('#miniHub'));
-  var USE={ground:'the page',tile:'content tiles',tileBack:'tile back face',raised:'glass layer, at 62%',line:'hairlines',lineSoft:'soft hairlines',ink:'text',muted:'secondary text',faded:'tertiary, disabled',accent:'primary, about 30%',accentInk:'text on primary',pop:'pop, about 10%',popInk:'text on pop'};
+  var USE={ground:'the page',tile:'content tiles',tileBack:'tile back face',raised:'glass layer, at 40%',line:'hairlines',lineSoft:'soft hairlines',ink:'text',muted:'secondary text',faded:'tertiary, disabled',accent:'primary, about 30%',accentInk:'text on primary',pop:'pop, about 10%',popInk:'text on pop'};
   var modes=J.stretch($('#modePivot'),function(b){J.setMode(b.dataset.m);});
   function tokens(){
     var cs=getComputedStyle(document.documentElement),m=J.getMode();

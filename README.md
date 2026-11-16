@@ -235,7 +235,7 @@ Ground, tile and raised. Raised is glass.
 |---|---|---|
 | ground | none, flat | the page and the lattice |
 | tile | `--j-shadow-tile` | content |
-| raised (glass) | `.j-raised` or `.j-glass`, `--j-glass-blur` (24px), `--j-glass-fill` (62%), `--j-glass-saturate` (140%), `--j-shadow-raised` | top bar, theme panel, toasts, menus, popovers, sheets. Own lighter colour, thin pop edge. Never on glass, never on reading content |
+| raised (glass) | `.j-raised` or `.j-glass`, `--j-glass-blur` (28px), `--j-glass-fill` (40%), `--j-glass-saturate` (150%), `--j-shadow-raised` | top bar, theme panel, toasts, menus, popovers, sheets. Own lighter colour, thin pop edge. Never on glass, never on reading content |
 
 ### Status
 

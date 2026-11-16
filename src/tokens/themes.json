@@ -310,9 +310,9 @@
     }
   },
   "material": {
-    "_note": "Glass for the function layer: bars, pills, menus, sheets, toasts and glass tiles.",
-    "blur": "24px",
-    "fill": "62%",
-    "saturate": "140%"
+    "_note": "Glass for the function layer: bars, pills, menus, sheets and toasts. A low fill lets the page show through; the blur keeps text readable.",
+    "blur": "28px",
+    "fill": "40%",
+    "saturate": "150%"
   }
 }
