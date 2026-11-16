@@ -1,4 +1,4 @@
-// Live tiles: tap to flip, and a random tile with a back face turns itself over now and then.
+// Live tiles: tap to flip. Pass { interval } (ms) if you want a random tile to turn itself over now and then.
 import { $$, reduced } from './util.js';
 import { tilt } from './tilt.js';
 
@@ -17,9 +17,9 @@ export function placeTiles(hub) {
 
 /**
  * Wire a .j-hub. Tiles marked data-j-live have a back face. Returns { stop, place }.
- * interval: ms between automatic flips. hold: ms a tile stays flipped.
+ * interval: ms between automatic flips, 0 (the default) for tap only. hold: ms a tile stays flipped.
  */
-export function liveTiles(hub, { interval = 2200, hold = 2800 } = {}) {
+export function liveTiles(hub, { interval = 0, hold = 2800 } = {}) {
   placeTiles(hub);
   const tiles = $$('.j-live', hub);
   tiles.forEach((t) => {
@@ -28,7 +28,7 @@ export function liveTiles(hub, { interval = 2200, hold = 2800 } = {}) {
   });
   const live = tiles.filter((t) => t.hasAttribute('data-j-live'));
   let timer = null;
-  if (!reduced() && live.length) {
+  if (interval > 0 && !reduced() && live.length) {
     timer = setInterval(() => {
       const t = live[Math.floor(Math.random() * live.length)];
       if (t.classList.contains('is-flip')) return;

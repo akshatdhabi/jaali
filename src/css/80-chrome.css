@@ -63,6 +63,5 @@
   .j-glass, .j-raised, .j-toast, .j-skins, .j-pour { background: var(--j-raised); }
   .j-top::before { background: var(--j-ground); }
   .j-sheet { background: var(--j-ground); }
-  .j-live.is-glass .j-face { background: var(--j-tile); }
 }
 

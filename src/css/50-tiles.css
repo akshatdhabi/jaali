@@ -1,5 +1,5 @@
 /* Tiles.
-   .j-hub   a grid of live tiles for dashboards: 8px gaps, 12px corners, one accent tile per hub.
+   .j-hub   a grid of live tiles for dashboards: 8px gaps, 12px corners, one tile with an accent number, one pop tile.
    .j-card  a larger content tile with a name, a tagline and an animated line motif. */
 
 /* ---------- hub of live tiles ---------- */
@@ -24,8 +24,8 @@
 }
 .j-face--back { transform: rotateX(180deg); background: var(--j-tile-back); }
 .j-face--feed { justify-content: flex-start; }
-.j-live.is-accent .j-face { background: var(--j-accent); color: var(--j-accent-ink); }
-.j-live.is-accent .j-face .j-tl { color: var(--j-accent-ink); opacity: .8; }
+/* the accent marks a number, never fills a tile */
+.j-live.is-accent .j-face .j-tn1 { color: var(--j-accent); }
 
 .j-tl { font-size: 13.5px; font-weight: 450; color: var(--j-muted); position: relative; z-index: 1; }
 .j-tn1 { font-weight: 240; font-size: clamp(44px, 4.6vw, 72px); line-height: .9; letter-spacing: -.055em; font-variant-numeric: tabular-nums; position: relative; z-index: 1; }
@@ -89,10 +89,13 @@
 .j-motif { width: clamp(96px, 10vw, 140px); height: auto; flex: 0 0 auto; overflow: visible; transition: filter .5s var(--j-ease); }
 .j-motif * { fill: none; stroke: var(--j-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .j-motif .j-dot { fill: var(--j-accent); stroke: none; }
-.j-motif .j-spin { transform-origin: 50% 50%; transform-box: view-box; animation: j-spin 40s linear infinite; }
-.j-motif .j-spin.r { animation-direction: reverse; animation-duration: 60s; }
-.j-motif .j-breathe { animation: j-breathe 4.5s ease-in-out infinite; transform-origin: 50% 50%; transform-box: view-box; }
-.j-motif .j-drawloop { stroke-dasharray: 1; animation: j-drawloop 7s var(--j-ease) infinite; }
+/* the line figures rest, and move only while you point at the card */
+.j-motif .j-spin, .j-motif .j-breathe { transform-origin: 50% 50%; transform-box: view-box; }
+.j-motif .j-drawloop { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.j-card:hover .j-motif .j-spin, .j-card:focus-visible .j-motif .j-spin { animation: j-spin 40s linear infinite; }
+.j-card:hover .j-motif .j-spin.r, .j-card:focus-visible .j-motif .j-spin.r { animation-direction: reverse; animation-duration: 60s; }
+.j-card:hover .j-motif .j-breathe, .j-card:focus-visible .j-motif .j-breathe { animation: j-breathe 4.5s ease-in-out infinite; }
+.j-card:hover .j-motif .j-drawloop, .j-card:focus-visible .j-motif .j-drawloop { animation: j-drawloop 7s var(--j-ease) infinite; }
 
 @media (max-width: 760px) {
   .j-card--wide { grid-column: auto; }

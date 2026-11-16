@@ -118,7 +118,7 @@ export function jaaliPattern(cv, { pattern = 'ogee' } = {}) {
   const onMove = (e) => { px = e.clientX; py = e.clientY; nearT = 1; idleAt = performance.now() + 1800; kick(); };
   const onResize = () => { size(); kick(); };
   const mo = new MutationObserver(kick);
-  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-mode', 'data-tier'] });
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "data-mode"] });
   addEventListener('pointermove', onMove, { passive: true });
   addEventListener('resize', onResize);
   document.addEventListener('visibilitychange', kick);
