@@ -93,6 +93,29 @@ There is no tier switch. These rules hold everywhere:
 
 `test/style.test.mjs` holds the rules as tests. The pattern comes from `jaaliPattern()` on a `div.j-pattern`. Set `data-pattern` to `ogee`, `win`, `bandhani` or `lehariya` on the element to switch it. It drifts, leans away from the pointer and lights up near it, and draws once under reduced motion.
 
+### Performance
+
+The pattern is the only thing on the page that runs by itself, so it is built to cost almost nothing.
+
+- It is drawn once. The drift is a compositor animation (a transform), so the browser moves a finished picture instead of redrawing it. It is as smooth as scrolling and runs no script.
+- The corner fade is a static layer. The pointer light is a brighter copy of the pattern seen through a round mask that follows the pointer by transform. No canvas covers the screen.
+- Lehariya is a flowing wave, so it is still drawn frame by frame on one canvas. It is the one pattern that costs more.
+- Under reduced motion nothing drifts or lights up.
+
+Measured with a 4x CPU slowdown, as main-thread milliseconds per second (1000 is fully busy). The first design redrew a full-screen canvas every frame:
+
+| case | redrawn every frame | drawn once, moved by the browser |
+|---|---|---|
+| trellis, nothing moving | 989 | 203 |
+| trellis, moving the pointer | 987 | 634 |
+| windows, moving the pointer | 967 | 727 |
+| bandhani, moving the pointer | 991 | 603 |
+| scrolling the kit page | 946 | 466 |
+
+The test browser uses software rendering, so the absolute numbers overstate a normal machine. The ratios are the useful part. A first attempt that redrew in whole-pixel steps was cheaper still and looked jagged, so it was rolled back: smoothness comes first.
+
+The docs are built to change page quickly. One minified stylesheet with the font faces folded in is the only render-blocking file. The browser is asked to pre-render the next page as you point at its link (`speculationrules`), other browsers prefetch it on hover, focus or touch, and the pages crossfade with the bar and the pattern held still (`@view-transition`, Chrome 126 and up). Nothing eases on page load, so changing page in light mode no longer flashes dark first.
+
 ### Three layers
 
 <p align="center">

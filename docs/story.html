@@ -79,6 +79,11 @@
 <p>So I redid all of it. Calm is the whole system now. Tiles are flat. There is one accent, and a second colour that only appears as a tint on the one thing that needs a person. Glass stays on what floats. Nothing moves at rest except state and the pattern behind the page.</p>
 <p>The first pattern I tried read as a fashion monogram, so I dropped it for ones from Rajasthan: the stone trellis, the windows of Hawa Mahal, bandhani dots and lehariya waves. The pattern drifts a little and leans away from the pointer. The old loud themes are gone. The soft ones took their names.</p>
 
+<h3>speed</h3>
+<p>Some pages made my browser feel slow. I measured it and the pattern was the cost: it redrew a full-screen canvas every frame. My first fix redrew it less often. It was cheaper and it looked jagged and unfinished, so I rolled it back.</p>
+<p>The second fix draws the pattern once and lets the browser move it, the way it moves a page when you scroll. You said that one was perfect. Idle cost fell to about a fifth, and nothing runs in script while the pattern drifts.</p>
+<p>Two more things I noticed by using it. Going to another page in light mode flashed dark first, because the page eased its background on load and the browser painted its default dark canvas before the styles arrived. And every click on a docs page was a pause followed by the whole page at once. Now one small stylesheet blocks the first paint, the next page is pre-rendered or prefetched as you point at its link, and the pages crossfade with the bar and the pattern held still.</p>
+
 <h3>known gaps</h3>
 <p>Some colour pairs in light mode fall below WCAG contrast. They are listed in the README with suggested fixes. I left the colours as I picked them and added a test that fails if a new gap appears.</p>
 
