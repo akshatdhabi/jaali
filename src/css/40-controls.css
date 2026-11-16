@@ -39,8 +39,8 @@
 .j-status--held::before { background: var(--j-accent); }
 .j-status--held { color: var(--j-accent); }
 .j-status--run::before { border: 1.5px solid var(--j-accent); animation: j-pulse 1.2s ease-in-out infinite; }
-.j-status--fail::before { border: 1.5px solid var(--j-muted); }
-.j-status--fail { color: var(--j-muted); }
+.j-status--fail::before { background: var(--j-pop); }
+.j-status--fail { color: var(--j-ink); }
 
 /* ---- toggle ---- */
 .j-toggle { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; }
@@ -85,3 +85,17 @@
 .j-pivot__strip button.ghost { opacity: 0; pointer-events: none; }
 .j-pivot--sm .j-pivot__strip button { font-size: clamp(20px, 2vw, 26px); }
 .j-pivot--flush { margin-bottom: 0; }
+
+/* a wrapping row of pill choices; aria-selected marks the one in use */
+.j-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.j-chips button {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 16px; border-radius: 999px; border: 0;
+  font: inherit; font-size: 14.5px; font-weight: 450; color: var(--j-muted); cursor: pointer;
+  background: color-mix(in srgb, var(--j-ink) 8%, transparent);
+  transition: color .3s var(--j-ease), box-shadow .3s var(--j-ease), background .3s var(--j-ease);
+}
+.j-chips button:hover { color: var(--j-ink); }
+.j-chips button[aria-selected="true"] {
+  color: var(--j-ink); background: color-mix(in srgb, var(--j-ink) 11%, transparent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--j-accent) 75%, transparent);
+}

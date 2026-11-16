@@ -9,6 +9,8 @@
 }
 
 html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
+/* the page canvas takes the ground colour as soon as the styles arrive, so there is no default-colour flash between pages */
+html:has(> body.jaali) { background: var(--j-ground); }
 
 .jaali {
   margin: 0;
@@ -18,7 +20,6 @@ html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  transition: background .5s var(--j-ease), color .5s var(--j-ease);
 }
 .jaali *, .jaali *::before, .jaali *::after { box-sizing: border-box; }
 /* paints the notch area in the ground colour on phones */

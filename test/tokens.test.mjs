@@ -29,27 +29,42 @@ test('contrast: black on white is 21, same colour is 1', () => {
   assert.ok(Math.abs(contrast('#336699', '#336699') - 1) < 1e-9);
 });
 
-test('eighteen themes ship, rani is the default', () => {
-  assert.deepEqual(names.slice().sort(), ['amer', 'cobalt', 'ember', 'gulabi', 'gulal', 'magenta', 'makrana', 'mehendi', 'neel', 'nilam', 'rani', 'sanjh', 'soft-amer', 'soft-calm', 'soft-makrana', 'soft-neel', 'soft-rani', 'soft-sanjh']);
+test('seven themes ship, rani is the default', () => {
+  assert.deepEqual(names.slice().sort(), ['amer', 'calm', 'gulabi', 'makrana', 'neel', 'rani', 'sanjh']);
   assert.equal(src.default, 'rani');
 });
 
-const THREE = ['rani', 'gulal', 'nilam', 'mehendi'];
+test('every theme is pinned, so what is written here is what ships', () => {
+  for (const name of names) assert.equal(src.themes[name].pinned, true, `${name} is pinned`);
+});
 
-test('three-colour themes: base, primary and pop are three distinct colours', () => {
-  for (const name of THREE) {
+const CALM = names.filter((n) => n !== 'gulabi');
+
+test('calm themes have a pop of their own, a different colour from the accent', () => {
+  for (const name of CALM) {
     for (const mode of ['dark', 'light']) {
       const m = resolveTheme(src.themes[name], mode);
       assert.notEqual(m.pop.toLowerCase(), m.accent.toLowerCase(), `${name} ${mode}: pop must differ from accent`);
-      const d = Math.abs(hue(m.pop) - hue(m.accent));
-      assert.ok(Math.min(d, 360 - d) >= 45, `${name} ${mode}: pop and accent hues are only ${Math.min(d, 360 - d).toFixed(0)} degrees apart`);
     }
   }
 });
 
-test('three-colour themes pass every audit check with no known gaps', () => {
-  const fails = audit(resolveAll(src)).filter((f) => THREE.includes(f.theme));
+test('calm themes pass every audit check with no known gaps', () => {
+  const fails = audit(resolveAll(src)).filter((f) => CALM.includes(f.theme));
   assert.deepEqual(fails.map((f) => f.key), []);
+});
+
+test('no dark accent is loud: saturation stays under 0.6', () => {
+  const sat = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+    return mx === 0 ? 0 : (mx - mn) / mx;
+  };
+  for (const name of names) {
+    const m = resolveTheme(src.themes[name], 'dark');
+    assert.ok(sat(m.accent) < 0.6, `${name} accent saturation ${sat(m.accent).toFixed(2)}`);
+    assert.ok(sat(m.pop) < 0.6, `${name} pop saturation ${sat(m.pop).toFixed(2)}`);
+  }
 });
 
 test('themes without their own pop reuse the accent', () => {

@@ -2,6 +2,61 @@
 
 All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/).
 
+## 1.0.0
+
+Calm becomes the whole system. A breaking release. Not published to npm.
+
+The ops screens had grown busy: five fill treatments on one screen, two equally loud colours, tiles over moving shapes, 33 animations at rest. This release removes the loud parts instead of hiding them behind a switch.
+
+**Changed**
+
+- Seven themes. `rani`, `neel`, `amer`, `makrana`, `sanjh` and `calm` take the plain names with the calm palettes. `gulabi` stays pinned. `rani` is still the default, and now it is dusty rose and warm amber. All themes are pinned. The contrast audit has 3 known gaps left, all gulabi `faded`.
+- `.is-pop` is a tint (a coloured number, a thin edge, a 15% fill). `.is-slab` brings back the solid fill.
+- `.is-accent` colours a number and never fills a tile.
+- A failed status (`.j-status--fail`) takes the pop dot.
+- `liveTiles()` flips on tap only. Pass `{ interval }` for automatic flips.
+- Card line figures (`.j-motif`) move only while you point at the card.
+- `glow()`: the card light trails the pointer.
+- `mount()` starts the pattern for `.j-pattern` and no longer starts scroll velocity. Call `velocity()` yourself if you use it.
+
+**Performance**
+
+A profile showed the pattern was the main cost: with it visible the main thread was about 99% busy at a 4x CPU slowdown, mostly the browser compositing a full-screen canvas redrawn every frame. The pattern is now drawn once and the browser moves it:
+
+- the drift is a compositor animation (a transform), so it is as smooth as scrolling and costs no script
+- the corner fade is a static layer, and the pointer light is a brighter copy of the pattern seen through a round mask that follows the pointer by transform
+- no canvas covers the screen. Lehariya flows as a wave, so it still draws frame by frame
+- `jaaliPattern()` now takes a `div.j-pattern` and fills it. The module no longer creates paths at import, so it can be imported on a server
+
+At 4x CPU slowdown, main-thread milliseconds per second (1000 is fully busy): trellis idle 989 to 203 with no script per frame, pointer over trellis 987 to 634, windows 967 to 727, bandhani 991 to 603, scrolling the kit 946 to 466.
+
+**Fixed**
+
+- Changing page felt slow: a click, a pause, then the whole page at once. The docs now link one minified stylesheet with the fonts folded in (one render-blocking request instead of two, 72 KB down to 58 KB before compression), pre-render the next page as you point at its link, prefetch it in browsers without speculation rules, and crossfade between pages with the bar and the pattern held still.
+- Going to another page in light mode flashed dark first, then faded to light. The page and the bar eased their background on load, and the browser painted its default dark canvas before the styles arrived. Nothing eases on load now. A mode change by hand still eases, through `j-reskin`. `setMode()` sets `color-scheme` on the root, and the docs set it in a script ahead of the stylesheets.
+
+**Added**
+
+- `jaaliPattern(canvas, { pattern })` and `PATTERNS`: `ogee` (stone trellis), `win` (Hawa Mahal windows), `bandhani` (tie-dye dots), `lehariya` (turban waves). Switch by setting `data-pattern` on the element.
+- `.j-chips`: a wrapping row of pill choices.
+- `test/style.test.mjs`: the calm rules as tests, including the motion rule (at rest only state indicators move; decoration moves on hover).
+
+**Removed**
+
+- Glass tiles (`.is-glass`), the stage (`.j-stage`, `.j-staged`, `stage()`), the lattice field (`jaaliField()`, `.j-field-canvas`), the lattice band (`.j-band`) and `.j-lattice-fill`.
+- Six themes: `gulal`, `nilam`, `mehendi`, `magenta`, `ember` and `cobalt`. `rani`, `neel`, `amer`, `makrana` and `sanjh` keep their names with new, calmer values.
+
+**Migrating from 0.x**
+
+| if you used | now |
+|---|---|
+| `jaaliField(canvas)` and `.j-field-canvas` | `<div class="j-pattern" data-pattern="ogee">`, started by `mount()` |
+| `.is-glass` tiles and `stage()` | flat `.j-live` tiles. Glass stays on bars, pills, menus, sheets and toasts |
+| a solid `.is-pop` or `.is-accent` tile | `.is-pop` is a tint. Add `.is-slab` for the solid fill. `.is-accent` colours a number |
+| `data-tier="tool"` (0.5.0) | nothing to set. It is the default |
+| a removed theme name | `setTheme()` throws for an unknown name. Pick one of the seven |
+| `mount()` starting `velocity()` | call `velocity()` yourself |
+
 ## 0.5.0
 
 Calm: a quieter tier for tools. Not published to npm.

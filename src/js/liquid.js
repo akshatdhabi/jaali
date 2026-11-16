@@ -100,25 +100,12 @@ export function pour(tile, render) {
 }
 addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) open.api.close(); });
 
-const ARCH = 'M8 300V132C8 76 46 40 80 6C114 40 152 76 152 132V300Z';
-const STAR = 'M0-48L11-27L34-34L27-11L48 0L27 11L34 34L11 27L0 48L-11 27L-34 34L-27 11L-48 0L-27-11L-34-34L-11-27Z';
-const ROSE = Array.from({ length: 8 }, (_, k) => `<path transform="rotate(${k * 45})" d="M0 0C-9-9-9-30 0-46C9-30 9-9 0 0Z"/>`).join('') + '<circle r="10"/>';
-
-/** Fill a .j-stage with the four drifting jaali shapes. */
-export function stage(el) {
-  el.setAttribute('aria-hidden', 'true');
-  el.innerHTML =
-    `<svg class="s1" viewBox="0 0 160 300"><path d="${ARCH}"/></svg>` +
-    `<svg class="s2" viewBox="-50 -50 100 100"><path d="${STAR}"/></svg>` +
-    `<svg class="s3" viewBox="-50 -50 100 100">${ROSE}</svg>` +
-    `<svg class="s4" viewBox="0 0 160 300"><path d="${ARCH}"/></svg>`;
-}
 
 /** A soft highlight follows the mouse across glass tiles. Touch keeps the resting sheen. Returns a stop function. */
 export function sheen(root = document) {
   const on = (e) => {
     if (e.pointerType !== 'mouse' || !e.target.closest) return;
-    const f = e.target.closest('.is-glass .j-face, .j-glass');
+    const f = e.target.closest('.j-glass');
     if (!f || !root.contains(f)) return;
     const r = f.getBoundingClientRect();
     f.style.setProperty('--mx', e.clientX - r.left + 'px');

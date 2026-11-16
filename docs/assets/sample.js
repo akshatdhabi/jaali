@@ -56,19 +56,18 @@
   const rt = () => ROWS.map((r, i) => `<i class="${r[2] > 60 ? 'o' : ''}" style="left:${(r[2] / 300 * 100).toFixed(1)}%;height:${14 + ((i * 7) % 4) * 6}px"></i>`).join('');
   const face = (cls, body) => `<div class="j-face ${cls}">${body}</div>`;
   const tile = (cls, front, back = '') => `<div class="j-live j-glow ${cls}" ${back ? 'data-j-live' : ''}><div class="j-live__in">${front}${back}</div></div>`;
-  $('#hubMount').innerHTML = `<div class="j-stage"></div><div class="j-hub" id="hub" data-j-in>
+  $('#hubMount').innerHTML = `<div class="j-hub" id="hub" data-j-in>
     ${tile('is-big', face('', `<span class="j-tn1">312</span><div><div class="j-ticks">${ticks()}</div><span class="j-tl" style="display:block;margin-top:10px">jobs today, one tick each</span></div>`), face('j-face--back', `<span class="j-tw">271 done, 38 held, 3 failed</span><span class="j-tl">since midnight</span>`))}
-    ${tile('is-wide is-glass', face('', `<span class="j-tn1">1.8<small>s</small></span><span class="j-tl">median run time</span>`), face('j-face--back', `<span class="j-tl">example run times on a 0 to 300s scale. The accent line is the 60s budget</span><div class="j-trt"><span class="ax"></span><span class="g"></span>${rt()}</div>`))}
+    ${tile('is-wide', face('', `<span class="j-tn1">1.8<small>s</small></span><span class="j-tl">median run time</span>`), face('j-face--back', `<span class="j-tl">example run times on a 0 to 300s scale. The accent line is the 60s budget</span><div class="j-trt"><span class="ax"></span><span class="g"></span>${rt()}</div>`))}
     ${tile('is-accent', face('', `<span class="j-tn1">6</span><span class="j-tl">retrying</span>`))}
     ${tile('is-pop', face('', `<span class="j-tn1">3</span><span class="j-tl">failed</span>`), face('j-face--back', `<span class="j-tn1">2</span><span class="j-tl">were timeouts</span>`))}
     ${tile('is-big', face('j-face--feed', `<span class="j-tl">recent jobs</span><div class="j-feed" id="feed"></div>`))}
     ${tile('is-wide', face('', `<div class="j-lattice-fill"></div><span class="j-tw">Lattice is syncing the <span class="j-flip" data-words="nightly build|billing export|cache warm-up">nightly build</span><span class="j-typing"><i></i><i></i><i></i></span></span><span class="j-tl">scheduler live</span>`))}
-    ${tile('is-wide is-glass', face('', `<span class="j-tn1">24</span><span class="j-tl">workers across 4 regions</span>`), face('j-face--back', `<span class="j-tw" id="famw">builds</span><span class="j-tl">queues</span>`))}
-    ${tile('is-glass" data-pour="done', face('', `<span class="j-tn1">271</span><span class="j-tl">done · tap</span>`))}
+    ${tile('is-wide', face('', `<span class="j-tn1">24</span><span class="j-tl">workers across 4 regions</span>`), face('j-face--back', `<span class="j-tw" id="famw">builds</span><span class="j-tl">queues</span>`))}
+    ${tile('" data-pour="done', face('', `<span class="j-tn1">271</span><span class="j-tl">done · tap</span>`))}
     ${tile('', face('', `<span class="j-tn1">0<small>/3</small></span><span class="j-tl">open incidents</span>`), face('j-face--back', `<span class="j-tw" style="font-size:17px">none this week</span><span class="j-tl">status</span>`))}
   </div>`;
   const hub = $('#hub');
-  J.stage($('.j-stage', $('#hubMount')));
   J.sheen();
   const doneTile = $('[data-pour="done"]', hub);
   doneTile.tabIndex = 0; doneTile.setAttribute('role', 'button');
@@ -110,7 +109,6 @@
 
   /* ---------- chrome and page-wide behaviour ---------- */
   J.mount();
-  J.jaaliField($('#field'));
   J.liveTiles(hub);
   $$('[data-count]').forEach((el) => J.countUp(el));
   J.themePicker($('#skinRow'), { toggle: $('#skinBtn'), panel: $('#skins') });

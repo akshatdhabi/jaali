@@ -1,7 +1,7 @@
 /* Three layers.
    ground : flat. The page and the lattice.
    tile   : lifted colour, edge highlight, soft shadow. Content lives here.
-   raised : glass. Its own lighter colour at 62%, a 24px backdrop blur, a thin pop edge, a deep shadow.
+   raised : glass. Its own lighter colour at 40%, a 28px backdrop blur, a thin pop edge, a deep shadow.
             Anything that pops in or floats: menus, popovers, sheets, toasts, bars. Never on reading content. */
 
 .j-tile {

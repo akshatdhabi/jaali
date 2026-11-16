@@ -19,9 +19,20 @@ export const getTheme = () => root().dataset.theme || DEFAULT_THEME;
 export const getMode = () =>
   root().dataset.mode || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
 
+// Colours ease for 0.7s while a theme or mode is being changed by hand. Never on page load.
+function reskin() {
+  if (reduced()) return;
+  const el = root();
+  el.classList.add('j-reskin');
+  clearTimeout(reskin._t);
+  reskin._t = setTimeout(() => el.classList.remove('j-reskin'), 700);
+}
+
 export function setMode(mode, { persist = true } = {}) {
   if (mode !== 'dark' && mode !== 'light') throw new RangeError(`mode must be "dark" or "light", got "${mode}"`);
+  reskin();
   root().dataset.mode = mode;
+  root().style.colorScheme = mode;
   if (persist) write(KEY_MODE, mode);
   notify();
 }
@@ -30,12 +41,7 @@ export const toggleMode = () => setMode(getMode() === 'light' ? 'dark' : 'light'
 
 export function setTheme(name, { quiet = false, persist = true } = {}) {
   if (!THEMES[name]) throw new RangeError(`unknown theme "${name}". Available: ${Object.keys(THEMES).join(', ')}`);
-  if (!quiet && !reduced()) {
-    const el = root();
-    el.classList.add('j-reskin');
-    clearTimeout(setTheme._t);
-    setTheme._t = setTimeout(() => el.classList.remove('j-reskin'), 700);
-  }
+  if (!quiet) reskin();
   root().dataset.theme = name;
   if (persist) write(KEY_THEME, name);
   notify();

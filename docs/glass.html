@@ -5,18 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
 <title>jaali · glass + liquid</title>
-<meta name="description" content="jaali glass + liquid: a material layer for glass on the function layer, liquid motion that answers an action, and three-colour themes.">
-<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/jaali.css">
-<link rel="stylesheet" href="assets/docs.css">
+<meta name="description" content="jaali glass + liquid: a material layer for glass on the function layer, liquid motion that answers an action.">
 <script>
   try {
     var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
     if (t) document.documentElement.dataset.theme = t;
-    if (m) document.documentElement.dataset.mode = m;
+    if (m) { document.documentElement.dataset.mode = m; document.documentElement.style.colorScheme = m; }
   } catch (e) {}
 </script>
+<script type="speculationrules">
+  {"prerender":[{"where":{"selector_matches":"nav a[href$='.html'], .home-hub a"},"eagerness":"moderate"}]}
+</script>
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/jaali.min.css">
+<link rel="stylesheet" href="assets/docs.css">
 <style>
   /* page layout only; every component comes from jaali.css */
   .gl-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--j-line); }
@@ -74,12 +76,12 @@
 </style>
 </head>
 <body class="jaali">
-<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+<div class="j-pattern" id="field" data-pattern="ogee" aria-hidden="true"></div>
 
 <header class="j-top j-wrap">
   <div class="j-inner">
     <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
-    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="glass.html" class="on">glass</a><a href="flow.html">flow</a><a href="calm.html">calm</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="glass.html" class="on">glass</a><a href="flow.html">flow</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
     <div class="j-actions">
       <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
       <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
@@ -94,26 +96,25 @@
 <!-- cover: the add-on, made of its own tiles -->
 <section style="padding-top:clamp(36px,6vw,80px)">
 <div class="j-wrap"><div class="j-inner">
-  <div class="gl-top"><p class="j-cap">jaali · v0.3 · glass + liquid</p><p class="j-cap">three layers · three colours · eight liquid parts</p></div>
+  <div class="gl-top"><p class="j-cap">jaali · glass + liquid</p><p class="j-cap">three layers · one accent · eight liquid parts</p></div>
   <h1 class="gl-h">glass <i>+</i> liquid<i>.</i></h1>
   <p class="j-lead j-halo gl-lead">A material layer for jaali. Flat tiles carry content, glass sits on what you act on, and liquid motion answers a tap, a drag or a scroll.</p>
-  <div class="j-staged gl-hub">
-    <div class="j-stage" data-stage></div>
-    <div class="j-hub" data-j-in>
+  <div class="gl-hub">
+        <div class="j-hub" data-j-in>
       <div class="j-live is-big is-accent"><div class="j-live__in"><div class="j-face">
-        <span class="j-tl">colour · 60 / 30 / 10</span>
-        <div class="gl-sw"><div><i style="background:var(--j-ground)"></i><span>base</span><b data-hex="--j-ground"></b></div><div><i style="background:var(--j-accent)"></i><span>primary</span><b data-hex="--j-accent"></b></div><div><i style="background:var(--j-pop)"></i><span>pop</span><b data-hex="--j-pop"></b></div></div>
+        <span class="j-tl">colour · one accent, one pop</span>
+        <div class="gl-sw"><div><i style="background:var(--j-ground)"></i><span>ground</span><b data-hex="--j-ground"></b></div><div><i style="background:var(--j-accent)"></i><span>accent</span><b data-hex="--j-accent"></b></div><div><i style="background:var(--j-pop)"></i><span>pop</span><b data-hex="--j-pop"></b></div></div>
         <span class="j-tl" data-theme-name></span>
       </div></div></div>
-      <div class="j-live is-big is-glass"><div class="j-live__in"><div class="j-face">
+      <div class="j-live is-big"><div class="j-live__in"><div class="j-face">
         <span class="j-tl">material · glass</span>
         <span class="j-tn1">24<small>px</small></span>
-        <div class="gl-kv"><span>fill</span><b>62%</b><span>saturate</span><b>140%</b><span>layer</span><b>function only</b></div>
+        <div class="gl-kv"><span>fill</span><b>40%</b><span>saturate</span><b>150%</b><span>layer</span><b>function only</b></div>
       </div></div></div>
       <div class="j-live is-wide"><div class="j-live__in"><div class="j-face" style="flex-direction:row;align-items:stretch"><span class="j-tl">type · Geist 100 to 700</span><span class="gl-aa">Aa<i>.</i></span></div></div></div>
       <div class="j-live is-pop"><div class="j-live__in"><div class="j-face"><span class="j-tl">layers</span><span class="j-tn1">3</span></div></div></div>
-      <div class="j-live is-glass"><div class="j-live__in"><div class="j-face"><span class="j-tl">one easing</span><svg class="gl-ease" viewBox="0 0 120 56" aria-hidden="true"><path d="M2 54C14 4 26 4 118 2" fill="none" stroke="currentColor" stroke-width="1.4"/><circle r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M2 54C14 4 26 4 118 2" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear"/></circle></svg><span class="j-tl">.1 .9 .2 1</span></div></div></div>
-      <a class="j-live is-wide is-glass gl-half" href="#layers"><span class="j-live__in"><span class="j-face"><span class="j-tl">start here</span><span class="gl-go">see the layers →</span></span></span></a>
+      <div class="j-live"><div class="j-live__in"><div class="j-face"><span class="j-tl">one easing</span><svg class="gl-ease" viewBox="0 0 120 56" aria-hidden="true"><path d="M2 54C14 4 26 4 118 2" fill="none" stroke="currentColor" stroke-width="1.4"/><circle r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M2 54C14 4 26 4 118 2" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear"/></circle></svg><span class="j-tl">.1 .9 .2 1</span></div></div></div>
+      <a class="j-live is-wide gl-half" href="#layers"><span class="j-live__in"><span class="j-face"><span class="j-tl">start here</span><span class="gl-go">see the layers →</span></span></span></a>
       <a class="j-live is-wide gl-half" href="#motion"><span class="j-live__in"><span class="j-face"><span class="j-tl">or play</span><span class="gl-go">try the motion →</span></span></span></a>
     </div>
   </div>
@@ -126,26 +127,25 @@
 <div class="j-wrap"><div class="j-inner" data-j-in>
   <p class="j-sub j-halo" data-j-st>Three layers, each with one job. Glass reads as glass only when content moves under it, so it stays on the layer that floats.</p>
   <div class="j-cols">
-    <div data-j-st><b>ground</b><p>The lattice and the page. Slow jaali shapes can drift behind a hub so glass has colour to bend.</p></div>
+    <div data-j-st><b>ground</b><p>The page, with a faint pattern behind it.</p></div>
     <div data-j-st style="--d:1"><b>content</b><p>Flat tiles, big type, hairlines. No blur, so text stays crisp on any screen.</p></div>
     <div data-j-st style="--d:2"><b>function</b><p>Glass on bars, pills, menus, sheets and toasts. It floats over content and never stacks on glass.</p></div>
   </div>
   <ul class="j-rules" data-j-st style="--d:3">
-    <li><b>glass goes on</b><span>Bars, tab pills, menus, sheets, toasts, and glass tiles over a stage.</span></li>
+    <li><b>glass goes on</b><span>Bars, tab pills, menus, sheets and toasts. Never a tile that holds data.</span></li>
     <li><b>flat stays on</b><span>Tiles you read, lists, text panels and page backgrounds.</span></li>
     <li><b>one layer</b><span>Glass never sits on glass. A menu opened from a bar takes over the bar's job.</span></li>
     <li><b>ink on glass</b><span>Text on glass stays ink. The pop marks state with a dot, an edge or a fill, never body text.</span></li>
-    <li><b>materialize</b><span>Glass arrives by ramping its blur from 0 to 24px while it rises, then leaves the same way.</span></li>
+    <li><b>materialize</b><span>Glass arrives by ramping its blur from 0 to 28px while it rises, then leaves the same way.</span></li>
   </ul>
 </div></div>
 </section>
 
 <!-- colour -->
 <section id="colour">
-<div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>three colours</h2></div>
+<div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>colour</h2></div>
 <div class="j-wrap"><div class="j-inner" data-j-in>
-  <p class="j-sub j-halo" data-j-st>Base holds the ground and plain tiles. The primary fills live tiles and the lattice. The pop marks only what needs you: a held dot, a flag, one tile per hub. Four themes are built this way; the other eight reuse their accent as the pop.</p>
-  <div class="gl-ratio" data-j-st><div style="flex:6;color:var(--j-muted)">base 60</div><div style="flex:3;background:var(--j-accent);color:var(--j-accent-ink)">primary 30</div><div style="flex:1;background:var(--j-pop);color:var(--j-pop-ink)">pop 10</div></div>
+  <p class="j-sub j-halo" data-j-st>One accent marks things: a number, a tick, a held dot, a link. A second colour, the pop, is a tint used once a view for the one thing that needs a person. Neither fills a tile by default. Seven themes, each with a dark and a light mode.</p>
   <div class="gl-pal" id="pal" data-j-st style="--d:1"></div>
 </div></div>
 </section>
@@ -159,7 +159,7 @@
     <div class="gl-demo" data-j-st><h3>stretch<span style="color:var(--j-accent)">.</span></h3><div class="stagebox"><div class="j-stretch" id="st" role="tablist" aria-label="Range"><i class="j-stretch__pill"></i><button role="tab" aria-selected="true">day</button><button role="tab">week</button><button role="tab">quarter</button></div></div><p class="j-cap">stretch(box). The leading edge moves in 0.36s and the trailing edge in 0.62s.</p></div>
     <div class="gl-demo" data-j-st style="--d:1"><h3>grow<span style="color:var(--j-accent)">.</span></h3><div class="stagebox"><button class="j-grow j-glass" id="gr" aria-label="New"><span class="j-grow__plus">+</span><span class="j-grow__opts"><span>new note</span><span>list</span><span>tile</span></span></button></div><p class="j-cap">grow(button). The + grows into its own row of actions with a spring.</p></div>
     <div class="gl-demo" data-j-st style="--d:2"><h3>melt<span style="color:var(--j-accent)">.</span></h3><div class="stagebox"><p class="gl-melt" aria-label="jaali in glass">jaali in <span class="j-melt" id="ml" data-words="glass|liquid|light"></span></p></div><p class="j-cap">melt(el). One word melts into the next through a threshold filter. Holds still under reduced motion.</p></div>
-    <div class="gl-demo" data-j-st style="--d:3"><h3>materialize<span style="color:var(--j-accent)">.</span></h3><div class="stagebox"><button class="j-link" id="mt">show a toast</button></div><p class="j-cap">materialize(el). Blur ramps from 0 to 24px while the toast rises.</p></div>
+    <div class="gl-demo" data-j-st style="--d:3"><h3>materialize<span style="color:var(--j-accent)">.</span></h3><div class="stagebox"><button class="j-link" id="mt">show a toast</button></div><p class="j-cap">materialize(el). Blur ramps from 0 to 28px while the toast rises.</p></div>
     <div class="gl-demo" data-j-st style="grid-column:1/-1"><h3>worm<span style="color:var(--j-accent)">.</span></h3>
       <div class="gl-car" id="car"></div><div class="j-worm" id="wm"><i></i><i></i><i></i><i></i><i></i><b></b></div>
       <p class="j-cap">worm(scroller, pager). The dot stretches to the next one as you scroll sideways, then its tail follows.</p></div>
@@ -171,17 +171,16 @@
 <section id="hub">
 <div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>hub</h2></div>
 <div class="j-wrap"><div class="j-inner" data-j-in>
-  <p class="j-sub j-halo" data-j-st>Live tiles over a stage. Glass tiles blur the shapes moving behind them. Tap one and it pours out into a sheet; close it and it pours back. Example data.</p>
-  <div class="j-staged" style="margin-top:26px">
-    <div class="j-stage" data-stage></div>
-    <div class="j-hub" data-j-in>
+  <p class="j-sub j-halo" data-j-st>Live tiles are flat. Tap one and it pours out into a glass sheet; close it and it pours back. Example data.</p>
+  <div style="margin-top:26px">
+        <div class="j-hub" data-j-in>
       <div class="j-live is-big is-accent"><div class="j-live__in"><div class="j-face"><span class="j-tl">notes sent · 8 weeks</span><span class="j-tn1">212</span><span class="j-tl">+18 on last week</span></div></div></div>
       <div class="j-live is-pop"><div class="j-live__in"><div class="j-face"><span class="j-tl">needs you</span><span class="j-tn1">3</span></div></div></div>
-      <div class="j-live is-glass" data-pour="time"><div class="j-live__in"><div class="j-face"><span class="j-tl">runtime · tap</span><span class="j-tn1">4.2<small>s</small></span></div></div></div>
-      <div class="j-live is-wide is-glass" data-pour="week"><div class="j-live__in"><div class="j-face"><span class="j-tl">this week · tap</span><div><div class="gl-row"><span>weekly note</span><span class="gl-dot h">held</span></div><div class="gl-row"><span>release notes</span><span class="gl-dot">sent</span></div><div class="gl-row"><span>board note</span><span class="gl-dot h">held</span></div></div></div></div></div>
-      <div class="j-live is-wide is-glass" data-pour="flag"><div class="j-live__in"><div class="j-face"><span class="j-tl">weekly note · 1 flag · tap</span><span style="font-size:18px;line-height:1.45;position:relative;z-index:1">We promised the export fix <span class="gl-mark">by Friday</span>.</span></div></div></div>
+      <div class="j-live" data-pour="time"><div class="j-live__in"><div class="j-face"><span class="j-tl">runtime · tap</span><span class="j-tn1">4.2<small>s</small></span></div></div></div>
+      <div class="j-live is-wide" data-pour="week"><div class="j-live__in"><div class="j-face"><span class="j-tl">this week · tap</span><div><div class="gl-row"><span>weekly note</span><span class="gl-dot h">held</span></div><div class="gl-row"><span>release notes</span><span class="gl-dot">sent</span></div><div class="gl-row"><span>board note</span><span class="gl-dot h">held</span></div></div></div></div></div>
+      <div class="j-live is-wide" data-pour="flag"><div class="j-live__in"><div class="j-face"><span class="j-tl">weekly note · 1 flag · tap</span><span style="font-size:18px;line-height:1.45;position:relative;z-index:1">We promised the export fix <span class="gl-mark">by Friday</span>.</span></div></div></div>
       <div class="j-live"><div class="j-live__in"><div class="j-face"><span class="j-tl">held</span><span class="j-tn1">6</span></div></div></div>
-      <div class="j-live is-glass" data-pour="glass"><div class="j-live__in"><div class="j-face"><span class="j-tl">glass · tap</span><span class="j-tw">bends the stage</span></div></div></div>
+      <div class="j-live" data-pour="glass"><div class="j-live__in"><div class="j-face"><span class="j-tl">glass · tap</span><span class="j-tw">a glass sheet</span></div></div></div>
     </div>
   </div>
 </div></div>
@@ -192,21 +191,18 @@
 <div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>use it</h2></div>
 <div class="j-wrap"><div class="j-inner" data-j-in>
   <p class="j-sub j-halo" data-j-st>Glass and liquid ship inside jaali.css and jaali.js. No extra files.</p>
-<pre class="code" data-j-st style="--d:1;margin-top:26px"><span class="c">&lt;!-- a hub with glass tiles over a stage --&gt;</span>
-&lt;div class="j-staged"&gt;
-  &lt;div class="j-stage"&gt;&lt;/div&gt;
-  &lt;div class="j-hub"&gt;
-    &lt;div class="j-live is-glass"&gt;...&lt;/div&gt;   <span class="c">&lt;!-- or is-pop, is-accent --&gt;</span>
-  &lt;/div&gt;
+<pre class="code" data-j-st style="--d:1;margin-top:26px"><span class="c">&lt;!-- flat live tiles. One pop tile at most, and it is a tint --&gt;</span>
+&lt;div class="j-hub"&gt;
+  &lt;div class="j-live"&gt;...&lt;/div&gt;
+  &lt;div class="j-live is-pop"&gt;...&lt;/div&gt;   <span class="c">&lt;!-- add is-slab for the solid fill --&gt;</span>
 &lt;/div&gt;
 
-<span class="k">import</span> { stage, sheen, stretch, grow, pour, worm, melt, materialize } <span class="k">from</span> './jaali/jaali.js';
-stage(document.querySelector('.j-stage'));
+<span class="k">import</span> { sheen, stretch, grow, pour, worm, melt, materialize } <span class="k">from</span> './jaali/jaali.js';
 sheen();
 pour(tile, (body) =&gt; { body.innerHTML = '&lt;h4&gt;details&lt;/h4&gt;'; });</pre>
   <ul class="j-rules" data-j-st style="--d:2">
     <li><b>tokens</b><span>--j-pop, --j-pop-ink, --j-glass-blur, --j-glass-fill, --j-glass-saturate, --j-spring</span></li>
-    <li><b>classes</b><span>.j-glass, .j-mat, .j-stage, .j-staged, .is-glass, .is-pop, .j-stretch, .j-grow, .j-pour, .j-worm, .j-melt</span></li>
+    <li><b>classes</b><span>.j-glass, .j-mat, .is-pop, .is-slab, .j-stretch, .j-grow, .j-pour, .j-worm, .j-melt</span></li>
     <li><b>support</b><span>Needs color-mix and backdrop-filter (Chrome 111, Safari 16.2, Firefox 113). Without backdrop-filter, glass shows as a tinted tile. Every motion stops under reduced motion.</span></li>
   </ul>
 </div></div>
@@ -230,7 +226,7 @@ pour(tile, (body) =&gt; { body.innerHTML = '&lt;h4&gt;details&lt;/h4&gt;'; });</
     $$('[data-theme-name]').forEach(function (s) { s.textContent = 'theme · ' + J.getTheme(); });
     $$('#pal button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === J.getTheme())); });
   }
-  var THREE = ['rani', 'gulal', 'nilam', 'mehendi'];
+  var THREE = J.themes().map(function (t) { return t.name; });
   function swatches() { $('#pal').innerHTML = THREE.map(function (n) {
     var t = J.THEMES[n], d = t[J.getMode() === 'light' ? 'light' : 'dark'];
     return '<button data-t="' + n + '"><span class="s"><i style="flex:6;background:' + d.ground + '"></i><i style="flex:3;background:' + d.accent + '"></i><i style="flex:1;background:' + d.pop + '"></i></span><b>' + n + '</b><span>' + t.label + '</span></button>';
@@ -255,7 +251,7 @@ pour(tile, (body) =&gt; { body.innerHTML = '&lt;h4&gt;details&lt;/h4&gt;'; });</
     time: ['4.2s', 'Median runtime this week, against a 5s target.', ['set target', 'history']],
     week: ['this week', 'Two notes are held for a person, one went out clean.', ['weekly note · held', 'release notes · sent', 'board note · held']],
     flag: ['1 flag', '"By Friday" is a date promised to a customer. The note waits until someone confirms the date.', ['confirm date', 'edit', 'send anyway']],
-    glass: ['glass', 'This sheet grew out of the tile you tapped. It blurs the shapes behind it and pours back when you close it.', ['close to pour back']]
+    glass: ['glass', 'This sheet grew out of the tile you tapped. It blurs the page behind it and pours back when you close it.', ['close to pour back']]
   };
   $$('[data-pour]').forEach(function (t) {
     t.tabIndex = 0; t.setAttribute('role', 'button');

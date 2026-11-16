@@ -6,17 +6,19 @@
 <meta name="color-scheme" content="dark light">
 <title>flow · jaali</title>
 <meta name="description" content="Motion that answers the reader: scroll velocity and focus groups.">
-<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/jaali.css">
-<link rel="stylesheet" href="assets/docs.css">
 <script>
   try {
     var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
     if (t) document.documentElement.dataset.theme = t;
-    if (m) document.documentElement.dataset.mode = m;
+    if (m) { document.documentElement.dataset.mode = m; document.documentElement.style.colorScheme = m; }
   } catch (e) {}
 </script>
+<script type="speculationrules">
+  {"prerender":[{"where":{"selector_matches":"nav a[href$='.html'], .home-hub a"},"eagerness":"moderate"}]}
+</script>
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/jaali.min.css">
+<link rel="stylesheet" href="assets/docs.css">
 <style>
   .vel { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
   .vel b { font-weight: 200; font-size: clamp(64px, 8vw, 110px); letter-spacing: -.06em; line-height: .9; font-variant-numeric: tabular-nums; }
@@ -56,12 +58,12 @@
 </style>
 </head>
 <body class="jaali">
-<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+<div class="j-pattern" id="field" data-pattern="ogee" aria-hidden="true"></div>
 
 <header class="j-top j-wrap">
   <div class="j-inner">
     <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
-    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="glass.html">glass</a><a href="flow.html" class="on">flow</a><a href="calm.html">calm</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="glass.html">glass</a><a href="flow.html" class="on">flow</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
     <div class="j-actions">
       <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
       <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
@@ -79,10 +81,10 @@
 
 <div class="j-wrap"><div class="j-inner" style="margin-top:56px">
 
-<div class="kit-sec"><h3>velocity<small>Scroll speed as a shared input, 0 at rest and 1 on a fast flick. <code>mount()</code> starts it.</small></h3>
+<div class="kit-sec"><h3>velocity<small>Scroll speed as a shared input, 0 at rest and 1 on a fast flick. Call <code>velocity()</code> to start it.</small></h3>
 <div>
   <div class="vel"><b id="velNum">0.00</b><div class="bar"><i></i><s id="velPeak"></s></div></div>
-  <p class="j-cap" style="margin-top:14px">Flick the page. The lattice behind it drifts up to 7× faster and glows brighter, then settles. Under reduced motion it stays at 0.</p>
+  <p class="j-cap" style="margin-top:14px">Flick the page. The meter follows your scroll speed, then settles. Under reduced motion it stays at 0.</p>
   <pre class="code" style="margin-top:22px"><span class="c">// js</span>
 <span class="k">const</span> stop = velocity();              <span class="c">// shared, safe to call twice</span>
 onVelocity((v) => meter.style.width = v * 100 + '%');
@@ -145,6 +147,7 @@ focusGroup(el, { tip: true }); <span class="c">// and names the picked item</spa
   $('#ros').innerHTML = J.motif('rosette');
 
   /* velocity readout */
+  J.velocity();
   var num = $('#velNum'), peak = $('#velPeak'), bar = peak.parentNode, hi = 0;
   J.onVelocity(function (v) {
     num.textContent = v.toFixed(2);

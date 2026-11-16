@@ -1,128 +1,38 @@
 {
-  "_note": "Source of truth for colour. 'gulabi' is pinned: its values are used exactly as written. Every other theme lists authored values that scripts/build.mjs resolves with the rules in src/tokens/derive.mjs. 'pop' is the third colour (the 10%): themes that leave it out reuse their accent.",
+  "_note": "Source of truth for colour. Every theme is pinned: its values are used exactly as written, so each one can be read here and checked by the contrast audit. 'pop' is the second colour: a tint for the one thing that needs a person, never a fill and never body text. Themes that leave it out reuse their accent.",
   "default": "rani",
   "themes": {
     "rani": {
-      "label": "black, rani pink and orange",
+      "label": "dusty rose and warm amber",
+      "pinned": true,
       "dark": {
-        "ground": "#0B0A0C",
-        "tile": "#1A181D",
-        "tileBack": "#222026",
-        "line": "#2C2930",
-        "lineSoft": "#1C1A1F",
-        "ink": "#F5F2F4",
-        "muted": "#ABA4AA",
-        "faded": "#7A737A",
-        "accent": "#FF3FA4",
-        "accentInk": "#0B0A0C",
-        "pop": "#FF8A1E",
-        "popInk": "#1A0A00"
+        "ground": "#141115",
+        "tile": "#201C22",
+        "tileBack": "#29242B",
+        "raised": "#36303B",
+        "line": "#2F2A32",
+        "lineSoft": "#231F26",
+        "ink": "#E9E3E7",
+        "muted": "#A59CA3",
+        "faded": "#7A7179",
+        "accent": "#E4789F",
+        "accentInk": "#141115",
+        "pop": "#DB9461",
+        "popInk": "#1A0F08"
       },
       "light": {
-        "ground": "#F7F5F6",
-        "tile": "#EEEBED",
-        "tileBack": "#E5E2E4",
-        "line": "#E0DCDE",
-        "lineSoft": "#ECE9EB",
-        "ink": "#1A1418",
-        "muted": "#5E555B",
-        "faded": "#8A8187",
-        "accent": "#C2066F",
+        "ground": "#F5F0F1",
+        "tile": "#FFFFFF",
+        "tileBack": "#F1EAEC",
+        "raised": "#FFFFFF",
+        "line": "#E4DADD",
+        "lineSoft": "#EFE7E9",
+        "ink": "#2B2327",
+        "muted": "#6F636A",
+        "faded": "#92868C",
+        "accent": "#B04373",
         "accentInk": "#FFFFFF",
-        "pop": "#A84A00",
-        "popInk": "#FFFFFF"
-      }
-    },
-    "gulal": {
-      "label": "gulal pink and marigold",
-      "dark": {
-        "ground": "#141016",
-        "tile": "#211B24",
-        "tileBack": "#2A222D",
-        "line": "#352C38",
-        "lineSoft": "#231C26",
-        "ink": "#F5EEF0",
-        "muted": "#AFA3AA",
-        "faded": "#7D7179",
-        "accent": "#FF6A9C",
-        "accentInk": "#141016",
-        "pop": "#FFC23D",
-        "popInk": "#1C1300"
-      },
-      "light": {
-        "ground": "#F7F2F1",
-        "tile": "#EFE7E6",
-        "tileBack": "#E7DEDC",
-        "line": "#E2D7D6",
-        "lineSoft": "#EEE6E4",
-        "ink": "#2E1F27",
-        "muted": "#665860",
-        "faded": "#8E7F87",
-        "accent": "#B32E62",
-        "accentInk": "#FFFFFF",
-        "pop": "#8A5E00",
-        "popInk": "#FFFFFF"
-      }
-    },
-    "nilam": {
-      "label": "cobalt and pink",
-      "dark": {
-        "ground": "#0A0C14",
-        "tile": "#141826",
-        "tileBack": "#1B2031",
-        "line": "#262C40",
-        "lineSoft": "#171B29",
-        "ink": "#F2F4FA",
-        "muted": "#A3AAC0",
-        "faded": "#717892",
-        "accent": "#6E92FF",
-        "accentInk": "#0A0C14",
-        "pop": "#FF6FA8",
-        "popInk": "#1C0710"
-      },
-      "light": {
-        "ground": "#F3F4F8",
-        "tile": "#E8EAF2",
-        "tileBack": "#DFE2EC",
-        "line": "#DADDE8",
-        "lineSoft": "#E6E8F0",
-        "ink": "#141A2E",
-        "muted": "#545B70",
-        "faded": "#7D8499",
-        "accent": "#2342D9",
-        "accentInk": "#FFFFFF",
-        "pop": "#B8155A",
-        "popInk": "#FFFFFF"
-      }
-    },
-    "mehendi": {
-      "label": "magenta and henna lime",
-      "dark": {
-        "ground": "#0A0A0A",
-        "tile": "#181818",
-        "tileBack": "#202020",
-        "line": "#2C2C2C",
-        "lineSoft": "#1A1A1A",
-        "ink": "#F4F4F2",
-        "muted": "#A8A8A4",
-        "faded": "#777774",
-        "accent": "#F04DA6",
-        "accentInk": "#0A0A0A",
-        "pop": "#B5D334",
-        "popInk": "#121800"
-      },
-      "light": {
-        "ground": "#F4F5F1",
-        "tile": "#EAECE6",
-        "tileBack": "#E1E3DC",
-        "line": "#DCDED7",
-        "lineSoft": "#E8EAE4",
-        "ink": "#161814",
-        "muted": "#565953",
-        "faded": "#80837C",
-        "accent": "#A8126A",
-        "accentInk": "#FFFFFF",
-        "pop": "#4F7A00",
+        "pop": "#94562B",
         "popInk": "#FFFFFF"
       }
     },
@@ -157,232 +67,7 @@
       }
     },
     "neel": {
-      "label": "blue pottery",
-      "dark": {
-        "ground": "#0C1424",
-        "tile": "#141F35",
-        "tileBack": "#1A2842",
-        "line": "#24324D",
-        "lineSoft": "#18233A",
-        "ink": "#EEF3FA",
-        "muted": "#98A8C2",
-        "faded": "#5C6C88",
-        "accent": "#7FB2FF",
-        "accentInk": "#0C1424"
-      },
-      "light": {
-        "ground": "#F6F8FC",
-        "tile": "#E9EEF7",
-        "tileBack": "#DDE5F2",
-        "line": "#D8E0EE",
-        "lineSoft": "#E8EDF6",
-        "ink": "#13213D",
-        "muted": "#5E6B85",
-        "faded": "#97A3BA",
-        "accent": "#1F4FB5",
-        "accentInk": "#F6F8FC"
-      }
-    },
-    "amer": {
-      "label": "sandstone",
-      "dark": {
-        "ground": "#19130D",
-        "tile": "#241B13",
-        "tileBack": "#2D2218",
-        "line": "#3A2D20",
-        "lineSoft": "#2A2017",
-        "ink": "#F7EEE2",
-        "muted": "#B8A58E",
-        "faded": "#7A6A56",
-        "accent": "#EBA74E",
-        "accentInk": "#19130D"
-      },
-      "light": {
-        "ground": "#FBF6EE",
-        "tile": "#F2E9DA",
-        "tileBack": "#EADDC8",
-        "line": "#E6D9C4",
-        "lineSoft": "#F0E6D6",
-        "ink": "#2B1D10",
-        "muted": "#7A6650",
-        "faded": "#AE9C84",
-        "accent": "#A35F12",
-        "accentInk": "#FBF6EE"
-      }
-    },
-    "makrana": {
-      "label": "marble and emerald",
-      "dark": {
-        "ground": "#0E1613",
-        "tile": "#16211D",
-        "tileBack": "#1C2A25",
-        "line": "#26362F",
-        "lineSoft": "#1A2621",
-        "ink": "#EEF5F1",
-        "muted": "#97ABA2",
-        "faded": "#5E7068",
-        "accent": "#4FD69C",
-        "accentInk": "#0E1613"
-      },
-      "light": {
-        "ground": "#F7F8F6",
-        "tile": "#ECEFEB",
-        "tileBack": "#E1E6E0",
-        "line": "#DCE2DB",
-        "lineSoft": "#EAEEE8",
-        "ink": "#16211C",
-        "muted": "#5F6E67",
-        "faded": "#99A69F",
-        "accent": "#0E7F57",
-        "accentInk": "#F7F8F6"
-      }
-    },
-    "magenta": {
-      "label": "black and magenta",
-      "dark": {
-        "ground": "#000000",
-        "tile": "#141414",
-        "tileBack": "#1D1D1D",
-        "line": "#2A2A2A",
-        "lineSoft": "#1A1A1A",
-        "ink": "#FFFFFF",
-        "muted": "#A3A3A3",
-        "faded": "#606060",
-        "accent": "#FF2E9A",
-        "accentInk": "#000000"
-      },
-      "light": {
-        "ground": "#FFFFFF",
-        "tile": "#F2F2F2",
-        "tileBack": "#E8E8E8",
-        "line": "#E3E3E3",
-        "lineSoft": "#F0F0F0",
-        "ink": "#111111",
-        "muted": "#666666",
-        "faded": "#A3A3A3",
-        "accent": "#D3007A",
-        "accentInk": "#FFFFFF"
-      }
-    },
-    "ember": {
-      "label": "graphite and orange",
-      "dark": {
-        "ground": "#1B1B1B",
-        "tile": "#262626",
-        "tileBack": "#2F2F2F",
-        "line": "#3A3A3A",
-        "lineSoft": "#2A2A2A",
-        "ink": "#FAFAFA",
-        "muted": "#A8A8A8",
-        "faded": "#6A6A6A",
-        "accent": "#FF7A1F",
-        "accentInk": "#1B1B1B"
-      },
-      "light": {
-        "ground": "#FAFAF9",
-        "tile": "#EFEFED",
-        "tileBack": "#E5E5E2",
-        "line": "#E2E2DF",
-        "lineSoft": "#EDEDEA",
-        "ink": "#1B1B1B",
-        "muted": "#666664",
-        "faded": "#A3A3A0",
-        "accent": "#D95B00",
-        "accentInk": "#FAFAF9"
-      }
-    },
-    "cobalt": {
-      "label": "midnight and cyan",
-      "dark": {
-        "ground": "#05152D",
-        "tile": "#0B2245",
-        "tileBack": "#102B54",
-        "line": "#173463",
-        "lineSoft": "#0E2549",
-        "ink": "#EAF6FF",
-        "muted": "#8FB1CF",
-        "faded": "#527293",
-        "accent": "#38D2FF",
-        "accentInk": "#05152D"
-      },
-      "light": {
-        "ground": "#F3F9FD",
-        "tile": "#E4F0F8",
-        "tileBack": "#D6E7F3",
-        "line": "#D2E3EF",
-        "lineSoft": "#E2EEF7",
-        "ink": "#0A2240",
-        "muted": "#4F6B86",
-        "faded": "#8DA6BD",
-        "accent": "#0A7DB0",
-        "accentInk": "#F3F9FD"
-      }
-    },
-    "sanjh": {
-      "label": "dusk sky",
-      "dark": {
-        "ground": "#150E24",
-        "tile": "#22163A",
-        "tileBack": "#2B1C47",
-        "line": "#3A2752",
-        "lineSoft": "#26193F",
-        "ink": "#FFF2EC",
-        "muted": "#C6A9B9",
-        "faded": "#7E6585",
-        "accent": "#FFAE78",
-        "accentInk": "#150E24",
-        "groundImage": "linear-gradient(180deg,#150E24 0%,#2A1440 38%,#4A1C3C 72%,#5C2533 100%)"
-      },
-      "light": {
-        "ground": "#FFF6EF",
-        "tile": "#FBE9E3",
-        "tileBack": "#F4DDD9",
-        "line": "#EED7D3",
-        "lineSoft": "#F8E5DF",
-        "ink": "#2A1730",
-        "muted": "#7A6070",
-        "faded": "#B39AA6",
-        "accent": "#C2492E",
-        "accentInk": "#FFF6EF",
-        "groundImage": "linear-gradient(180deg,#FFF6EF 0%,#FCE6E4 45%,#EFE3F7 100%)"
-      }
-    },
-    "soft-rani": {
-      "label": "soft rani: dusty rose and warm amber",
-      "pinned": true,
-      "dark": {
-        "ground": "#141115",
-        "tile": "#201C22",
-        "tileBack": "#29242B",
-        "raised": "#36303B",
-        "line": "#2F2A32",
-        "lineSoft": "#231F26",
-        "ink": "#E9E3E7",
-        "muted": "#A59CA3",
-        "faded": "#7A7179",
-        "accent": "#E4789F",
-        "accentInk": "#141115",
-        "pop": "#DB9461",
-        "popInk": "#1A0F08"
-      },
-      "light": {
-        "ground": "#F5F0F1",
-        "tile": "#FFFFFF",
-        "tileBack": "#F1EAEC",
-        "raised": "#FFFFFF",
-        "line": "#E4DADD",
-        "lineSoft": "#EFE7E9",
-        "ink": "#2B2327",
-        "muted": "#6F636A",
-        "faded": "#92868C",
-        "accent": "#B04373",
-        "accentInk": "#FFFFFF",
-        "pop": "#94562B",
-        "popInk": "#FFFFFF"
-      }
-    },
-    "soft-neel": {
-      "label": "soft neel: blue pottery, cornflower and amber",
+      "label": "blue pottery, cornflower and amber",
       "pinned": true,
       "dark": {
         "ground": "#10131A",
@@ -415,8 +100,8 @@
         "popInk": "#FFFFFF"
       }
     },
-    "soft-amer": {
-      "label": "soft amer: sandstone, gold and terracotta",
+    "amer": {
+      "label": "sandstone, gold and terracotta",
       "pinned": true,
       "dark": {
         "ground": "#16120E",
@@ -449,8 +134,8 @@
         "popInk": "#FFFFFF"
       }
     },
-    "soft-makrana": {
-      "label": "soft makrana: marble, sea green and brass",
+    "makrana": {
+      "label": "marble, sea green and brass",
       "pinned": true,
       "dark": {
         "ground": "#0F1413",
@@ -483,8 +168,8 @@
         "popInk": "#FFFFFF"
       }
     },
-    "soft-sanjh": {
-      "label": "soft sanjh: dusk, peach and lavender",
+    "sanjh": {
+      "label": "dusk, peach and lavender",
       "pinned": true,
       "dark": {
         "ground": "#14111B",
@@ -517,8 +202,8 @@
         "popInk": "#FFFFFF"
       }
     },
-    "soft-calm": {
-      "label": "soft calm: neutral ground, muted rose and tan",
+    "calm": {
+      "label": "neutral ground, muted rose and tan",
       "pinned": true,
       "dark": {
         "ground": "#141517",
@@ -625,9 +310,9 @@
     }
   },
   "material": {
-    "_note": "Glass for the function layer: bars, pills, menus, sheets, toasts and glass tiles.",
-    "blur": "24px",
-    "fill": "62%",
-    "saturate": "140%"
+    "_note": "Glass for the function layer: bars, pills, menus, sheets and toasts. A low fill lets the page show through; the blur keeps text readable.",
+    "blur": "28px",
+    "fill": "40%",
+    "saturate": "150%"
   }
 }

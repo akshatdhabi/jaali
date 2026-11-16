@@ -6,25 +6,27 @@
 <meta name="color-scheme" content="dark light">
 <title>story · jaali</title>
 <meta name="description" content="Why I built jaali and how it was made.">
-<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/jaali.css">
-<link rel="stylesheet" href="assets/docs.css">
 <script>
   try {
     var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
     if (t) document.documentElement.dataset.theme = t;
-    if (m) document.documentElement.dataset.mode = m;
+    if (m) { document.documentElement.dataset.mode = m; document.documentElement.style.colorScheme = m; }
   } catch (e) {}
 </script>
+<script type="speculationrules">
+  {"prerender":[{"where":{"selector_matches":"nav a[href$='.html'], .home-hub a"},"eagerness":"moderate"}]}
+</script>
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/jaali.min.css">
+<link rel="stylesheet" href="assets/docs.css">
 </head>
 <body class="jaali">
-<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+<div class="j-pattern" id="field" data-pattern="ogee" aria-hidden="true"></div>
 
 <header class="j-top j-wrap">
   <div class="j-inner">
     <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
-    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="glass.html">glass</a><a href="flow.html">flow</a><a href="calm.html">calm</a><a href="examples.html">examples</a><a href="story.html" class="on">story</a><a href="sample.html">sample</a></nav>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html">kit</a><a href="glass.html">glass</a><a href="flow.html">flow</a><a href="examples.html">examples</a><a href="story.html" class="on">story</a><a href="sample.html">sample</a></nav>
     <div class="j-actions">
       <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
       <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
@@ -47,7 +49,7 @@
 <p>Jaipur is the other half. Gulabi is the pink of the city. Jaali are the stone lattices in its windows. Amer has the pointed arch and blue pottery has the rosettes. I didn't want to decorate with any of it, so each shows up in one small place: a faint lattice behind the page, one pink accent, one arch, one rosette.</p>
 
 <h3>how it was built</h3>
-<p>I built it with Claude over two days, in three rounds. Each round I looked at screenshots, said what was wrong, and Claude rebuilt it. The first two rounds failed.</p>
+<p>I built it with Claude over several months, in rounds. Each round I looked at screenshots, said what was wrong, and Claude rebuilt it. The first two rounds failed.</p>
 <p><b>Round 1, Breathe + jaali.</b> I rejected it. The type was too loud and the pink looked dirty on dark.</p>
 <p><b>Round 2, Gulabi.</b> Serif type, arch-shaped tiles, a rose ticker and turquoise accents. I tried to add the Zune ideas on top and the two systems clashed.</p>
 <p><b>Round 3, Gulabi Zune.</b> I restarted with Zune as the base, hairlines second and Jaipur third. The first version was a horizontal panorama. It glitched, so it became a vertical page where titles stay in frame. This is the version I kept.</p>
@@ -69,9 +71,18 @@
 
 <h3>glass and liquid</h3>
 <p>In November I added a material layer. The first tries put a glass drop under the cursor and glass panes over the tiles. Both pulled my eye off the content, and the water drops fought the lattice. I cut them.</p>
-<p>The version that stayed gives glass one job: the things that float. The top bar, menus, sheets and toasts are glass now, and so is any tile that sits over a stage of slow jaali shapes. Reading content stays on flat tiles.</p>
+<p>The version that stayed gives glass one job: the things that float. The top bar, menus, sheets and toasts are glass. Reading content stays on flat tiles.</p>
 <p>Liquid motion only answers you. A tab pill stretches to the tab you picked, a + grows into its actions, a tile pours out into a sheet and back. Every one of them stops under reduced motion.</p>
-<p>The colours changed too. Four new themes run on three colours: a base for most of the page, a primary for live tiles and the lattice, and a pop for the one thing that needs you. The default, rani, is black, rani pink and orange, the Zune look I started from. The eight original themes are still there.</p>
+
+<h3>calm</h3>
+<p>Then I looked at my own ops screen and it felt overwhelming. Layers of similar colours, tiles over moving shapes, a pink slab next to an orange one. I loved every piece alone and together it read as a vanity design.</p>
+<p>So I redid all of it. Calm is the whole system now. Tiles are flat. There is one accent, and a second colour that only appears as a tint on the one thing that needs a person. Glass stays on what floats. Nothing moves at rest except state and the pattern behind the page.</p>
+<p>The first pattern I tried read as a fashion monogram, so I dropped it for ones from Rajasthan: the stone trellis, the windows of Hawa Mahal, bandhani dots and lehariya waves. The pattern drifts a little and leans away from the pointer. The old loud themes are gone. The soft ones took their names.</p>
+
+<h3>speed</h3>
+<p>Some pages made my browser feel slow. I measured it and the pattern was the cost: it redrew a full-screen canvas every frame. My first fix redrew it less often. It was cheaper and it looked jagged and unfinished, so I rolled it back.</p>
+<p>The second fix draws the pattern once and lets the browser move it, the way it moves a page when you scroll. You said that one was perfect. Idle cost fell to about a fifth, and nothing runs in script while the pattern drifts.</p>
+<p>Two more things I noticed by using it. Going to another page in light mode flashed dark first, because the page eased its background on load and the browser painted its default dark canvas before the styles arrived. And every click on a docs page was a pause followed by the whole page at once. Now one small stylesheet blocks the first paint, the next page is pre-rendered or prefetched as you point at its link, and the pages crossfade with the bar and the pattern held still.</p>
 
 <h3>known gaps</h3>
 <p>Some colour pairs in light mode fall below WCAG contrast. They are listed in the README with suggested fixes. I left the colours as I picked them and added a test that fails if a new gap appears.</p>
