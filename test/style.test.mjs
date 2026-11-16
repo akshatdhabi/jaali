@@ -65,3 +65,18 @@ test('glow trails the pointer and goes straight to it under reduced motion', () 
   assert.match(js('glow.js'), /requestAnimationFrame/);
   assert.match(js('glow.js'), /reduced\(\)/);
 });
+
+test('the pattern stays cheap: no full-screen canvas, drift in whole pixels, sleeps when idle, light follows by transform', () => {
+  const src = js('pattern.js');
+  assert.match(src, /SLEEP_AFTER/, 'sleeps after a stretch with no input');
+  assert.match(src, /IDLE_CHECK/, 'checks the drift on a timer, not every frame, when nothing moves');
+  assert.match(src, /Math\.round\(\(\(t \* 5/, 'drift is quantised to whole pixels, so the corners redraw only when it moves');
+  assert.match(src, /translate3d/, 'the pointer light moves by transform');
+  assert.match(src, /Math\.min\(1\.5, devicePixelRatio/, 'the pixel ratio is capped');
+  assert.ok(!/cv\.width = Math\.round\(W \* dpr\)/.test(src), 'no canvas covers the whole screen');
+});
+
+test('the pattern module can be imported where there is no canvas (server rendering)', async () => {
+  const m = await import('../src/js/pattern.js');
+  assert.equal(typeof m.jaaliPattern, 'function');
+});
