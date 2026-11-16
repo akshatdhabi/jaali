@@ -77,3 +77,20 @@ test('the pattern module can be imported where there is no canvas (server render
   const m = await import('../src/js/pattern.js');
   assert.equal(typeof m.jaaliPattern, 'function');
 });
+
+test('nothing eases on page load: the page and the bar have no colour transition, and a mode change eases through j-reskin', () => {
+  assert.ok(!/\.jaali\s*\{[^}]*transition/.test(css), '.jaali must not transition its background');
+  assert.ok(!/\.j-top::before\s*\{[^}]*transition/.test(css), 'the bar must not transition its background');
+  assert.match(js('theme.js'), /function reskin\(\)/);
+  assert.match(js('theme.js'), /reskin\(\);\s*root\(\)\.dataset\.mode/);
+});
+
+test('every docs page sets theme, mode and color-scheme in a script that runs before the stylesheets', () => {
+  for (const f of readdirSync(new URL('../docs/', import.meta.url)).filter((n) => n.endsWith('.html'))) {
+    const h = readFileSync(new URL(`../docs/${f}`, import.meta.url), 'utf8');
+    const script = h.indexOf("localStorage.getItem('jaali:mode')");
+    const sheet = h.indexOf('<link rel="stylesheet"');
+    assert.ok(script > -1 && script < sheet, `${f}: the early script must come before the first stylesheet`);
+    assert.match(h, /style\.colorScheme = m/, `${f}: sets color-scheme early`);
+  }
+});

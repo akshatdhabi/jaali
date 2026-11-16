@@ -6,17 +6,17 @@
 <meta name="color-scheme" content="dark light">
 <title>jaali · glass + liquid</title>
 <meta name="description" content="jaali glass + liquid: a material layer for glass on the function layer, liquid motion that answers an action.">
-<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/jaali.css">
-<link rel="stylesheet" href="assets/docs.css">
 <script>
   try {
     var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
     if (t) document.documentElement.dataset.theme = t;
-    if (m) document.documentElement.dataset.mode = m;
+    if (m) { document.documentElement.dataset.mode = m; document.documentElement.style.colorScheme = m; }
   } catch (e) {}
 </script>
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/jaali.css">
+<link rel="stylesheet" href="assets/docs.css">
 <style>
   /* page layout only; every component comes from jaali.css */
   .gl-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--j-line); }

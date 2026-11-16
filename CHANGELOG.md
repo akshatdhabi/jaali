@@ -17,11 +17,26 @@ The ops screens had grown busy: five fill treatments on one screen, two equally 
 - `liveTiles()` flips on tap only. Pass `{ interval }` for automatic flips.
 - Card line figures (`.j-motif`) move only while you point at the card.
 - `glow()`: the card light trails the pointer.
-- `mount()` starts the pattern for `canvas.j-pattern-canvas` and no longer starts scroll velocity. Call `velocity()` yourself if you use it.
+- `mount()` starts the pattern for `.j-pattern` and no longer starts scroll velocity. Call `velocity()` yourself if you use it.
+
+**Performance**
+
+A profile showed the pattern was the main cost: with it visible the main thread was about 99% busy at a 4x CPU slowdown, mostly the browser compositing a full-screen canvas redrawn every frame. The pattern is now drawn once and the browser moves it:
+
+- the drift is a compositor animation (a transform), so it is as smooth as scrolling and costs no script
+- the corner fade is a static layer, and the pointer light is a brighter copy of the pattern seen through a round mask that follows the pointer by transform
+- no canvas covers the screen. Lehariya flows as a wave, so it still draws frame by frame
+- `jaaliPattern()` now takes a `div.j-pattern` and fills it. The module no longer creates paths at import, so it can be imported on a server
+
+At 4x CPU slowdown, main-thread milliseconds per second (1000 is fully busy): trellis idle 989 to 203 with no script per frame, pointer over trellis 987 to 634, windows 967 to 727, bandhani 991 to 603, scrolling the kit 946 to 466.
+
+**Fixed**
+
+- Going to another page in light mode flashed dark first, then faded to light. The page and the bar eased their background on load, and the browser painted its default dark canvas before the styles arrived. Nothing eases on load now. A mode change by hand still eases, through `j-reskin`. `setMode()` sets `color-scheme` on the root, and the docs set it in a script ahead of the stylesheets.
 
 **Added**
 
-- `jaaliPattern(canvas, { pattern })` and `PATTERNS`: `ogee` (stone trellis), `win` (Hawa Mahal windows), `bandhani` (tie-dye dots), `lehariya` (turban waves). Switch by setting `data-pattern` on the canvas.
+- `jaaliPattern(canvas, { pattern })` and `PATTERNS`: `ogee` (stone trellis), `win` (Hawa Mahal windows), `bandhani` (tie-dye dots), `lehariya` (turban waves). Switch by setting `data-pattern` on the element.
 - `.j-chips`: a wrapping row of pill choices.
 - `test/style.test.mjs`: the calm rules as tests, including the motion rule (at rest only state indicators move; decoration moves on hover).
 
@@ -34,7 +49,7 @@ The ops screens had grown busy: five fill treatments on one screen, two equally 
 
 | if you used | now |
 |---|---|
-| `jaaliField(canvas)` and `.j-field-canvas` | `<canvas class="j-pattern-canvas" data-pattern="ogee">`, started by `mount()` |
+| `jaaliField(canvas)` and `.j-field-canvas` | `<div class="j-pattern" data-pattern="ogee">`, started by `mount()` |
 | `.is-glass` tiles and `stage()` | flat `.j-live` tiles. Glass stays on bars, pills, menus, sheets and toasts |
 | a solid `.is-pop` or `.is-accent` tile | `.is-pop` is a tint. Add `.is-slab` for the solid fill. `.is-accent` colours a number |
 | `data-tier="tool"` (0.5.0) | nothing to set. It is the default |

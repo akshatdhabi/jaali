@@ -8,7 +8,6 @@
   background: color-mix(in srgb, var(--j-ground) 72%, transparent);
   -webkit-backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
   backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
-  transition: background .5s var(--j-ease);
 }
 .j-top .j-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
 .j-brand { font-size: 14px; font-weight: 500; white-space: nowrap; }

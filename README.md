@@ -150,14 +150,14 @@ themePicker(document.querySelector('#themes'));     // one card per theme
 document.querySelector('#mode').onclick = toggleMode;
 ```
 
-Set the theme and mode before first paint to avoid a flash:
+Set the theme and mode before first paint, ahead of your stylesheets, to avoid a flash. Setting `colorScheme` stops the browser painting its default dark canvas first:
 
 ```html
 <script>
   try {
     var t = localStorage.getItem('jaali:theme'), m = localStorage.getItem('jaali:mode');
     if (t) document.documentElement.dataset.theme = t;
-    if (m) document.documentElement.dataset.mode = m;
+    if (m) { document.documentElement.dataset.mode = m; document.documentElement.style.colorScheme = m; }
   } catch (e) {}
 </script>
 ```
@@ -170,7 +170,7 @@ Set the theme and mode before first paint to avoid a flash:
 | `setTheme(name)`, `getTheme()`, `themes()` | Switch and read the theme. Persists to `localStorage` (`jaali:theme`). |
 | `setMode('dark' \| 'light')`, `toggleMode()`, `getMode()` | Dark or light. Follows the system until the visitor picks (`jaali:mode`). |
 | `themePicker(list, { toggle, panel })` | Renders a card per theme. Optional dropdown wiring. |
-| `jaaliPattern(canvas, { pattern })` | The backdrop: `ogee`, `win`, `bandhani` or `lehariya`. Drifts, leans away from the pointer, lights up near it. Switch it by setting `data-pattern` on the element. Returns `{ set(pattern), stop() }`. `mount()` starts it for you. |
+| `jaaliPattern(el, { pattern })` | The backdrop: `ogee`, `win`, `bandhani` or `lehariya`. Drifts, leans away from the pointer, lights up near it. Switch it by setting `data-pattern` on the element. Returns `{ set(pattern), stop() }`. `mount()` starts it for you. |
 | `flipWords(root)` | Turns `<span class="j-flip" data-words="a\|b\|c">` into a flip word. |
 | `pivot(el, onPick)`, `turnstile(el, render)` | Pivot strip, and the out-then-in swap of a list. |
 | `liveTiles(hub, { interval })` | Tap to flip `.j-live[data-j-live]` tiles. Pass `interval` (ms) for occasional automatic flips. |
