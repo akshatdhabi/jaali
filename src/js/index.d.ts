@@ -26,7 +26,7 @@ export function tiltAll(root?: ParentNode): void;
 export function glow(): () => void;
 export type Pattern = 'ogee' | 'win' | 'bandhani' | 'lehariya';
 export const PATTERNS: Pattern[];
-export function jaaliPattern(canvas: HTMLCanvasElement, options?: { pattern?: Pattern }): { set(pattern: Pattern): void; stop(): void };
+export function jaaliPattern(host: HTMLElement, options?: { pattern?: Pattern }): { set(pattern: Pattern): void; stop(): void };
 export function reveal(root?: ParentNode): () => void;
 export function countUp(el: HTMLElement, options?: { duration?: number; delay?: number }): void;
 export function liveTiles(hub: HTMLElement, options?: { interval?: number; hold?: number }): { stop(): void; place(): void };

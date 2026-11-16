@@ -91,7 +91,7 @@ There is no tier switch. These rules hold everywhere:
 | glass | bar, pills, menus, sheets, toasts |
 | ambient motion | the pattern, and one flip word |
 
-`test/style.test.mjs` holds the rules as tests. The pattern comes from `jaaliPattern()` on a `canvas.j-pattern-canvas`. Set `data-pattern` to `ogee`, `win`, `bandhani` or `lehariya` on the canvas to switch it. It drifts, leans away from the pointer and lights up near it, and draws once under reduced motion.
+`test/style.test.mjs` holds the rules as tests. The pattern comes from `jaaliPattern()` on a `div.j-pattern`. Set `data-pattern` to `ogee`, `win`, `bandhani` or `lehariya` on the element to switch it. It drifts, leans away from the pointer and lights up near it, and draws once under reduced motion.
 
 ### Three layers
 
@@ -133,7 +133,7 @@ Then link the CSS and add one class:
 <link rel="stylesheet" href="jaali/jaali.css">
 
 <body class="jaali">
-  <canvas class="j-pattern-canvas" data-pattern="ogee" aria-hidden="true"></canvas>
+  <div class="j-pattern" data-pattern="ogee" aria-hidden="true"></div>
   <h1 class="j-title">hello</h1>
 </body>
 ```
@@ -170,7 +170,7 @@ Set the theme and mode before first paint to avoid a flash:
 | `setTheme(name)`, `getTheme()`, `themes()` | Switch and read the theme. Persists to `localStorage` (`jaali:theme`). |
 | `setMode('dark' \| 'light')`, `toggleMode()`, `getMode()` | Dark or light. Follows the system until the visitor picks (`jaali:mode`). |
 | `themePicker(list, { toggle, panel })` | Renders a card per theme. Optional dropdown wiring. |
-| `jaaliPattern(canvas, { pattern })` | The backdrop: `ogee`, `win`, `bandhani` or `lehariya`. Drifts, leans away from the pointer, lights up near it. Switch it by setting `data-pattern` on the canvas. Returns `{ set(pattern), stop() }`. `mount()` starts it for you. |
+| `jaaliPattern(canvas, { pattern })` | The backdrop: `ogee`, `win`, `bandhani` or `lehariya`. Drifts, leans away from the pointer, lights up near it. Switch it by setting `data-pattern` on the element. Returns `{ set(pattern), stop() }`. `mount()` starts it for you. |
 | `flipWords(root)` | Turns `<span class="j-flip" data-words="a\|b\|c">` into a flip word. |
 | `pivot(el, onPick)`, `turnstile(el, render)` | Pivot strip, and the out-then-in swap of a list. |
 | `liveTiles(hub, { interval })` | Tap to flip `.j-live[data-j-live]` tiles. Pass `interval` (ms) for occasional automatic flips. |

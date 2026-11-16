@@ -26,13 +26,13 @@ export { materialize, stretch, grow, pour, sheen, worm, melt } from './liquid.js
 
 /**
  * One call for the common setup: restore theme and mode, slide-ins, cursor glow, flip words, press tilt,
- * and the pattern on <canvas class="j-pattern-canvas" data-pattern="ogee"> if the page has one.
+ * and the pattern on <div class="j-pattern" data-pattern="ogee"> if the page has one.
  * Returns a function that undoes it all.
  */
 export function mount(root = document) {
   initTheme();
   const stops = [reveal(root), glow(), flipWords(root)];
-  const cv = root.querySelector && root.querySelector('canvas.j-pattern-canvas');
+  const cv = root.querySelector && root.querySelector('.j-pattern');
   if (cv) stops.push(jaaliPattern(cv, { pattern: cv.dataset.pattern || 'ogee' }).stop);
   tiltAll(root);
   return () => stops.forEach((s) => s && s());

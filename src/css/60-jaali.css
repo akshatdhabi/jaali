@@ -1,8 +1,21 @@
 /* Jaipur, in line and rose only.
    The lattice is the one place the accent is allowed to be everywhere, and only faintly. */
 
-/* the page backdrop, drawn by jaaliPattern(). Sits behind everything and never takes the pointer. */
-.j-pattern-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+/* the page backdrop, filled by jaaliPattern(): <div class="j-pattern" data-pattern="ogee" aria-hidden="true"></div>.
+   The pattern is drawn once. The browser moves it (a transform), so the drift is as smooth as scrolling. */
+.j-pattern { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.j-pattern-corner { position: absolute; overflow: hidden; contain: strict; }
+.j-pattern-tile { position: absolute; will-change: transform; }
+.j-pattern-fog { position: absolute; inset: 0; }
+.j-pattern-legacy { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* the pointer light: a brighter copy of the pattern seen through a round mask that follows the pointer */
+.j-pattern-light {
+  position: absolute; left: 0; top: 0; overflow: hidden; opacity: 0; visibility: hidden; will-change: transform, opacity;
+  transition: opacity .6s var(--j-ease), visibility 0s linear .6s;
+  -webkit-mask-image: radial-gradient(circle 240px at 50% 50%, #000 0, rgba(0,0,0,.63) 25%, rgba(0,0,0,.33) 50%, rgba(0,0,0,.11) 75%, transparent 100%);
+          mask-image: radial-gradient(circle 240px at 50% 50%, #000 0, rgba(0,0,0,.63) 25%, rgba(0,0,0,.33) 50%, rgba(0,0,0,.11) 75%, transparent 100%);
+}
+.j-pattern-light.is-lit { opacity: 1; visibility: visible; transition-delay: 0s; }
 
 /* lattice lit by the accent under the cursor. add .j-glow to a tile or card; glow() sets --mx and --my */
 .j-glow { position: relative; isolation: isolate; }

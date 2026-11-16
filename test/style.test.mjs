@@ -53,15 +53,27 @@ test('live tiles flip on tap only unless you ask for an interval', () => {
 });
 
 test('mount starts the pattern when the page has a canvas for it', () => {
-  assert.match(js('index.js'), /canvas\.j-pattern-canvas/);
+  assert.match(js('index.js'), /\.j-pattern/);
   assert.match(js('index.js'), /jaaliPattern/);
 });
 
-test('the pattern canvas never takes the pointer', () => {
-  assert.match(css, /\.j-pattern-canvas\s*\{[^}]*pointer-events:\s*none/);
+test('the pattern never takes the pointer', () => {
+  assert.match(css, /\.j-pattern\s*\{[^}]*pointer-events:\s*none/);
 });
 
 test('glow trails the pointer and goes straight to it under reduced motion', () => {
   assert.match(js('glow.js'), /requestAnimationFrame/);
   assert.match(js('glow.js'), /reduced\(\)/);
+});
+
+test('the pattern drift is a compositor animation, not a redraw loop', () => {
+  const src = js('pattern.js');
+  assert.match(src, /\.animate\(frames/, 'the drift uses the Web Animations API on a transform');
+  assert.match(src, /translate3d/);
+  assert.ok(!/ctx\.setTransform[\s\S]{0,400}fillRect[\s\S]{0,200}requestAnimationFrame/.test(src.split('function startWaves')[0]), 'no per-frame fill outside lehariya');
+});
+
+test('the pattern module can be imported where there is no canvas (server rendering)', async () => {
+  const m = await import('../src/js/pattern.js');
+  assert.equal(typeof m.jaaliPattern, 'function');
 });
