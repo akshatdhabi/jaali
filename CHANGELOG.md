@@ -32,6 +32,7 @@ At 4x CPU slowdown, main-thread milliseconds per second (1000 is fully busy): tr
 
 **Fixed**
 
+- Changing page felt slow: a click, a pause, then the whole page at once. The docs now link one minified stylesheet with the fonts folded in (one render-blocking request instead of two, 72 KB down to 58 KB before compression), pre-render the next page as you point at its link, prefetch it in browsers without speculation rules, and crossfade between pages with the bar and the pattern held still.
 - Going to another page in light mode flashed dark first, then faded to light. The page and the bar eased their background on load, and the browser painted its default dark canvas before the styles arrived. Nothing eases on load now. A mode change by hand still eases, through `j-reskin`. `setMode()` sets `color-scheme` on the root, and the docs set it in a script ahead of the stylesheets.
 
 **Added**

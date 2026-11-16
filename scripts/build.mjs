@@ -98,9 +98,9 @@ writeFileSync(p('dist/fonts.css'), `/* Geist variable, self-hosted. SIL Open Fon
 
 // ---------- docs ----------
 mkdirSync(p('docs/assets'), { recursive: true });
-copyFileSync(p('dist/jaali.css'), p('docs/assets/jaali.css'));
+// the docs link one minified stylesheet with the font faces folded in: one blocking request instead of two
+writeFileSync(p('docs/assets/jaali.min.css'), readFileSync(p('dist/fonts.css'), 'utf8') + '\n' + readFileSync(p('dist/jaali.min.css'), 'utf8'));
 copyFileSync(p('dist/jaali.iife.js'), p('docs/assets/jaali.iife.js'));
-copyFileSync(p('dist/fonts.css'), p('docs/assets/fonts.css'));
 mkdirSync(p('docs/assets/fonts'), { recursive: true });
 for (const f of readdirSync(p('dist/fonts'))) copyFileSync(p('dist/fonts', f), p('docs/assets/fonts', f));
 

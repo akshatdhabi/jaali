@@ -138,6 +138,8 @@ Then link the CSS and add one class:
 </body>
 ```
 
+For smooth page changes on a multi-page site, add `@view-transition { navigation: auto; }` (Chrome 126 and up), give the bar and the pattern a `view-transition-name`, and let the browser pre-render the next page with a `speculationrules` script. The docs do all three.
+
 Everything is opt-in. The base styles only apply under `<body class="jaali">`, and every class is prefixed `j-`, so it will not fight an existing stylesheet.
 
 ## Use it

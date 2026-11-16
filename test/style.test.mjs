@@ -94,3 +94,16 @@ test('every docs page sets theme, mode and color-scheme in a script that runs be
     assert.match(h, /style\.colorScheme = m/, `${f}: sets color-scheme early`);
   }
 });
+
+test('the docs load fast: one minified stylesheet, the next page warmed, pages crossfade', () => {
+  for (const f of readdirSync(new URL('../docs/', import.meta.url)).filter((n) => n.endsWith('.html'))) {
+    const h = readFileSync(new URL(`../docs/${f}`, import.meta.url), 'utf8');
+    assert.match(h, /assets\/jaali\.min\.css/, `${f}: links the minified stylesheet`);
+    assert.ok(!/assets\/fonts\.css/.test(h), `${f}: no separate fonts stylesheet`);
+    assert.match(h, /speculationrules/, `${f}: asks the browser to pre-render the next page`);
+  }
+  const docsCss = readFileSync(new URL('../docs/assets/docs.css', import.meta.url), 'utf8');
+  assert.match(docsCss, /@view-transition\s*\{\s*navigation:\s*auto/);
+  assert.match(docsCss, /prefers-reduced-motion:\s*no-preference\)\s*\{\s*@view-transition/, 'crossfade only without reduced motion');
+  assert.match(readFileSync(new URL('../docs/assets/site.js', import.meta.url), 'utf8'), /rel = 'prefetch'/);
+});
