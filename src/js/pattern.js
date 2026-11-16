@@ -122,12 +122,14 @@ export function jaaliPattern(cv, { pattern = 'ogee' } = {}) {
   addEventListener('pointermove', onMove, { passive: true });
   addEventListener('resize', onResize);
   document.addEventListener('visibilitychange', kick);
+  const attr = new MutationObserver(() => { const v = cv.dataset.pattern; if (PATTERNS.includes(v)) { kind = v; kick(); } });
+  attr.observe(cv, { attributes: true, attributeFilter: ['data-pattern'] });
   size(); kick();
 
   return {
     set(next) { if (PATTERNS.includes(next)) { kind = next; kick(); } },
     stop() {
-      stopped = true; cancelAnimationFrame(raf); mo.disconnect();
+      stopped = true; cancelAnimationFrame(raf); mo.disconnect(); attr.disconnect();
       removeEventListener('pointermove', onMove); removeEventListener('resize', onResize);
       document.removeEventListener('visibilitychange', kick);
       ctx.clearRect(0, 0, W, H);

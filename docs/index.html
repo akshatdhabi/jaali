@@ -19,12 +19,12 @@
 </script>
 </head>
 <body class="jaali">
-<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+<canvas class="j-pattern-canvas" id="field" data-pattern="ogee" aria-hidden="true"></canvas>
 
 <header class="j-top j-wrap">
   <div class="j-inner">
     <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
-    <nav class="j-nav" aria-label="Docs"><a href="index.html" class="on">home</a><a href="kit.html">kit</a><a href="glass.html">glass</a><a href="flow.html">flow</a><a href="calm.html">calm</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html" class="on">home</a><a href="kit.html">kit</a><a href="glass.html">glass</a><a href="flow.html">flow</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
     <div class="j-actions">
       <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
       <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
@@ -44,11 +44,11 @@
 <span class="j-title j-title--hero" aria-hidden="true">a design system</span>
 <span class="j-title j-title--hero" aria-hidden="true">for <span class="j-flip" data-words="pages|tools|dashboards|trackers">pages</span></span></h1>
 <div class="j-hero__low">
-<p class="j-lead j-halo">Design tokens, CSS and about 10 KB (gzipped) of vanilla JS. Eighteen themes, each with a dark and a light mode. No framework.</p>
+<p class="j-lead j-halo">Design tokens, CSS and about 11 KB (gzipped) of vanilla JS. Seven themes, each with a dark and a light mode. No framework.</p>
 <div class="j-hero__cta"><a class="j-link j-link--accent j-halo" href="kit.html">kit <span class="ar">→</span></a><a class="j-link j-halo" href="story.html">story <span class="ar">→</span></a></div>
 </div>
 <div class="j-stats" data-j-in>
-<div class="j-stat" data-j-st style="--d:0"><div class="j-num"><span data-count="12">12</span></div><p class="j-cap">themes, each with dark and light</p></div>
+<div class="j-stat" data-j-st style="--d:0"><div class="j-num"><span data-count="7">7</span></div><p class="j-cap">themes, each with dark and light</p></div>
 <div class="j-stat" data-j-st style="--d:1"><div class="j-num"><span data-count="3">3</span></div><p class="j-cap">surface layers: ground, tile, raised glass</p></div>
 <div class="j-stat" data-j-st style="--d:2"><div class="j-num"><span data-count="1">1</span></div><p class="j-cap">easing curve, one spring</p></div>
 <div class="j-stat" data-j-st style="--d:3"><div class="j-num"><span data-count="0">0</span></div><p class="j-cap">dependencies</p></div>
@@ -60,8 +60,8 @@
 <div class="j-cols cols4">
 <div data-j-st style="--d:1"><div class="k">01</div><b>type</b><p>Thin, lowercase and large. One easing curve for all motion.</p></div>
 <div data-j-st style="--d:2"><div class="k">02</div><b>lines</b><p>Hairlines and grids give the structure. Tiles and raised surfaces are the only filled shapes.</p></div>
-<div data-j-st style="--d:3"><div class="k">03</div><b>Jaipur</b><p>A jaali lattice, an Amer arch, a blue-pottery rosette and one rose accent. Used sparingly, except the lattice.</p></div>
-<div data-j-st style="--d:4"><div class="k">04</div><b>glass</b><p>Only on what floats: the bar, menus, sheets, toasts. Liquid motion answers a tap or a scroll, nothing more.</p></div>
+<div data-j-st style="--d:3"><div class="k">03</div><b>calm</b><p>Flat tiles, one accent and a second colour used as a tint. Glass only on what floats. Nothing moves at rest except state and the pattern behind the page.</p></div>
+<div data-j-st style="--d:4"><div class="k">04</div><b>Jaipur</b><p>A thin pattern behind the page, from Rajasthan: a stone trellis, the Hawa Mahal windows, bandhani dots or lehariya waves. One pointed arch and one rosette, drawn once.</p></div>
 </div></div></div></section>
 
 <section><div class="j-bleed" data-j-in><h2 class="j-title" data-j-st>get started</h2></div>
@@ -80,16 +80,14 @@ cd jaali &amp;&amp; npm install &amp;&amp; npm run build
 &lt;/body&gt;
 
 <span class="c">// optional behaviour</span>
-<span class="k">import</span> { mount, jaaliField, stage } <span class="k">from</span> './jaali/jaali.js';
-mount();
-jaaliField(document.querySelector('canvas'));
-stage(document.querySelector('.j-stage'));       <span class="c">// shapes for glass tiles to blur</span></pre>
-<div class="j-staged home-hub" style="margin-top:44px">
-<div class="j-stage" data-stage></div>
+<span class="k">import</span> { mount } <span class="k">from</span> './jaali/jaali.js';
+mount();   <span class="c">// theme, slide-ins, card light, flip words, and the pattern</span>
+<span class="c">// the pattern is a canvas: &lt;canvas class="j-pattern-canvas" data-pattern="ogee"&gt;</span></pre>
+<div class="home-hub" style="margin-top:44px">
 <nav class="j-hub" data-j-in aria-label="Docs pages">
 <a class="j-live is-wide is-pop" href="kit.html"><span class="j-live__in"><span class="j-face"><span class="j-tl">start here · tokens, themes, every component</span><span class="j-tw">kit →</span></span></span></a>
-<a class="j-live is-wide is-glass" href="glass.html"><span class="j-live__in"><span class="j-face"><span class="j-tl">glass, liquid motion, three colours</span><span class="j-tw">glass →</span></span></span></a>
-<a class="j-live is-glass" href="examples.html"><span class="j-live__in"><span class="j-face"><span class="j-tl">three small pages</span><span class="j-tw">examples →</span></span></span></a>
+<a class="j-live is-wide" href="glass.html"><span class="j-live__in"><span class="j-face"><span class="j-tl">glass and liquid motion</span><span class="j-tw">glass →</span></span></span></a>
+<a class="j-live" href="examples.html"><span class="j-live__in"><span class="j-face"><span class="j-tl">three small pages</span><span class="j-tw">examples →</span></span></span></a>
 <a class="j-live " href="story.html"><span class="j-live__in"><span class="j-face"><span class="j-tl">how it was made</span><span class="j-tw">story →</span></span></span></a>
 </nav></div>
 </div></div></section>

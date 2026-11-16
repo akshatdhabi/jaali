@@ -19,12 +19,12 @@
 </script>
 </head>
 <body class="jaali">
-<canvas class="j-field-canvas" id="field" aria-hidden="true"></canvas>
+<canvas class="j-pattern-canvas" id="field" data-pattern="ogee" aria-hidden="true"></canvas>
 
 <header class="j-top j-wrap">
   <div class="j-inner">
     <a class="j-brand" href="index.html" style="text-decoration:none">jaali</a>
-    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html" class="on">kit</a><a href="glass.html">glass</a><a href="flow.html">flow</a><a href="calm.html">calm</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
+    <nav class="j-nav" aria-label="Docs"><a href="index.html">home</a><a href="kit.html" class="on">kit</a><a href="glass.html">glass</a><a href="flow.html">flow</a><a href="examples.html">examples</a><a href="story.html">story</a><a href="sample.html">sample</a></nav>
     <div class="j-actions">
       <button id="skinBtn" class="j-skin-btn" aria-label="Choose a theme" aria-expanded="false"><span class="j-ring-sm"><i></i></span></button>
       <button id="modeBtn" aria-label="Switch light or dark"><span class="j-ring-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span></button>
@@ -43,10 +43,18 @@
 <div class="kit-sec"><h3>colour<small>CSS custom properties, <code>--j-*</code>. Values for the theme and mode you have on.</small></h3>
 <div><div class="ctl-row" style="margin-bottom:18px"><div class="j-stretch" id="modePivot" role="tablist" aria-label="Mode"><i class="j-stretch__pill"></i><button role="tab" aria-selected="true" data-m="dark">dark</button><button role="tab" data-m="light">light</button></div><span class="j-cap" id="tokTheme"></span></div>
 <table class="tokens" id="tokTable"><thead><tr><th>token</th><th>value</th><th>use</th></tr></thead><tbody id="tokBody"></tbody></table>
-<p class="j-cap" style="margin-top:14px">Base, primary and pop run about 60, 30 and 10. The pop marks one thing that needs you; in the eight original themes it reuses the accent. See <code>src/tokens/themes.json</code>.</p></div></div>
+<p class="j-cap" style="margin-top:14px">One accent marks things. The pop is a tint for the one thing that needs a person. See <code>src/tokens/themes.json</code>.</p></div></div>
 
-<div class="kit-sec"><h3>themes<small>Eighteen themes. The first four use three colours and the last six are the soft set for tools. Pick one to apply it to this page.</small></h3>
+<div class="kit-sec"><h3>themes<small>Seven themes, each with a dark and a light mode. Pick one to apply it to this page.</small></h3>
 <div><div class="j-skin-list" id="themeList"></div></div></div>
+
+<div class="kit-sec"><h3>pattern<small>A thin pattern behind the page. It drifts, leans away from your pointer and lights up near it. Pick one, and it stays for the other pages.</small></h3>
+<div><div class="j-chips" id="patList" role="tablist" aria-label="Pattern">
+<button role="tab" data-v="ogee" aria-selected="true">trellis</button>
+<button role="tab" data-v="win" aria-selected="false">windows</button>
+<button role="tab" data-v="bandhani" aria-selected="false">bandhani</button>
+<button role="tab" data-v="lehariya" aria-selected="false">lehariya</button>
+<button role="tab" data-v="none" aria-selected="false">none</button></div></div></div>
 
 <div class="kit-sec"><h3>type<small>Geist, variable. Light weights, tight tracking.</small></h3>
 <div>
@@ -62,13 +70,13 @@
 <div class="j-raised j-pop pop" id="popDemo"><b>Raised glass</b><span>Layer 2. 62% fill, 24px blur, a thin pop edge.</span></div></div>
 <div class="layers"><div class="l0"><b>ground</b><span>flat</span></div><div class="l1"><b>tile</b><span>--j-shadow-tile</span></div><div class="l2 j-raised"><b>raised glass</b><span>.j-raised, --j-glass-blur</span></div></div></div></div>
 
-<div class="kit-sec"><h3>tiles<small>Tap a tile to flip it. Glass tiles blur the stage behind; tap the glass one to pour it into a sheet.</small></h3>
-<div><div class="j-staged" style="max-width:640px"><div class="j-stage" data-stage></div><div class="minihub j-hub" id="miniHub" data-j-in style="grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:110px;max-width:640px">
+<div class="kit-sec"><h3>tiles<small>Tap a tile to flip it. Tap the wide one to pour it into a glass sheet.</small></h3>
+<div><div style="max-width:640px"><div class="minihub j-hub" id="miniHub" data-j-in style="grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:110px;max-width:640px">
 <div class="j-live j-glow is-wide" data-j-live><div class="j-live__in"><div class="j-face"><span class="j-tn1">128</span><span class="j-tl">items, front</span></div><div class="j-face j-face--back"><span class="j-tw">back face is lighter</span><span class="j-tl">flip</span></div></div></div>
-<div class="j-live j-glow is-accent"><div class="j-live__in"><div class="j-face"><span class="j-tn1">6</span><span class="j-tl">accent tile</span></div></div></div>
+<div class="j-live j-glow is-accent"><div class="j-live__in"><div class="j-face"><span class="j-tn1">6</span><span class="j-tl">.is-accent: a number</span></div></div></div>
 <div class="j-live j-glow"><div class="j-live__in"><div class="j-face"><span class="j-tn1">3</span><span class="j-tl">plain</span></div></div></div>
-<div class="j-live is-wide is-glass" id="pourTile"><div class="j-live__in"><div class="j-face"><span class="j-tn1">24<small>px</small></span><span class="j-tl">.is-glass · tap to pour</span></div></div></div>
-<div class="j-live is-pop"><div class="j-live__in"><div class="j-face"><span class="j-tn1">1</span><span class="j-tl">.is-pop</span></div></div></div>
+<div class="j-live is-wide" id="pourTile"><div class="j-live__in"><div class="j-face"><span class="j-tn1">24<small>px</small></span><span class="j-tl">tap to pour</span></div></div></div>
+<div class="j-live is-pop"><div class="j-live__in"><div class="j-face"><span class="j-tn1">1</span><span class="j-tl">.is-pop: a tint</span></div></div></div>
 <div class="j-live"><div class="j-live__in"><div class="j-face"><span class="j-tn1">0</span><span class="j-tl">plain</span></div></div></div>
 </div></div></div></div>
 
@@ -110,7 +118,7 @@
 <div><div class="cues">
 <div><div class="art" id="cueArch"></div><b>Amer arch</b><p>Pointed, with straight sides. Drawn once in the hero corner.</p></div>
 <div><div class="art" id="cueRos"></div><b>rosette</b><p>Blue-pottery rosette with eight petals. Closes a page.</p></div>
-<div><div class="art"><div class="mini-band"><div class="j-band is-in"><i></i><b></b></div></div></div><b>jaali lattice</b><p>The one place the accent covers the page, at low opacity.</p></div>
+<div><div class="art"><svg viewBox="0 0 120 60" style="width:100%;height:60px" aria-hidden="true"><path d="M30 0C30 12 44 18 60 30C44 42 30 48 30 60C30 48 16 42 0 30C16 18 30 12 30 0ZM90 0C90 12 104 18 120 30C104 42 90 48 90 60C90 48 76 42 60 30C76 18 90 12 90 0Z" fill="none" stroke="var(--j-accent)" stroke-width="1.2"/></svg></div><b>pattern</b><p>The one place the accent covers the page, at low opacity. Trellis, windows, bandhani or lehariya.</p></div>
 </div></div></div>
 
 <div class="kit-sec"><h3>left out<small>Tried and removed.</small></h3>
@@ -141,7 +149,7 @@
   J.themePicker($('#themeList'));
   $('#themeList').addEventListener('click',function(){});
   J.liveTiles($('#miniHub'));
-  var USE={ground:'the page, about 60%',tile:'content tiles',tileBack:'tile back face',raised:'glass layer, at 62%',line:'hairlines',lineSoft:'soft hairlines',ink:'text',muted:'secondary text',faded:'tertiary, disabled',accent:'primary, about 30%',accentInk:'text on primary',pop:'pop, about 10%',popInk:'text on pop'};
+  var USE={ground:'the page',tile:'content tiles',tileBack:'tile back face',raised:'glass layer, at 62%',line:'hairlines',lineSoft:'soft hairlines',ink:'text',muted:'secondary text',faded:'tertiary, disabled',accent:'primary, about 30%',accentInk:'text on primary',pop:'pop, about 10%',popInk:'text on pop'};
   var modes=J.stretch($('#modePivot'),function(b){J.setMode(b.dataset.m);});
   function tokens(){
     var cs=getComputedStyle(document.documentElement),m=J.getMode();

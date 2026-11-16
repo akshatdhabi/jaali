@@ -2,6 +2,45 @@
 
 All notable changes to jaali. Follows [Semantic Versioning](https://semver.org/).
 
+## 1.0.0
+
+Calm becomes the whole system. A breaking release. Not published to npm.
+
+The ops screens had grown busy: five fill treatments on one screen, two equally loud colours, tiles over moving shapes, 33 animations at rest. This release removes the loud parts instead of hiding them behind a switch.
+
+**Changed**
+
+- Seven themes. `rani`, `neel`, `amer`, `makrana`, `sanjh` and `calm` take the plain names with the calm palettes. `gulabi` stays pinned. `rani` is still the default, and now it is dusty rose and warm amber. All themes are pinned. The contrast audit has 3 known gaps left, all gulabi `faded`.
+- `.is-pop` is a tint (a coloured number, a thin edge, a 15% fill). `.is-slab` brings back the solid fill.
+- `.is-accent` colours a number and never fills a tile.
+- A failed status (`.j-status--fail`) takes the pop dot.
+- `liveTiles()` flips on tap only. Pass `{ interval }` for automatic flips.
+- Card line figures (`.j-motif`) move only while you point at the card.
+- `glow()`: the card light trails the pointer.
+- `mount()` starts the pattern for `canvas.j-pattern-canvas` and no longer starts scroll velocity. Call `velocity()` yourself if you use it.
+
+**Added**
+
+- `jaaliPattern(canvas, { pattern })` and `PATTERNS`: `ogee` (stone trellis), `win` (Hawa Mahal windows), `bandhani` (tie-dye dots), `lehariya` (turban waves). Switch by setting `data-pattern` on the canvas.
+- `.j-chips`: a wrapping row of pill choices.
+- `test/style.test.mjs`: the calm rules as tests, including the motion rule (at rest only state indicators move; decoration moves on hover).
+
+**Removed**
+
+- Glass tiles (`.is-glass`), the stage (`.j-stage`, `.j-staged`, `stage()`), the lattice field (`jaaliField()`, `.j-field-canvas`), the lattice band (`.j-band`) and `.j-lattice-fill`.
+- Six themes: `gulal`, `nilam`, `mehendi`, `magenta`, `ember` and `cobalt`. `rani`, `neel`, `amer`, `makrana` and `sanjh` keep their names with new, calmer values.
+
+**Migrating from 0.x**
+
+| if you used | now |
+|---|---|
+| `jaaliField(canvas)` and `.j-field-canvas` | `<canvas class="j-pattern-canvas" data-pattern="ogee">`, started by `mount()` |
+| `.is-glass` tiles and `stage()` | flat `.j-live` tiles. Glass stays on bars, pills, menus, sheets and toasts |
+| a solid `.is-pop` or `.is-accent` tile | `.is-pop` is a tint. Add `.is-slab` for the solid fill. `.is-accent` colours a number |
+| `data-tier="tool"` (0.5.0) | nothing to set. It is the default |
+| a removed theme name | `setTheme()` throws for an unknown name. Pick one of the seven |
+| `mount()` starting `velocity()` | call `velocity()` yourself |
+
 ## 0.5.0
 
 Calm: a quieter tier for tools. Not published to npm.
