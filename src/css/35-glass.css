@@ -27,7 +27,7 @@
   backdrop-filter: blur(var(--j-glass-blur)) saturate(var(--j-glass-saturate));
 }
 
-/* the pop tile: a tint, not a fill */
+/* the pop tile is a tint, and the solid fill is opt-in */
 .j-live.is-pop .j-face {
   background: color-mix(in srgb, var(--j-pop) 15%, var(--j-tile));
   color: var(--j-pop);
